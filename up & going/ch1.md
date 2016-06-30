@@ -1,57 +1,61 @@
-# You Don't Know JS: Up & Going
-# 第一章: Into Programming
+# 你不知道的JavaScript: Up & Going
+# 第一章: 走进编程
 
-欢迎你进入 *You Don't Know JS* (*YDKJS*) 系列.
+欢迎你进入 **你不知道的JavaScript** (**YDKJS**) 系列.
 
-*Up & Going* is an introduction to several basic concepts of programming -- of course we lean toward JavaScript (often abbreviated JS) specifically -- and how to approach and understand the rest of the titles in this series. Especially if you're just getting into programming and/or JavaScript, this book will briefly explore what you need to get *up and going*.
+*Up & Going*介绍了一些基本的编程概念——当然我们会更加倾向于特别介绍JavaScript（经常简称为JS）——以及如何进一步理解本系列的其他主题内容。特别是当你刚接触编程或者JavaScript，这本书会简要的介绍你需要掌握的知识。
 
-This book starts off explaining the basic principles of programming at a very high level. It's mostly intended if you are starting *YDKJS* with little to no prior programming experience, and are looking to these books to help get you started along a path to understanding programming through the lens of JavaScript.
+这本书一开始就从高级层面解释基本的编程概念。如果你之前没有编程经验并且希望找到一些书来帮助你学习并且透彻的理解JavaScript，这个系列的丛书就是你要找的。
 
-Chapter 1 should be approached as a quick overview of the things you'll want to learn more about and practice to get *into programming*. There are also many other fantastic programming introduction resources that can help you dig into these topics further, and I encourage you to learn from them in addition to this chapter.
+通过第一章你可以找到一些快速入门的东西，来帮助你更多的了解和实践，进入编程的世界。这里有许多很棒的程序设计入门指南帮助你深入探讨这些主题，我建议你向它们学习，并不局限于这一章的介绍。
 
-Once you feel comfortable with general programming basics, Chapter 2 will help guide you to a familiarity with JavaScript's flavor of programming. Chapter 2 introduces what JavaScript is about, but again, it's not a comprehensive guide -- that's what the rest of the *YDKJS* books are for!
+第1章应该找到一个快速概述的事情你想要更多地了解和实践进入编程。还有其他许多奇妙的编程的介绍资料可以帮助你进一步深入探讨这些话题,我鼓励大家向他们学习本章除了。
 
-If you're already fairly comfortable with JavaScript, first check out Chapter 3 as a brief glimpse of what to expect from *YDKJS*, then jump right in!
+第1章应接触作为你要了解和实践进入编程事情的简要概述。也有许多其他的梦幻般的程序设计入门的资源，可以帮助您深入探讨这些主题进一步，我建议你向他们学习，除了这一章。
 
-## Code
+一旦你了解了编程基础概念，第二章将引导你进入JavaScript的编程世界。第二章介绍了什么是JavaScript，但同样，这不是一个全面的指南——这是**YDKJS**剩余部分要做的工作。
 
-Let's start from the beginning.
+如果你已经熟悉JavaScript了，可以直接阅读第三章，了解一下你可以从*YDKJS*系列中学到什么，然后开始阅读吧！
 
-A program, often referred to as *source code* or just *code*, is a set of special instructions to tell the computer what tasks to perform. Usually code is saved in a text file, although with JavaScript you can also type code directly into a developer console in a browser, which we'll cover shortly.
+## 代码
 
-The rules for valid format and combinations of instructions is called a *computer language*, sometimes referred to as its *syntax*, much the same as English tells you how to spell words and how to create valid sentences using words and punctuation.
+让我们从头开始吧！
 
-### Statements
+程序，通常被称为**源代码**或**代码**，是一组特殊的指令来告诉计算机应该执行什么任务。通常代码保存在文本文件中，尽管你可以直接在浏览器的开发者控制台中输入JavaScript代码，我们接下来会讲解这个。
 
-In a computer language, a group of words, numbers, and operators that performs a specific task is a *statement*. In JavaScript, a statement might look as follows:
+有效的格式和指令的组合规则被称为**计算机语言**，有时也被叫做（编程语言的）**语法**，就像英语语言告诉你如何拼写单词，以及如何用单词和标点来构造有效的句子。
 
-```js
-a = b * 2;
-```
+### 语句
 
-The characters `a` and `b` are called *variables* (see "Variables"), which are like simple boxes you can store any of your stuff in. In programs, variables hold values (like the number `42`) to be used by the program. Think of them as symbolic placeholders for the values themselves.
-
-By contrast, the `2` is just a value itself, called a *literal value*, because it stands alone without being stored in a variable.
-
-The `=` and `*` characters are *operators* (see "Operators") -- they perform actions with the values and variables such as assignment and mathematic multiplication.
-
-Most statements in JavaScript conclude with a semicolon (`;`) at the end.
-
-The statement `a = b * 2;` tells the computer, roughly, to get the current value stored in the variable `b`, multiply that value by `2`, then store the result back into another variable we call `a`.
-
-Programs are just collections of many such statements, which together describe all the steps that it takes to perform your program's purpose.
-
-### Expressions
-
-Statements are made up of one or more *expressions*. An expression is any reference to a variable or value, or a set of variable(s) and value(s) combined with operators.
-
-For example:
+在计算机语言中，执行特定任务的一组单词、数字和操作符称为**语句**。在JavaScript中，语句如下所示：
 
 ```js
 a = b * 2;
 ```
 
-This statement has four expressions in it:
+字符`a`和`b`称为**变量**（参见**变量**），变量就像一个简单的盒子可以装入你的任何东西。在程序中，变量保存值（如数字`42`），给程序使用。你可以把变量理解为代表值的占位符。
+
+相比之下，`2`仅仅代表值本身，称为**字面量**，因为它是独立的，没有存储在变量中。
+
+字符`=`和`*`称为**操作符**（参见“操作符”）——它们与值和变量执行一些操作，如分配（专业术语称“赋值”）和数学乘法运算。
+
+在JavaScript中大多数语句以分号（;）结尾。
+
+语句`a = b * 2;`告诉计算机，获取变量`b`中的值，乘以`2`，然后将计算结果存入另外一个变量`a`中。
+
+程序就是一组的语句，它们表述了为实现程序目的所需的步骤集合。
+
+### 表达式
+
+语句由一个或者多个**表达式**组成。表达式是一个变量或者值的引用，或者一组变量和值以及操作符的组合。
+
+比如:
+
+```js
+a = b * 2;
+```
+
+这条语句中有四个表达式：
 
 * `2` is a *literal value expression*
 * `b` is a *variable expression*, which means to retrieve its current value

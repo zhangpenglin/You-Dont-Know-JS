@@ -1,18 +1,18 @@
-# You Don't Know JS: Up & Going
+# 你不知道的JavaScript:  Up & Going
 
 <img src="cover.jpg" width="300">
 
 -----
 
-**[Purchase digital/print copy from O'Reilly](http://shop.oreilly.com/product/0636920039303.do)**
+**[从O'Reilly购买电子/纸质版](http://shop.oreilly.com/product/0636920039303.do)**
 
 -----
 
-[Table of Contents](toc.md)
+[目录](toc.zh.md)
 
-* [Foreword](foreword.md) (by [Jenn Lukas](http://jennlukas.com))
-* [Preface](../preface.md)
-* [Chapter 1: Into Programming](ch1.md)
-* [Chapter 2: Into JavaScript](ch2.md)
-* [Chapter 3: Into YDKJS](ch3.md)
-* [Appendix A: Thank You's!](apA.md)
+* [前言](foreword.md) (by [Jenn Lukas](http://jennlukas.com))
+* [序](../preface.md)
+* [第一章: 走进编程](ch1.md)
+* [第二章: 走进JavaScript](ch2.md)
+* [第三章: 走进你不知道的JavaScript](ch3.md)
+* [附录 A: 谢谢你们](apA.md)

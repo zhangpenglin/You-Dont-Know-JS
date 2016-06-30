@@ -1,10 +1,10 @@
-# You Don't Know JS: Up & Going
+# 你不知道的JavaScript: 开篇
 
-## Table of Contents
+## 目录
 
-* Foreword
-* Preface
-* Chapter 1: Into Programming
+* 前言
+* 序
+* 第一章: 进入编程
 	* Code
 	* Try It Yourself
 	* Operators
@@ -16,7 +16,7 @@
 	* Loops
 	* Functions
 	* Practice
-* Chapter 2: Into JavaScript
+* 第二章: 进入JavaScript
 	* Values & Types
 	* Variables
 	* Conditionals
@@ -26,10 +26,10 @@
 	* Prototypes
 	* Old & New
 	* Non-JavaScript
-* Chapter 3: Into YDKJS
-	* Scope & Closures
-	* this & Object Prototypes
-	* Types & Grammar
-	* Async & Performance
-	* ES6 & Beyond
-* Appendix A: Acknowledgments
+* 第三章: 进入你不知道的JavaScript
+	* 作用域和闭包
+	* this和对象原型
+	* 类型和语法
+	* 异步和性能
+	* ES6及展望
+* 附录A: 致谢
