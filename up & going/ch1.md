@@ -57,40 +57,40 @@ a = b * 2;
 
 这条语句中有四个表达式：
 
-* `2` is a *literal value expression*
-* `b` is a *variable expression*, which means to retrieve its current value
-* `b * 2` is an *arithmetic expression*, which means to do the multiplication
-* `a = b * 2` is an *assignment expression*, which means to assign the result of the `b * 2` expression to the variable `a` (more on assignments later)
+* `2`是一个**字面量表达式**
+* `b`是一个**变量表达式**，表示获取这个变量当前的值
+* `b * 2`是一个**算术表达式**，表示做乘法运算
+* `a = b * 2`是一个**赋值表达式**，表示将`b * 2`表达式的结果赋予变量`a`（之后会更多的提到赋值操作）
 
-A general expression that stands alone is also called an *expression statement*, such as the following:
+一个单独的一般表达式也被称为**表达式语句**，比如下面：
 
 ```js
 b * 2;
 ```
 
-This flavor of expression statement is not very common or useful, as generally it wouldn't have any effect on the running of the program -- it would retrieve the value of `b` and multiply it by `2`, but then wouldn't do anything with that result.
+这种表达式语句并不常见或者有用，因为它对程序的运行并没有产生任何影响——它就是将`b`的值取出来，然后乘以`2`，然而并没有对结果进行任何操作。
 
-A more common expression statement is a *call expression* statement (see "Functions"), as the entire statement is the function call expression itself:
+一种更加常见的表达式语句是**调用表达式**语句（常见“函数”），整个语句就是函数调用表达式本身：
 
 ```js
 alert( a );
 ```
 
-### Executing a Program
+### 执行程序
 
-How do those collections of programming statements tell the computer what to do? The program needs to be *executed*, also referred to as *running the program*.
+这组编程语句如何告诉计算机该做什么？程序需要被**执行**，也被称为**运行程序**。
 
-Statements like `a = b * 2` are helpful for developers when reading and writing, but are not actually in a form the computer can directly understand. So a special utility on the computer (either an *interpreter* or a *compiler*) is used to translate the code you write into commands a computer can understand.
+像`a = b * 2`这样的语句有利于开发者阅读和书写，但是计算机并不能直接理解这种格式。所以，在电脑上需要一个特殊的工具（可以是**解释器**或者**编译器**）来将你写的代码翻译成计算机能够理解的指令。
 
-For some computer languages, this translation of commands is typically done from top to bottom, line by line, every time the program is run, which is usually called *interpreting* the code.
+对于某些计算机语言，每当程序执行的时候，工具会从上到下，逐行执行这种命令翻译工作，这通常被称为**解释**代码。
 
-For other languages, the translation is done ahead of time, called *compiling* the code, so when the program *runs* later, what's running is actually the already compiled computer instructions ready to go.
+对于其他的语言，这种翻译工作会提前完成，称为**编译**代码，所以当之后程序**运行**的时候，计算机实际执行的是编译之后的指令。
 
-It's typically asserted that JavaScript is *interpreted*, because your JavaScript source code is processed each time it's run. But that's not entirely accurate. The JavaScript engine actually *compiles* the program on the fly and then immediately runs the compiled code.
+很明显，JavaScript是**解释型**语言，因为JavaScript源代码都是在运行时处理的。但这并不完全准确。JavaScript引擎实际上是先**编译**代码，然后立即执行编译后的代码。
 
-**Note:** For more information on JavaScript compiling, see the first two chapters of the *Scope & Closures* title of this series.
+**注意：** 有关JavaScript编译的更多信息，请参阅本系列的“作用域和闭包”的前两章。
 
-## Try It Yourself
+## 尝试一下
 
 This chapter is going to introduce each programming concept with simple snippets of code, all written in JavaScript (obviously!).
 

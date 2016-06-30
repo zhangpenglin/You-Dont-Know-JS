@@ -5,8 +5,8 @@
 * 前言
 * 序
 * 第一章: 进入编程
-	* Code
-	* Try It Yourself
+	* 代码
+	* 尝试一下
 	* Operators
 	* Values & Types
 	* Code Comments

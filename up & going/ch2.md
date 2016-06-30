@@ -1,5 +1,5 @@
-# You Don't Know JS: Up & Going
-# Chapter 2: Into JavaScript
+# 你不知道的JavaScript: Up & Going
+# 第二章: 走进JavaScript
 
 In the previous chapter, I introduced the basic building blocks of programming, such as variables, loops, conditionals, and functions. Of course, all the code shown has been in JavaScript. But in this chapter, we want to focus specifically on things you need to know about JavaScript to get up and going as a JS developer.
 

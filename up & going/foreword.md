@@ -1,4 +1,4 @@
-# You Don't Know JS: Up & Going
+# 你不知道的JavaScript: Up & Going
 # Foreword
 
 What was the last new thing you learned?

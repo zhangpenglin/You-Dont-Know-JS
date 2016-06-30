@@ -1,5 +1,5 @@
-# You Don't Know JS: Up & Going
-# Chapter 3: Into YDKJS
+# 你不知道的JavaScript: Up & Going
+# 第三章: 走进YDKJS
 
 What is this series all about? Put simply, it's about taking seriously the task of learning *all parts of JavaScript*, not just some subset of the language that someone called "the good parts," and not just whatever minimal amount you need to get your job done at work.
 
@@ -9,7 +9,7 @@ The *You Don't Know JS* (*YDKJS*) series stands in stark contrast to the typical
 
 I'm going to use this final chapter to briefly summarize what to expect from the rest of the books in the series, and how to most effectively go about building a foundation of JS learning on top of *YDKJS*.
 
-## Scope & Closures
+## 作用域和闭包
 
 Perhaps one of the most fundamental things you'll need to quickly come to terms with is how scoping of variables really works in JavaScript. It's not enough to have anecdotal fuzzy *beliefs* about scope.
 
@@ -21,7 +21,7 @@ This critical understanding of "lexical scope" is what we then base our explorat
 
 One important application of closure is the module pattern, as we briefly introduced in this book in Chapter 2. The module pattern is perhaps the most prevalent code organization pattern in all of JavaScript; deep understanding of it should be one of your highest priorities.
 
-## this & Object Prototypes
+## this和对象原型
 
 Perhaps one of the most widespread and persistent mistruths about JavaScript is that the `this` keyword refers to the function it appears in. Terribly mistaken.
 
@@ -39,7 +39,7 @@ The claims I make regarding delegation versus inheritance come not from a dislik
 
 But the case I make regarding prototypes and delegation is a much more involved one than what I will indulge here. If you're ready to reconsider everything you think you know about JavaScript "classes" and "inheritance," I offer you the chance to "take the red pill" (*Matrix* 1999) and check out Chapters 4-6 of the *this & Object Prototypes* title of this series.
 
-## Types & Grammar
+## 类型和语法
 
 The third title in this series primarily focuses on tackling yet another highly controversial topic: type coercion. Perhaps no topic causes more frustration with JS developers than when you talk about the confusions surrounding implicit coercion.
 
@@ -53,7 +53,7 @@ But I'm not merely suggesting that coercion is sensible and learnable, I'm asser
 
 Do you want to just keep following what the crowd says, or are you willing to set all the assumptions aside and look at coercion with a fresh perspective? The *Types & Grammar* title of this series will coerce your thinking.
 
-## Async & Performance
+## 异步和性能
 
 The first three titles of this series focus on the core mechanics of the language, but the fourth title branches out slightly to cover patterns on top of the language mechanics for managing asynchronous programming. Asynchrony is not only critical to the performance of our applications, it's increasingly becoming *the* critical factor in writability and maintainability.
 
@@ -77,7 +77,7 @@ Writing JavaScript effectively means writing code that can break the constraint 
 
 The *Async & Performance* title is designed to give you all the tools and skills you need to write reasonable and performant JavaScript code.
 
-## ES6 & Beyond
+## ES6及展望
 
 No matter how much you feel you've mastered JavaScript to this point, the truth is that JavaScript is never going to stop evolving, and moreover, the rate of evolution is increasing rapidly. This fact is almost a metaphor for the spirit of this series, to embrace that we'll never fully *know* every part of JS, because as soon as you master it all, there's going to be new stuff coming down the line that you'll need to learn.
 
