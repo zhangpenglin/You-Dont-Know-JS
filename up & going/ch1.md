@@ -338,19 +338,19 @@ console.log( a );	// 42
 
 你一定会希望通过写注释代码的习惯出发，开始编程的学习。在本章的其余部分，你会看到我用注释来解释的东西，所以在自己的实践中做同样的事情。相信我，大家谁读你的代码都会感谢你的！
 
-## Variables
+## 变量
 
-Most useful programs need to track a value as it changes over the course of the program, undergoing different operations as called for by your program's intended tasks.
+许多的程序都需要跟踪值的变化，因为它在整个程序的生命周期中，会被各种任务操作所改变。
 
-The easiest way to go about that in your program is to assign a value to a symbolic container, called a *variable* -- so called because the value in this container can *vary* over time as needed.
+最简单的方法就是在你的程序中将一个值赋给一个象征性的容器，我们称之为**变量**——之所以这么称，是因为容器中的值能够根据需要而不断变化。
 
-In some programming languages, you declare a variable (container) to hold a specific type of value, such as `number` or `string`. *Static typing*, otherwise known as *type enforcement*, is typically cited as a benefit for program correctness by preventing unintended value conversions.
+在一些编程语言中，你声明一个变量（容器）持有特定类型的值，如`number`或`string`。**静态类型**，也被称为**强类型**，能够防止意外的值转换，从而提高程序的正确性。
 
-Other languages emphasize types for values instead of variables. *Weak typing*, otherwise known as *dynamic typing*, allows a variable to hold any type of value at any time. It's typically cited as a benefit for program flexibility by allowing a single variable to represent a value no matter what type form that value may take at any given moment in the program's logic flow.
+其他语言强调值的类型而不是变量。 **弱类型**，也被称为**动态类型**，允许一个变量在任何时间保存任何类型的值。它对程序的典型好处就是提高了程序的灵活性，因为在程序的逻辑流程中，它允许一个变量代表一个任意类型的值。
 
-JavaScript uses the latter approach, *dynamic typing*, meaning variables can hold values of any *type* without any *type* enforcement.
+JavaScript使用后一种方式，**动态类型**，这意味着变量可以保存任何**类型**，而不用强制声明类型。
 
-As mentioned earlier, we declare a variable using the `var` statement -- notice there's no other *type* information in the declaration. Consider this simple program:
+正如前面所提到的，我们使用`var`声明一个变量——注意在声明的时候没有其他类型声明的信息。考虑这个简单的程序：
 
 ```js
 var amount = 99.99;
@@ -366,23 +366,23 @@ amount = "$" + String( amount );
 console.log( amount );		// "$199.98"
 ```
 
-The `amount` variable starts out holding the number `99.99`, and then holds the `number` result of `amount * 2`, which is `199.98`.
+变量`amount`开始的时候存储的是数字`99.99`，之后存储的是`amount * 2`的结果，也就是`199.98`。
 
-The first `console.log(..)` command has to *implicitly* coerce that `number` value to a `string` to print it out.
+第一个`console.log(..)`命令已经**隐式**的转换`number`值成`string`然后打印输出。
 
-Then the statement `amount = "$" + String(amount)` *explicitly* coerces the `199.98` value to a `string` and adds a `"$"` character to the beginning. At this point, `amount` now holds the `string` value `"$199.98"`, so the second `console.log(..)` statement doesn't need to do any coercion to print it out.
+然后语句`amount = "$" + String(amount)`**显式**转换值`199.98`为`string`类型，并且在它前面加上了一个字符`"$"`。此时，`amount`现在存储了`string`值`"$199.98"`，因此第二个语句`console.log(..)`不用做任何转换就可以打印输出。
 
-JavaScript developers will note the flexibility of using the `amount` variable for each of the `99.99`, `199.98`, and the `"$199.98"` values. Static-typing enthusiasts would prefer a separate variable like `amountStr` to hold the final `"$199.98"` representation of the value, because it's a different type.
+JavaScript开发者会发现使用一个`amount`变量来存储`99.99`，`199.98`和`"$199.98"`的值的灵活性。热衷静态类型的开发者宁愿用一个独立的变量比如`amountStr`来存储最终的变量值`"$199.98"`，因为它们是不同的类型。
 
-Either way, you'll note that `amount` holds a running value that changes over the course of the program, illustrating the primary purpose of variables: managing program *state*.
+无论哪种方式，你会注意到，在程序的运行过程中`amount`存储了一个变化的运行值，说明了变量的主要目的：管理程序的**状态。**
 
-In other words, *state* is tracking the changes to values as your program runs.
+换句话说，当你的程序运行的时候，**状态**跟踪了值的变化。
 
-Another common usage of variables is for centralizing value setting. This is more typically called *constants*, when you declare a variable with a value and intend for that value to *not change* throughout the program.
+变量的另外一个用途就是集中配置一些值。在程序的运行过程中，你声明了一个变量，并且将一个不打算改变的值存储在这个变量中，这个变量通常被称为**常量**。
 
-You declare these *constants*, often at the top of a program, so that it's convenient for you to have one place to go to alter a value if you need to. By convention, JavaScript variables as constants are usually capitalized, with underscores `_` between multiple words.
+通常在程序的顶部声明这些**常量**，这样当你需要修改它们的值的时候你就可以很方便的找到。按照惯例，JavaScript的作为变量的常量，变量名通常都是大写，多个单词之间用下划线`_`分割。
 
-Here's a silly example:
+这里是一个愚蠢的例子：
 
 ```js
 var TAX_RATE = 0.08;	// 8% sales tax
@@ -397,11 +397,11 @@ console.log( amount );				// 215.9784
 console.log( amount.toFixed( 2 ) );	// "215.98"
 ```
 
-**Note:** Similar to how `console.log(..)` is a function `log(..)` accessed as an object property on the `console` value, `toFixed(..)` here is a function that can be accessed on `number` values. JavaScript `number`s aren't automatically formatted for dollars -- the engine doesn't know what your intent is and there's no type for currency. `toFixed(..)` lets us specify how many decimal places we'd like the `number` rounded to, and it produces the `string` as necessary.
+**注意：**函数`log(..)`能够通过对象访问符被值`console`访问到，与此类似，这里`toFixed(..)`也是一个函数，能够通过对象访问符被`number`访问到。JavaScript的`number`不能自动格式化美元——引擎不知道你的意图，而且这里也没有货币类型。`toFixed(..)`让我们指定`number`四舍五入多少位小数，并且返回一个`string`。
 
-The `TAX_RATE` variable is only *constant* by convention -- there's nothing special in this program that prevents it from being changed. But if the city raises the sales tax rate to 9%, we can still easily update our program by setting the `TAX_RATE` assigned value to `0.09` in one place, instead of finding many occurrences of the value `0.08` strewn throughout the program and updating all of them.
+变量`TAX_RATE`只是按约定是**常量**——这里并没有什么特殊机制来防止它被修改。但是，如果城市提高了营业税税率到9%，我们仍然可以很容易地在一个地方找到`TAX_RATE`并为它分配值`0.09`，而不是去寻找散落在程序中各个地方的`0.08`然后去更新他们。
 
-The newest version of JavaScript at the time of this writing (commonly called "ES6") includes a new way to declare *constants*, by using `const` instead of `var`:
+在写这篇文章的时候，最新版本的JavaScript（俗称“ES6”）包含一种新的声明**常量**的方法，通过使用`const`代替`var`：
 
 ```js
 // as of ES6:
@@ -412,11 +412,11 @@ var amount = 99.99;
 // ..
 ```
 
-Constants are useful just like variables with unchanged values, except that constants also prevent accidentally changing value somewhere else after the initial setting. If you tried to assign any different value to `TAX_RATE` after that first declaration, your program would reject the change (and in strict mode, fail with an error -- see "Strict Mode" in Chapter 2).
+不能改变其值的常量就像变量一样有用，并且常量防止了在其初始化赋值之后，在其他某处进行意外的修改。如果你试图在第一次声明常量`TAX_RATE`之后，又给它赋予一个不同的值，你的程序会拒绝这次改变（在严格模式中，会抛出一个错误——参见第二章的“严格模式”）。
 
-By the way, that kind of "protection" against mistakes is similar to the static-typing type enforcement, so you can see why static types in other languages can be attractive!
+顺便说一句，那种防止错误的“保护”类似于静态类型的类型增强，所以你应该明白为什么其他静态类型的语言会吸引人！
 
-**Note:** For more information about how different values in variables can be used in your programs, see the *Types & Grammar* title of this series.
+**注意：**想要了解有关在你的程序中如何使用不同的变量值的更多信息，参见本系列的“类型和语法”。
 
 ## Blocks
 

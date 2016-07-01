@@ -10,7 +10,7 @@
 	* 运算符
 	* 值和类型
 	* 代码注释
-	* Variables
+	* 变量
 	* Blocks
 	* Conditionals
 	* Loops
