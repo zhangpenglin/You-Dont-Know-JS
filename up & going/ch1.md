@@ -418,11 +418,12 @@ var amount = 99.99;
 
 **注意：**想要了解有关在你的程序中如何使用不同的变量值的更多信息，参见本系列的“类型和语法”。
 
-## Blocks
+## 块
 
-The phone store employee must go through a series of steps to complete the checkout as you buy your new phone.
+手机店员工必须经过一系列的步骤才能让你完成购买手机的操作。
 
-Similarly, in code we often need to group a series of statements together, which we often call a *block*. In JavaScript, a block is defined by wrapping one or more statements inside a curly-brace pair `{ .. }`. Consider:
+同样，在代码中，我们经常需要将一系列的语句组合在一起，我们称之为**块**。在JavaScript中，块是定义在一对花括号`{ .. }`中的一条或多条语句。考虑如下：
+
 
 ```js
 var amount = 99.99;
@@ -434,7 +435,8 @@ var amount = 99.99;
 }
 ```
 
-This kind of standalone `{ .. }` general block is valid, but isn't as commonly seen in JS programs. Typically, blocks are attached to some other control statement, such as an `if` statement (see "Conditionals") or a loop (see "Loops"). For example:
+这种独立的块`{ .. }`是有效的，但是在JS程序中并不常见。典型地，块被附属到一些其他的控制语句上，比如`if`语句（参见“条件语句”）或循环语句（参见“循环”）。例如：
+
 
 ```js
 var amount = 99.99;
@@ -446,9 +448,9 @@ if (amount > 10) {			// <-- block attached to `if`
 }
 ```
 
-We'll explain `if` statements in the next section, but as you can see, the `{ .. }` block with its two statements is attached to `if (amount > 10)`; the statements inside the block will only be processed if the conditional passes.
+我们将在下一节中解释`if`语句，但是正如你所见，块`{ .. }`与它的两个语句被连接到`if (amount > 10)`上，只有当条件通过时，块里面的语句才会被执行。
 
-**Note:** Unlike most other statements like `console.log(amount);`, a block statement does not need a semicolon (`;`) to conclude it.
+**注意：**不像其他的语句，比如`console.log(amount);`，块语句不需要分号（`;`）来结束它。
 
 ## Conditionals
 

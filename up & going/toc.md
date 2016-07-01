@@ -11,7 +11,7 @@
 	* 值和类型
 	* 代码注释
 	* 变量
-	* Blocks
+	* 块
 	* Conditionals
 	* Loops
 	* Functions
