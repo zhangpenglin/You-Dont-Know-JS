@@ -7,7 +7,7 @@
 * 第一章: 进入编程
 	* 代码
 	* 尝试一下
-	* Operators
+	* 运算符
 	* Values & Types
 	* Code Comments
 	* Variables

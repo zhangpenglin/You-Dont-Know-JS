@@ -27,7 +27,7 @@
 
 ### 语句
 
-在计算机语言中，执行特定任务的一组单词、数字和操作符称为**语句**。在JavaScript中，语句如下所示：
+在计算机语言中，执行特定任务的一组单词、数字和运算符称为**语句**。在JavaScript中，语句如下所示：
 
 ```js
 a = b * 2;
@@ -37,7 +37,7 @@ a = b * 2;
 
 相比之下，`2`仅仅代表值本身，称为**字面量**，因为它是独立的，没有存储在变量中。
 
-字符`=`和`*`称为**操作符**（参见“操作符”）——它们与值和变量执行一些操作，如分配（专业术语称“赋值”）和数学乘法运算。
+字符`=`和`*`称为**运算符**（参见“运算符”）——它们与值和变量执行一些操作，如分配（专业术语称“赋值”）和数学乘法运算。
 
 在JavaScript中大多数语句以分号（;）结尾。
 
@@ -47,7 +47,7 @@ a = b * 2;
 
 ### 表达式
 
-语句由一个或者多个**表达式**组成。表达式是一个变量或者值的引用，或者一组变量和值以及操作符的组合。
+语句由一个或者多个**表达式**组成。表达式是一个变量或者值的引用，或者一组变量和值以及运算符的组合。
 
 比如:
 
@@ -92,15 +92,15 @@ alert( a );
 
 ## 尝试一下
 
-This chapter is going to introduce each programming concept with simple snippets of code, all written in JavaScript (obviously!).
+本章将通过一些简单的代码片段来介绍每个编程概念，全部都是用JavaScript写的（你懂的！）。
 
-It cannot be emphasized enough: while you go through this chapter -- and you may need to spend the time to go over it several times -- you should practice each of these concepts by typing the code yourself. The easiest way to do that is to open up the developer tools console in your nearest browser (Firefox, Chrome, IE, etc.).
+特别的强调一下：当你阅读本章的时候——你需要花时间多练习几次——你应该通过敲代码来练习每个概念。最简单的方法就是打开你浏览器中的开发者工具（火狐、谷歌浏览器、IE等）。
 
-**Tip:** Typically, you can launch the developer console with a keyboard shortcut or from a menu item. For more detailed information about launching and using the console in your favorite browser, see "Mastering The Developer Tools Console" (http://blog.teamtreehouse.com/mastering-developer-tools-console). To type multiple lines into the console at once, use `<shift> + <enter>` to move to the next new line. Once you hit `<enter>` by itself, the console will run everything you've just typed.
+**提示：**通常情况下，你可以通过键盘快捷键或者菜单项来启动开发者控制台。想要了解更多有关如何在你最喜欢的浏览器中打开和使用控制台的信息，参见“掌握开发者工具控制台”(http://blog.teamtreehouse.com/mastering-developer-tools-console)。要一次输入多行到控制台，使用`<shift> + <enter>`移动到下一行。一旦你输入`<enter>`，控制台就会运行你刚刚输入的代码。
 
-Let's get familiar with the process of running code in the console. First, I suggest opening up an empty tab in your browser. I prefer to do this by typing `about:blank` into the address bar. Then, make sure your developer console is open, as we just mentioned.
+让我们熟悉一下在控制台中运行代码的过程。首先，我建议你在浏览器中打开一个空页面。我更喜欢在地址栏输入`about:blank`来打开空页面。然后，确保你的开发者控制台是打开的，就像我们刚刚提到的那样。
 
-Now, type this code and see how it runs:
+现在，输入这段代码，看看它是如何运行的：
 
 ```js
 a = 21;
@@ -110,39 +110,39 @@ b = a * 2;
 console.log( b );
 ```
 
-Typing the preceding code into the console in Chrome should produce something like the following:
+前面的代码输入到Chrome的控制台，应该产生类似以下内容：
 
 <img src="fig1.png" width="500">
 
-Go on, try it. The best way to learn programming is to start coding!
+来吧，试试看吧。学习编程的最好方法是开始编码！
 
-### Output
+### 输出
 
-In the previous code snippet, we used `console.log(..)`. Briefly, let's look at what that line of code is all about.
+在前面的代码片段中，我们使用了`console.log（..）`。让我们简要的讲解下这行代码是什么意思。
 
-You may have guessed, but that's exactly how we print text (aka *output* to the user) in the developer console. There are two characteristics of that statement that we should explain.
+你可能已经猜到了，这就是我们在开发者控制台打印文本的方式（又名**输出**给用户）。我们有必要解释一下它的两个特点。
 
-First, the `log( b )` part is referred to as a function call (see "Functions"). What's happening is we're handing the `b` variable to that function, which asks it to take the value of `b` and print it to the console.
+第一，`log( b )`部分被称为函数调用（参见“函数”）。它所做的事情就是，我们将`b`变量交给`log`函数，然后它取出`b`的值把它打印到控制台。
 
-Second, the `console.` part is an object reference where the `log(..)` function is located. We cover objects and their properties in more detail in Chapter 2.
+第二，`console.`部分是一个对象引用，函数`log(..)`就在这个对象里面。我们将在第二章中更详细的讲解对象和它的属性。
 
-Another way of creating output that you can see is to run an `alert(..)` statement. For example:
+另一种创建输出的方法就是运行`alert(..)`语句。例如：
 
 ```js
 alert( b );
 ```
 
-If you run that, you'll notice that instead of printing the output to the console, it shows a popup "OK" box with the contents of the `b` variable. However, using `console.log(..)` is generally going to make learning about coding and running your programs in the console easier than using `alert(..)`, because you can output many values at once without interrupting the browser interface.
+如果你运行那段代码，你会发现浏览器弹出了一个“OK”对话框，它的内容是变量`b`的值，而不是打印输出到控制台。通常来说，使用`console.log(..)`学习编码并且在控制台运行程序会比使用`alert(..)`更容易，因为你可以一次输出多个值，而且不会打断浏览器界面响应。
 
-For this book, we'll use `console.log(..)` for output.
+在本书中，我们使用`console.log(..)`来输出信息。
 
-### Input
+### 输入
 
-While we're discussing output, you may also wonder about *input* (i.e., receiving information from the user).
+虽然我们一直在讨论输出，你可能也想知道如何**输入**（即从用户那边接收信息）。
 
-The most common way that happens is for the HTML page to show form elements (like text boxes) to a user that they can type into, and then using JS to read those values into your program's variables.
+最常见的方式是，在HTML页面中向用户显示表单元素（如文本框），他们可以输入信息到表单中，然后使用JS将用户的输入读取到程序当中。
 
-But there's an easier way to get input for simple learning and demonstration purposes such as what you'll be doing throughout this book. Use the `prompt(..)` function:
+如果仅仅只是为了简单的学习和演示（就像你当前跟随本书所做的一样），这里有一个更加简单的方法来获取用户的输入，那就是使用`prompt(..)`函数：
 
 ```js
 age = prompt( "Please tell me your age:" );
@@ -150,40 +150,40 @@ age = prompt( "Please tell me your age:" );
 console.log( age );
 ```
 
-As you may have guessed, the message you pass to `prompt(..)` -- in this case, `"Please tell me your age:"` -- is printed into the popup.
+你可能已经猜到了，你传递给`prompt(..)`的信息——在这个例子中，`"Please tell me your age:"`——被打印在弹出框里。
 
-This should look similar to the following:
+这应该类似以下内容：
 
 <img src="fig2.png" width="500">
 
-Once you submit the input text by clicking "OK," you'll observe that the value you typed is stored in the `age` variable, which we then *output* with `console.log(..)`:
+一旦你点击提交输入的文本，你会发现你输入的值存储在变量`age`中，接着我们使用`console.log(..)`将它**输出**。
 
 <img src="fig3.png" width="500">
 
-To keep things simple while we're learning basic programming concepts, the examples in this book will not require input. But now that you've seen how to use `prompt(..)`, if you want to challenge yourself you can try to use input in your explorations of the examples.
+为了让我们在学习基本编程概念的时候保持简单，在本书中的例子不需要输入。但是现在你已经了解了如何使用`prompt(..)`，如果你想挑战自己，你可以尝试在接下来的实例是使用输入。
 
-## Operators
+## 运算符
 
-Operators are how we perform actions on variables and values. We've already seen two JavaScript operators, the `=` and the `*`.
+运算符是我们用来操作变量和值的。我们已经看到了两个JavaScript运算符，`=`和`*`。
 
-The `*` operator performs mathematic multiplication. Simple enough, right?
+`*`运算符是用来表示数序乘法的，这很简单吧！
 
-The `=` equals operator is used for *assignment* -- we first calculate the value on the *right-hand side* (source value) of the `=` and then put it into the variable that we specify on the *left-hand side* (target variable).
+`=`等号运算符用来**赋值**——我们首先计算出`=`**右边**（来源值）的值，然后把它放入`=`**左边**（目标变量）我们指定的变量中。
 
-**Warning:** This may seem like a strange reverse order to specify assignment. Instead of `a = 42`, some might prefer to flip the order so the source value is on the left and the target variable is on the right, like `42 -> a` (this is not valid JavaScript!). Unfortunately, the `a = 42` ordered form, and similar variations, is quite prevalent in modern programming languages. If it feels unnatural, just spend some time rehearsing that ordering in your mind to get accustomed to it.
+**警告：**这种以相反方向来赋值的操作可能看起来很奇怪。不像`a = 42`，有些人可能喜欢翻转顺序，使得源值在左边，目标变量在右边，如`42 -> a`（在JavaScript中这是无效的）。不幸的是，像`a = 42`这种有序的形式，以及类似的变形，在现代编程语言中相当普遍。如果你感觉不自然，那就花费一些时间在你心中反复排练下这种顺序，适应它吧。
 
-Consider:
+考虑如下：
 
 ```js
 a = 2;
 b = a + 1;
 ```
 
-Here, we assign the `2` value to the `a` variable. Then, we get the value of the `a` variable (still `2`), add `1` to it resulting in the value `3`, then store that value in the `b` variable.
+在这里，我们将`2`赋值给变量`a`，然后获取变量`a`的值（仍然是`2`），加`1`得到结果`3`，最后将这个值存储在变量`b`中。
 
-While not technically an operator, you'll need the keyword `var` in every program, as it's the primary way you *declare* (aka *create*) *var*iables (see "Variables").
+虽然这不是一个技术上的运算符，但是你需要明白每个程序中的关键字`var`，因为它你声明**变量**的主要方式（参见“变量”）。
 
-You should always declare the variable by name before you use it. But you only need to declare a variable once for each *scope* (see "Scope"); it can be used as many times after that as needed. For example:
+在使用变量之前，你总是应该通过名字来声明变量。但是，在每个**作用域**（参见“作用域”）你只需要为每个变量声明一次就行，他可以在需要的时候使用任意多次。例如：
 
 ```js
 var a = 20;
@@ -194,26 +194,25 @@ a = a * 2;
 console.log( a );	// 42
 ```
 
-Here are some of the most common operators in JavaScript:
+以下是JavaScript中一些最常见的运算符：
 
-* Assignment: `=` as in `a = 2`.
-* Math: `+` (addition), `-` (subtraction), `*` (multiplication), and `/` (division), as in `a * 3`.
-* Compound Assignment: `+=`, `-=`, `*=`, and `/=` are compound operators that combine a math operation with assignment, as in `a += 2` (same as `a = a + 2`).
-* Increment/Decrement: `++` (increment), `--` (decrement), as in `a++` (similar to `a = a + 1`).
-* Object Property Access: `.` as in `console.log()`.
+* 赋值：如：`a = 2`中的`=`
+* 算术：`+`（加法），`-`（减法），`*`（乘法）和 `/` (除法)，如：`a * 3`
+* 复合赋值：`+=`，`-=`，`*=` 和 `/=` 都是复合赋值运算符，它们组合了算术和赋值两个操作，如：`a += 2` (等同于`a = a + 2`)
+* 递加/递减：`++`（递加），`--`（递减），如：`a++`（等同于`a = a + 1`）
+* 对象属性访问：如：`console.log()`中的`.` 
+对象是在称为属性特定的命名位置持有其他值的值。`obj.a`表示一个对象值，变量名为`obj`，它带有一个叫`a`的属性。也可以通过`obj["a"]`这种方式来访问属性。参见第二章。
 
-   Objects are values that hold other values at specific named locations called properties. `obj.a` means an object value called `obj` with a property of the name `a`. Properties can alternatively be accessed as `obj["a"]`. See Chapter 2.
-* Equality: `==` (loose-equals), `===` (strict-equals), `!=` (loose not-equals), `!==` (strict not-equals), as in `a == b`.
+* 比较：`==`（一般等于），`===`（严格等于），`!=`（一般不等），`!==`（严格等于），如：`a == b`。
+参见第二章的“值与类型”
 
-   See "Values & Types" and Chapter 2.
-* Comparison: `<` (less than), `>` (greater than), `<=` (less than or loose-equals), `>=` (greater than or loose-equals), as in `a <= b`.
+* 比较：`<`（小与），`>`（大于），`<=`（小于等于），`>=`（大于等于），如：`a <= b`。
+参见第二章的“值与类型”
 
-   See "Values & Types" and Chapter 2.
-* Logical: `&&` (and), `||` (or), as in `a || b` that selects either `a` *or* `b`.
+* 逻辑：`&&`（与），`||`（或），如：`a || b`表示选择`a` **或者** `b`
+这些操作符是用来表示复合条件语句（参见“条件表达式”），就像`a`**或者**`b`为真。
 
-   These operators are used to express compound conditionals (see "Conditionals"), like if either `a` *or* `b` is true.
-
-**Note:** For much more detail, and coverage of operators not mentioned here, see the Mozilla Developer Network (MDN)'s "Expressions and Operators" (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators).
+**注意：**想要了解更多的细节，以及了解这里没有讲解到的运算符，参见Mozilla Developer Network (MDN)'s "Expressions and Operators" (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators)。
 
 ## Values & Types
 
@@ -784,7 +783,7 @@ if (amount > bank_balance) {
 
 How did you do? It wouldn't hurt to try it again now that you've seen my code. And play around with changing some of the constants to see how the program runs with different values.
 
-## Review
+## 小结
 
 Learning programming doesn't have to be a complex and overwhelming process. There are just a few basic concepts you need to wrap your head around.
 
