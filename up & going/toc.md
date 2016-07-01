@@ -8,7 +8,7 @@
 	* 代码
 	* 尝试一下
 	* 运算符
-	* Values & Types
+	* 值和类型
 	* Code Comments
 	* Variables
 	* Blocks
@@ -17,7 +17,7 @@
 	* Functions
 	* Practice
 * 第二章: 进入JavaScript
-	* Values & Types
+	* 值和类型
 	* Variables
 	* Conditionals
 	* Strict Mode

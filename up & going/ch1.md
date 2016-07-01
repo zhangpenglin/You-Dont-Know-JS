@@ -214,25 +214,25 @@ console.log( a );	// 42
 
 **注意：**想要了解更多的细节，以及了解这里没有讲解到的运算符，参见Mozilla Developer Network (MDN)'s "Expressions and Operators" (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators)。
 
-## Values & Types
+## 值和类型
 
-If you ask an employee at a phone store how much a certain phone costs, and they say "ninety-nine, ninety-nine" (i.e., $99.99), they're giving you an actual numeric dollar figure that represents what you'll need to pay (plus taxes) to buy it. If you want to buy two of those phones, you can easily do the mental math to double that value to get $199.98 for your base cost.
+如果您在手机商店问员工一部特定的手机的价格，他们说：“99，99”（即，$99.99），他们会告诉你一个实际上的美元数字代表你需要支付（加税）多少钱才能买它。如果你想购买两部，你可以很容易通过心算就知道你需要支付$199.98，一部手机价格的两倍。
 
-If that same employee picks up another similar phone but says it's "free" (perhaps with air quotes), they're not giving you a number, but instead another kind of representation of your expected cost ($0.00) -- the word "free."
+如果同样的员工拿起另一个类似的手机，但说这是“免费”的（可能是跟你开玩笑），他们不会给你一个数字，而是另外一种表示价格（￥0.00）的单词——“免费”。
 
-When you later ask if the phone includes a charger, that answer could only have been either "yes" or "no."
+当你接着问手机是否包括充电器，这个问题的答案只能是“是”或“否”。
 
-In very similar ways, when you express values in a program, you choose different representations for those values based on what you plan to do with them.
+这很类似于当你在程序中表达值的时候，你会根据它们的用途来选择不同的表示方法。
 
-These different representations for values are called *types* in programming terminology. JavaScript has built-in types for each of these so called *primitive* values:
+在编程术语中，这种不同的值表示被称为**类型**。JavaScript内置了一些类型，我们称之为**基本**类型。
 
-* When you need to do math, you want a `number`.
-* When you need to print a value on the screen, you need a `string` (one or more characters, words, sentences).
-* When you need to make a decision in your program, you need a `boolean` (`true` or `false`).
+* 当你想要做数学运算，你可能想要`number`（数字类型）
+* 当你想要往屏幕上打印值，你需要`string`（一个或多个字符，单词，句子）
+* 当你需要在程序中做决定，你需要`boolean` (`true` 或 `false`)
 
-Values that are included directly in the source code are called *literals*. `string` literals are surrounded by double quotes `"..."` or single quotes (`'...'`) -- the only difference is stylistic preference. `number` and `boolean` literals are just presented as is (i.e., `42`, `true`, etc.).
+被直接包含在源代码中的值称为**字面量**。`string`字面量是由双引号`“...”`或单引号（`'...'`）——唯一的区别是风格偏好。`number`和`boolean`字面量表现为`42`和`true`等。
 
-Consider:
+考虑如下：
 
 ```js
 "I am a string";
@@ -244,13 +244,13 @@ true;
 false;
 ```
 
-Beyond `string`/`number`/`boolean` value types, it's common for programming languages to provide *arrays*, *objects*, *functions*, and more. We'll cover much more about values and types throughout this chapter and the next.
+除了`string`/`number`/`boolean`值类型，很多的编程语言还提供了**数组**、**对象**、**函数**以及更多的类型。我们在本章和接下来的内容，会讲解更多有关值和类型的知识。
 
-### Converting Between Types
+### 类型转换
 
-If you have a `number` but need to print it on the screen, you need to convert the value to a `string`, and in JavaScript this conversion is called "coercion." Similarly, if someone enters a series of numeric characters into a form on an ecommerce page, that's a `string`, but if you need to then use that value to do math operations, you need to *coerce* it to a `number`.
+如果你有一个数字类型的值，但是需要把它打印到屏幕上，这个时候你需要将这个数字转换为字符串，在JavaScript中，这个转换称之为**强制转换**。同样，如果你进入了包含一系列数字的电子商务网站上，那些都是字符串，但是如果你需要用这些字符串数字进行算术运算，你就需要把字符串**强制**转换成数字。
 
-JavaScript provides several different facilities for forcibly coercing between *types*. For example:
+JavaScript提供了几种不同的方法用来在**类型**之间进行强制转换。例如：
 
 ```js
 var a = "42";
@@ -260,21 +260,21 @@ console.log( a );	// "42"
 console.log( b );	// 42
 ```
 
-Using `Number(..)` (a built-in function) as shown is an *explicit* coercion from any other type to the `number` type. That should be pretty straightforward.
+使用如上所示的`Number(..)`（一个内置函数）是一种**显式**强制转换，它能把任何类型转换为`number`（数字）类型。这应该最直截了当的。
 
-But a controversial topic is what happens when you try to compare two values that are not already of the same type, which would require *implicit* coercion.
+但是一个有争议的话题是，当你尝试比较两个不同类型的值的时候，你需要**隐式**强制转换。
 
-When comparing the string `"99.99"` to the number `99.99`, most people would agree they are equivalent. But they're not exactly the same, are they? It's the same value in two different representations, two different *types*. You could say they're "loosely equal," couldn't you?
+当比较字符串`“99.99”`和数字`99.99`，大多数人都认为它们是等价的。但他们不完全一样的，不是吗？它们是有着相同值的不同表示，两种不同的**类型**。你可以说它们是“非严格相等”，难道不是吗？
 
-To help you out in these common situations, JavaScript will sometimes kick in and *implicitly* coerce values to the matching types.
+为了帮助你应对这些常见的情况，JavaScript有时会进行**隐式**强制转换值使得他们的类型相匹配。
 
-So if you use the `==` loose equals operator to make the comparison `"99.99" == 99.99`, JavaScript will convert the left-hand side `"99.99"` to its `number` equivalent `99.99`. The comparison then becomes `99.99 == 99.99`, which is of course `true`.
+所以，如果你使用非严格等于`==`运算符对`"99.99" == 99.99`做比较，JavaScript会将左边的`"99.99"`转换为与它等价的`number`（数字）值`99.99`。然后比较就变成了`99.99 == 99.99`，这个结果当然就是`true`。
 
-While designed to help you, implicit coercion can create confusion if you haven't taken the time to learn the rules that govern its behavior. Most JS developers never have, so the common feeling is that implicit coercion is confusing and harms programs with unexpected bugs, and should thus be avoided. It's even sometimes called a flaw in the design of the language.
+虽然旨在帮助你，但是如果你没有花时间去学习规则控制它的行为，隐式转换会给你造成混乱。许多的JS开发者从来没有花时间了解过，所以大家普遍的感觉是，隐式转换是混乱的，会导致程序出现意外的bug，因此，应该尽量避免它。它甚至有时被认为是语言的设计缺陷。
 
-However, implicit coercion is a mechanism that *can be learned*, and moreover *should be learned* by anyone wishing to take JavaScript programming seriously. Not only is it not confusing once you learn the rules, it can actually make your programs better! The effort is well worth it.
+然而，隐式强制是**可以学会**的技巧，而且**应该被认真的学习**，如果你想要认真学习JavaScript编程。一旦你掌握了这些规则，它不仅不混淆，还可以让你的程序变得更好！这种努力是值得的。
 
-**Note:** For more information on coercion, see Chapter 2 of this title and Chapter 4 of the *Types & Grammar* title of this series.
+**注意：**有关强制的更多信息，请参阅本题第二章和本系列中“类型和语法”的第四章。
 
 ## Code Comments
 

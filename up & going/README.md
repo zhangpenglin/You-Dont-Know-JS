@@ -15,4 +15,4 @@
 * [第一章: 走进编程](ch1.md)
 * [第二章: 走进JavaScript](ch2.md)
 * [第三章: 走进你不知道的JavaScript](ch3.md)
-* [附录 A: 谢谢你们](apA.md)
+* [附录 A: 致谢](apA.md)
