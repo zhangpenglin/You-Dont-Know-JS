@@ -9,7 +9,7 @@
 	* 尝试一下
 	* 运算符
 	* 值和类型
-	* Code Comments
+	* 代码注释
 	* Variables
 	* Blocks
 	* Conditionals

@@ -276,27 +276,27 @@ console.log( b );	// 42
 
 **注意：**有关强制的更多信息，请参阅本题第二章和本系列中“类型和语法”的第四章。
 
-## Code Comments
+## 代码注释
 
-The phone store employee might jot down some notes on the features of a newly released phone or on the new plans her company offers. These notes are only for the employee -- they're not for customers to read. Nevertheless, these notes help the employee do her job better by documenting the hows and whys of what she should tell customers.
+手机店员工可能会记下新发布手机的功能或者公司的新计划。这些笔记只是为了员工自己——而不是给他们的客户阅读的。然而，通过记录他们应该告诉客户什么以及如何告诉客户，能够更好的帮助员工做好他们的工作。
 
-One of the most important lessons you can learn about writing code is that it's not just for the computer. Code is every bit as much, if not more, for the developer as it is for the compiler.
+学习写代码最重要的一课就是你必须明白，你写代码不仅仅是为计算机而写代码。对编译器来说代码仅仅只是比特而已，但对开发者来说却不是。（感觉翻译不来，给出原文：One of the most important lessons you can learn about writing code is that it's not just for the computer. Code is every bit as much, if not more, for the developer as it is for the compiler.）
 
-Your computer only cares about machine code, a series of binary 0s and 1s, that comes from *compilation*. There's a nearly infinite number of programs you could write that yield the same series of 0s and 1s. The choices you make about how to write your program matter -- not only to you, but to your other team members and even to your future self.
+你的计算机只关心机器码（编译器编译之后的一串0和1的序列）。在你的职业生涯中，你可能会写很多的代码，但是最终都会被转换成机器码。你所做的如何编写你的代码的决定，将不仅仅对你、对你的其他团队成员甚至未来的你自己产生极大的影响。
 
-You should strive not just to write programs that work correctly, but programs that make sense when examined. You can go a long way in that effort by choosing good names for your variables (see "Variables") and functions (see "Functions").
+你应该努力写出不仅仅是可正常运行的代码，还需要在检查的时候也有意义。尽量给变量（参见“变量”）和函数（参见“函数”）选择一个好的名称，能够让你的程序生涯走得更远。
 
-But another important part is code comments. These are bits of text in your program that are inserted purely to explain things to a human. The interpreter/compiler will always ignore these comments.
+另外一个重要的部分就是代码注释。它们是插入你代码中的一些文本，用来向人解释你的代码。解释器或者编译器会忽略掉这些注释。
 
-There are lots of opinions on what makes well-commented code; we can't really define absolute universal rules. But some observations and guidelines are quite useful:
+这里有许多的建议，关于如何写出良好注释的代码；我们无法定义绝对通用的规则。但是一些建议和指导还是十分有用的：
 
-* Code without comments is suboptimal.
-* Too many comments (one per line, for example) is probably a sign of poorly written code.
-* Comments should explain *why*, not *what*. They can optionally explain *how* if that's particularly confusing.
+* 没有注释的代码是不合格的代码
+* 过度的注释（例如：每行都有）可能是写得不好的代码的标志
+* 注释应该解释**为什么**，而不是**这是什么**。如果代码容易引起混乱，注释也可以解释**如何实现**。
 
-In JavaScript, there are two types of comments possible: a single-line comment and a multiline comment.
+在JavaScript中，有两种类型的注释：单行注释和多行注释。
 
-Consider:
+考虑如下:
 
 ```js
 // This is a single-line comment
@@ -307,17 +307,17 @@ Consider:
                       */
 ```
 
-The `//` single-line comment is appropriate if you're going to put a comment right above a single statement, or even at the end of a line. Everything on the line after the `//` is treated as the comment (and thus ignored by the compiler), all the way to the end of the line. There's no restriction to what can appear inside a single-line comment.
+如果你打算把评论正上方一条语句，或者是在一行的末尾注释，`//`单行注释是合适的。在`//`后面的一切被视为注释（并因此被编译器忽略），一直到行的结尾。单行注释中可以出现任何字符。
 
-Consider:
+考虑如下:
 
 ```js
 var a = 42;		// 42 is the meaning of life
 ```
 
-The `/* .. */` multiline comment is appropriate if you have several lines worth of explanation to make in your comment.
+如果你需要在多行注释你的代码，那`/* .. */`多行注释是合适的。
 
-Here's a common usage of multiline comments:
+下面是多行注释的一个常见用法：
 
 ```js
 /* The following value is used because
@@ -326,7 +326,7 @@ Here's a common usage of multiline comments:
 var a = 42;
 ```
 
-It can also appear anywhere on a line, even in the middle of a line, because the `*/` ends it. For example:
+它可以出现在一行的任意位置，甚至在一行的中间，因为`*/`表示注释结束。例如：
 
 ```js
 var a = /* arbitrary value */ 42;
@@ -334,9 +334,9 @@ var a = /* arbitrary value */ 42;
 console.log( a );	// 42
 ```
 
-The only thing that cannot appear inside a multiline comment is a `*/`, because that would be interpreted to end the comment.
+在多行注释的内容中不能出现`*/`，因为它会被解释器认为是结束注释。
 
-You will definitely want to begin your learning of programming by starting off with the habit of commenting code. Throughout the rest of this chapter, you'll see I use comments to explain things, so do the same in your own practice. Trust me, everyone who reads your code will thank you!
+你一定会希望通过写注释代码的习惯出发，开始编程的学习。在本章的其余部分，你会看到我用注释来解释的东西，所以在自己的实践中做同样的事情。相信我，大家谁读你的代码都会感谢你的！
 
 ## Variables
 
