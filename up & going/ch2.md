@@ -183,17 +183,17 @@ b.toFixed(4);			// "3.1416"
 
 在JS程序中，有两种主要的值比较方案：**相等**和**不相等**。任何一种的比较结果都是一个严格的`boolean`值（`true`或`false`），不管比较的值类型是什么。
 
-#### Coercion
+#### 强制转换
 
-We talked briefly about coercion in Chapter 1, but let's revisit it here.
+我们在第一章简单的讲解了**强制转换**，让我们在这里重温它。
 
-Coercion comes in two forms in JavaScript: *explicit* and *implicit*. Explicit coercion is simply that you can see obviously from the code that a conversion from one type to another will occur, whereas implicit coercion is when the type conversion can happen as more of a non-obvious side effect of some other operation.
+在JavaScript中有两种形式的强制转换：**显式转换**和**隐式转换**。显式转换很简单，你从代码中就能很明显的看出从一种类型转换到另外一种类型，而隐式转换则发生在一些操作上，这些操作会产生一些非显而易见的副作用。
 
-You've probably heard sentiments like "coercion is evil" drawn from the fact that there are clearly places where coercion can produce some surprising results. Perhaps nothing evokes frustration from developers more than when the language surprises them.
+你可能听别人抱怨过“强制转换是邪恶的”，事实上有例子表明强制转换有时能产生一些令人惊讶的结果。可能没有什么能比编程语言让开发者惊讶更受挫的事情了。
 
-Coercion is not evil, nor does it have to be surprising. In fact, the majority of cases you can construct with type coercion are quite sensible and understandable, and can even be used to *improve* the readability of your code. But we won't go much further into that debate -- Chapter 4 of the *Types & Grammar* title of this series covers all sides.
+强制转换不是邪恶的，也没有到令人惊讶。事实上，在多数情况下，你使用类型转换是相当明智且易于理解的，甚至可以用来**改善**你代码的可读性。但是我不打算在这里作深入讲解——在本系列标题为“**类型和语法**”的第四章涵盖了转换的所有内容。
 
-Here's an example of *explicit* coercion:
+这里是一个**显式转换**的例子：
 
 ```js
 var a = "42";
@@ -204,7 +204,7 @@ a;				// "42"
 b;				// 42 -- the number!
 ```
 
-And here's an example of *implicit* coercion:
+这里是一个**隐式转换**的例子：
 
 ```js
 var a = "42";
