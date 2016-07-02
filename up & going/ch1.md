@@ -787,21 +787,21 @@ if (amount > bank_balance) {
 
 ## 小结
 
-Learning programming doesn't have to be a complex and overwhelming process. There are just a few basic concepts you need to wrap your head around.
+学习编程并不是一个复杂和压倒性的过程。你只需要在大脑中记住一些基本的概念。
 
-These act like building blocks. To build a tall tower, you start first by putting block on top of block on top of block. The same goes with programming. Here are some of the essential programming building blocks:
+这就像是搭积木。要建立高塔，你需要一块一块的堆积积木。对编程来说也是一样。下面是一些基本的编程积木：
 
-* You need *operators* to perform actions on values.
-* You need values and *types* to perform different kinds of actions like math on `number`s or output with `string`s.
-* You need *variables* to store data (aka *state*) during your program's execution.
-* You need *conditionals* like `if` statements to make decisions.
-* You need *loops* to repeat tasks until a condition stops being true.
-* You need *functions* to organize your code into logical and reusable chunks.
+* 你需要通过**操作符**来操作值
+* 你需要值和**类型**来执行不同的操作，如数学运算用`number`，输出用`string`
+* 在程序执行过程中，你需要**变量**来存储数据（即**状态**）
+* 你需要**条件语句**如`if`语句来做决定
+* 你需要**循环**来重复执行任务，直到判断条件不为真（才停止）
+* 你需要**函数**将你的代码组织逻辑，编程可复用的代码块
 
-Code comments are one effective way to write more readable code, which makes your program easier to understand, maintain, and fix later if there are problems.
+代码注释是一种有效的方式来编写更加易读的代码，这使得你的程序更容易被理解、维护以及之后出现问题的时候更容易修复。
 
-Finally, don't neglect the power of practice. The best way to learn how to write code is to write code.
+最后，不要忽视实践的力量。学习如何编写代码最佳的方式就是编写代码，开始动起来吧！
 
-I'm excited you're well on your way to learning how to code, now! Keep it up. Don't forget to check out other beginner programming resources (books, blogs, online training, etc.). This chapter and this book are a great start, but they're just a brief introduction.
+我很高兴看到你在学习如何编程的路上表现很棒。坚持下去。不要忘记去看看其他初级编程的资料（书籍、博客、在线教程等）。本章和本书是一个很好的开端，但是它们只是一个简单的介绍。
 
-The next chapter will review many of the concepts from this chapter, but from a more JavaScript-specific perspective, which will highlight most of the major topics that are addressed in deeper detail throughout the rest of the series.
+下一章将会回顾本章的许多概念，但是会从更具体的JavaScript的角度来看，会重点讲解几个主要的话题，这几个话题我们会在本系列丛书中更加深入的讲解。
