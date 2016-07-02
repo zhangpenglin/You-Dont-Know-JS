@@ -154,11 +154,11 @@ typeof foo.bar;		// "string"
 
 **注意：**有关JS值和类型的详细信息，请参阅本系列标题为**类型和语法**的前两章。
 
-### Built-In Type Methods
+### 内置类型方法
 
-The built-in types and subtypes we've just discussed have behaviors exposed as properties and methods that are quite powerful and useful.
+我们刚刚讨论的内置类型和子类型暴露了一些非常强大和有用的行为（方法）作为它们的属性。
 
-For example:
+如下例子：
 
 ```js
 var a = "hello world";
@@ -169,19 +169,19 @@ a.toUpperCase();		// "HELLO WORLD"
 b.toFixed(4);			// "3.1416"
 ```
 
-The "how" behind being able to call `a.toUpperCase()` is more complicated than just that method existing on the value.
+理解调用`a.toUpperCase()`的背后是如何实现的比认为这个方法就是存在这个值中更加复杂。（原句：The "how" behind being able to call `a.toUpperCase()` is more complicated than just that method existing on the value.）
 
-Briefly, there is a `String` (capital `S`) object wrapper form, typically called a "native," that pairs with the primitive `string` type; it's this object wrapper that defines the `toUpperCase()` method on its prototype.
+简单来说，这里有个`String`（注意，首字母是大写的`S`）对象包装的形式，通常称为“本地类型”，它包含了一个`string`类型的属性；正是这个对象包装类在它的原型上定义了方法`toUpperCase()`。（原句：Briefly, there is a `String` (capital `S`) object wrapper form, typically called a "native," that pairs with the primitive `string` type; it's this object wrapper that defines the `toUpperCase()` method on its prototype.）
 
-When you use a primitive value like `"hello world"` as an `object` by referencing a property or method (e.g., `a.toUpperCase()` in the previous snippet), JS automatically "boxes" the value to its object wrapper counterpart (hidden under the covers).
+当你使用像`"hello world"`这样的原始值来引用一个属性或者方法（如上面示例代码中的`a.toUpperCase()`），JS会自动为这个值进行“装箱”（这是隐式发生的），转换成它对应的包装类。
 
-A `string` value can be wrapped by a `String` object, a `number` can be wrapped by a `Number` object, and a `boolean` can be wrapped by a `Boolean` object. For the most part, you don't need to worry about or directly use these object wrapper forms of the values -- prefer the primitive value forms in practically all cases and JavaScript will take care of the rest for you.
+`string`值会被包裹成`String`对象，`number`值会被包裹成`Number`对象，并且`boolean`值会被包裹成`Boolean`对象。在大多数情况下，你都没有必要担心和使用这些包装对象，你只需使用它们的原始值形式，剩余的事情交给JavaScript就行了。
 
-**Note:** For more information on JS natives and "boxing," see Chapter 3 of the *Types & Grammar* title of this series. To better understand the prototype of an object, see Chapter 5 of the *this & Object Prototypes* title of this series.
+**注意：**有关JS本地类型和“装箱”，请参阅本系列标题为“**类型和语法**”的第三章。想要更好地理解对象原型，请参阅本系列标题为“**this和对象原型**”的第五章。
 
-### Comparing Values
+### 比较值
 
-There are two main types of value comparison that you will need to make in your JS programs: *equality* and *inequality*. The result of any comparison is a strictly `boolean` value (`true` or `false`), regardless of what value types are compared.
+在JS程序中，有两种主要的值比较方案：**相等**和**不相等**。任何一种的比较结果都是一个严格的`boolean`值（`true`或`false`），不管比较的值类型是什么。
 
 #### Coercion
 
