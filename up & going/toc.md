@@ -14,7 +14,7 @@
 	* 块
 	* 条件语句
 	* 循环
-	* Functions
+	* 函数
 	* Practice
 * 第二章: 进入JavaScript
 	* 值和类型

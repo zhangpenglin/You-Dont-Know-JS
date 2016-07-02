@@ -504,7 +504,7 @@ JavaScript定义了一些值，它们被认为是假值（`falsy`），因为当
 
 ## 循环
 
-在繁忙的时候，手机店员工有一个想要购买手机客户等待名单。只要这个名单中还有人，她就会继续为下一个客户服务。
+在繁忙的时候，手机店员工有一个想要购买手机客户的等待名单。只要这个名单中还有人，她就会继续为下一个客户服务。
 
 重复一组动作，直到在一定条件下失败——换句话说，仅在条件成立才重复——这是编程循环所做的工作；循环可以有多种表现形式，但是它们都满足这个基本行为。
 
@@ -579,13 +579,13 @@ for (var i = 0; i <= 9; i = i + 1) {
 
 这里也有其他特殊的循环形式用于迭代特定的值，例如对象的属性（参见第二章），它隐含的条件测试是是否所有的属性都被处理过。不管循环以什么形式表现，但循环的核心理念就是“循环，直到条件失败”，切记！
 
-## Functions
+## 函数
 
-The phone store employee probably doesn't carry around a calculator to figure out the taxes and final purchase amount. That's a task she needs to define once and reuse over and over again. Odds are, the company has a checkout register (computer, tablet, etc.) with those "functions" built in.
+手机店员工可能不会一直用计算器来计算税款和最终的购买量。这是一个她需要定义一次并且重复使用的任务。事实上，公司已经将类似校验寄存器（电脑、平板电脑等）的这些**功能**内置。
 
-Similarly, your program will almost certainly want to break up the code's tasks into reusable pieces, instead of repeatedly repeating yourself repetitiously (pun intended!). The way to do this is to define a `function`.
+同样的，你的程序肯定想要将代码任务拆分成可重用的块，而不是一再重复你自己。要完成这个，你只需要定义一个`function`（函数）。
 
-A function is generally a named section of code that can be "called" by name, and the code inside it will be run each time. Consider:
+函数是一个被命名的代码块，它能通过名字被**调用**，然后它里面的代码就会被执行。考虑如下：
 
 ```js
 function printAmount() {
@@ -601,7 +601,7 @@ amount = amount * 2;
 printAmount(); // "199.98"
 ```
 
-Functions can optionally take arguments (aka parameters) -- values you pass in. And they can also optionally return a value back.
+函数可以接受参数（可选）——你传递进去的值。函数也可以选择性的返回一个值。
 
 ```js
 function printAmount(amt) {
@@ -620,11 +620,11 @@ amount = formatAmount();
 console.log( amount );			// "$99.99"
 ```
 
-The function `printAmount(..)` takes a parameter that we call `amt`. The function `formatAmount()` returns a value. Of course, you can also combine those two techniques in the same function.
+函数`printAmount（..）`需要一个叫`amt`的参数。函数`formatAmount()`返回了一个值。当然，你也可以在一个函数中结合这两种技术。
 
-Functions are often used for code that you plan to call multiple times, but they can also be useful just to organize related bits of code into named collections, even if you only plan to call them once.
+函数通常用于组织那些你计划多次调用的代码，但是你如果只是想要组织你的代码，整理到集合中，函数对你来说也是很有用的，即使你只打算调用一次。
 
-Consider:
+考虑如下：
 
 ```js
 const TAX_RATE = 0.08;
@@ -644,15 +644,15 @@ amount = calculateFinalPurchaseAmount( amount );
 console.log( amount.toFixed( 2 ) );		// "107.99"
 ```
 
-Although `calculateFinalPurchaseAmount(..)` is only called once, organizing its behavior into a separate named function makes the code that uses its logic (the `amount = calculateFinal...` statement) cleaner. If the function had more statements in it, the benefits would be even more pronounced.
+虽然`calculateFinalPurchaseAmount（..）`只调用一次，组织其行为到一个单独命名的函数使得使用它的代码逻辑（`amount = calculateFinal...`语句）更清晰。如果函数里面有更多的语句，带来的好处会更加明显。
 
-### Scope
+### 作用域
 
-If you ask the phone store employee for a phone model that her store doesn't carry, she will not be able to sell you the phone you want. She only has access to the phones in her store's inventory. You'll have to try another store to see if you can find the phone you're looking for.
+如果你询问手机店员工一款她店里不存在的手机型号，她不能卖给你你想要的那款手机。她只能访问她店里的库存手机。你必须尝试去其他店里看看能不能找到你想要的手机。
 
-Programming has a term for this concept: *scope* (technically called *lexical scope*). In JavaScript, each function gets its own scope. Scope is basically a collection of variables as well as the rules for how those variables are accessed by name. Only code inside that function can access that function's *scoped* variables.
+编程对这个概念有个术语：**作用域**（技术上称为**词法范围**）。在JavaScript中，每个函数都有自己的作用域。作用域是指一组变量以及如何通过名称访问这些变量的规则的集合。只有在函数内部的代码才能访问函数**作用域**内部的变量。
 
-A variable name has to be unique within the same scope -- there can't be two different `a` variables sitting right next to each other. But the same variable name `a` could appear in different scopes.
+在相同的作用域中，一个变量的名字必须是唯一的——这里不允许出现两个变量`a`。但是相同的变量名`a`可以出现在不同的作用域中。
 
 ```js
 function one() {
@@ -671,9 +671,9 @@ one();		// 1
 two();		// 2
 ```
 
-Also, a scope can be nested inside another scope, just like if a clown at a birthday party blows up one balloon inside another balloon. If one scope is nested inside another, code inside the innermost scope can access variables from either scope.
+此外，一个作用域可以嵌套在另外一个作用域中，就像在生日聚会上的小丑炸毁一个气球中的另外一个气球。如果一个作用域嵌套在另一个作用域里面，最里面的作用域中的代码可以访问外层作用域的变量。
 
-Consider:
+考虑如下：
 
 ```js
 function outer() {
@@ -695,11 +695,11 @@ function outer() {
 outer();
 ```
 
-Lexical scope rules say that code in one scope can access variables of either that scope or any scope outside of it.
+词法作用域规则说明一个作用域里面的代码可以访问该作用域或者任何外层作用域范围的变量。
 
-So, code inside the `inner()` function has access to both variables `a` and `b`, but code in `outer()` has access only to `a` -- it cannot access `b` because that variable is only inside `inner()`.
+因此，`inner()`函数可以访问变量`a`和变量`b`，但是`outer()`函数中的代码只能访问`a`——它不能访问`b`，因为变量`b`只在函数`inner()`中（才能被访问到）。
 
-Recall this code snippet from earlier:
+回想一下前面这段代码：
 
 ```js
 const TAX_RATE = 0.08;
@@ -713,9 +713,9 @@ function calculateFinalPurchaseAmount(amt) {
 }
 ```
 
-The `TAX_RATE` constant (variable) is accessible from inside the `calculateFinalPurchaseAmount(..)` function, even though we didn't pass it in, because of lexical scope.
+常量`TAX_RATE`可以在函数`calculateFinalPurchaseAmount(..)`内部被访问到，尽管我们没有当作参数传递给这个函数，就是因为词法作用域规则。
 
-**Note:** For more information about lexical scope, see the first three chapters of the *Scope & Closures* title of this series.
+**注意：**想要了解更多有关词法作用域的信息，请参阅本系列**作用域和闭包**的前三个章节。
 
 ## Practice
 
