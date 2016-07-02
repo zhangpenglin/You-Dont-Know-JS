@@ -16,7 +16,11 @@
 - "this & Object Prototypes"未定
 
 ### Up & Going
-正在翻译ch1.md
+
+* ch1.md翻译完成
+* ch2.md正在翻译
+* ch3.md将要翻译
+* apA.md翻译完成
 
 # 翻译错误
 
