@@ -134,9 +134,9 @@ typeof arr;		// "object"
 
 使用数组最好并且最自然的方法就是使用数字下标的值，而使用`object`（对象）来表示命名属性。
 
-#### Functions
+#### 函数
 
-The other `object` subtype you'll use all over your JS programs is a function:
+在JS程序中，你会一直用的另外一个`object`子类型是`function`函数：
 
 ```js
 function foo() {
@@ -150,9 +150,9 @@ typeof foo();		// "number"
 typeof foo.bar;		// "string"
 ```
 
-Again, functions are a subtype of `objects` -- `typeof` returns `"function"`, which implies that a `function` is a main type -- and can thus have properties, but you typically will only use function object properties (like `foo.bar`) in limited cases.
+再说一遍，函数是`object`的子类型——尽管`typeof`返回`"function"`，这说明`function`（函数）也是一个主要类型——因此它可以有属性，但是你通常只会在有限的情况下使用函数对象的属性（就像`foo.bar`）。
 
-**Note:** For more information on JS values and their types, see the first two chapters of the *Types & Grammar* title of this series.
+**注意：**有关JS值和类型的详细信息，请参阅本系列标题为**类型和语法**的前两章。
 
 ### Built-In Type Methods
 
