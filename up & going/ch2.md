@@ -215,18 +215,18 @@ a;				// "42"
 b;				// 42 -- the number!
 ```
 
-#### Truthy & Falsy
+#### 真与假
 
-In Chapter 1, we briefly mentioned the "truthy" and "falsy" nature of values: when a non-`boolean` value is coerced to a `boolean`, does it become `true` or `false`, respectively?
+在第一章中，我们简要的提到了表示“真”和“假”的一些自然值：当非`boolean`值被强制转为`boolean`，它们会被分别转为`true`或`false`。
 
-The specific list of "falsy" values in JavaScript is as follows:
+下面这些值在JavaScript中表示“假”：
 
 * `""` (empty string)
 * `0`, `-0`, `NaN` (invalid `number`)
 * `null`, `undefined`
 * `false`
 
-Any value that's not on this "falsy" list is "truthy." Here are some examples of those:
+不在“假”值名单中的其他任何值都是“真”的。这里是一些例子：
 
 * `"hello"`
 * `42`
@@ -235,7 +235,7 @@ Any value that's not on this "falsy" list is "truthy." Here are some examples of
 * `{ }`, `{ a: 42 }` (objects)
 * `function foo() { .. }` (functions)
 
-It's important to remember that a non-`boolean` value only follows this "truthy"/"falsy" coercion if it's actually coerced to a `boolean`. It's not all that difficult to confuse yourself with a situation that seems like it's coercing a value to a `boolean` when it's not.
+重要的是要记住，只要非`boolean`的值转换成`boolean`值，就一定会遵守上面那个“真”和“假”的列表。下次当你碰到看似一个值被转为`boolean`时实际上却没有时，你就一点都不会感到迷惑了。（原句：It's important to remember that a non-`boolean` value only follows this "truthy"/"falsy" coercion if it's actually coerced to a `boolean`. It's not all that difficult to confuse yourself with a situation that seems like it's coercing a value to a `boolean` when it's not.）
 
 #### Equality
 
