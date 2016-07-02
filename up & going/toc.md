@@ -12,7 +12,7 @@
 	* 代码注释
 	* 变量
 	* 块
-	* Conditionals
+	* 条件语句
 	* Loops
 	* Functions
 	* Practice

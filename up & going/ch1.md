@@ -452,13 +452,13 @@ if (amount > 10) {			// <-- block attached to `if`
 
 **注意：**不像其他的语句，比如`console.log(amount);`，块语句不需要分号（`;`）来结束它。
 
-## Conditionals
+## 条件语句
 
-"Do you want to add on the extra screen protectors to your purchase, for $9.99?" The helpful phone store employee has asked you to make a decision. And you may need to first consult the current *state* of your wallet or bank account to answer that question. But obviously, this is just a simple "yes or no" question.
+“你是否需要购买额外的屏幕保护膜，特价$9.99美元？”乐于助人的手机店员工询问你的决定。在回答这个问题之前，你可能需要看看你钱包当前的**状态**或者你银行账户的余额。但很明显，这只是一个简单的“是或否”的问题。
 
-There are quite a few ways we can express *conditionals* (aka decisions) in our programs.
+这里有许多方法在我们的程序中表示“条件语句”（又称决策）。
 
-The most common one is the `if` statement. Essentially, you're saying, "*If* this condition is true, do the following...". For example:
+最常见的一种是`if`声明。其所表达的意思就是“**如果**这个条件为真，执行如下操作...”。例如：
 
 ```js
 var bank_balance = 302.13;
@@ -469,9 +469,9 @@ if (amount < bank_balance) {
 }
 ```
 
-The `if` statement requires an expression in between the parentheses `( )` that can be treated as either `true` or `false`. In this program, we provided the expression `amount < bank_balance`, which indeed will either evaluate to `true` or `false` depending on the amount in the `bank_balance` variable.
+`if`语句中要求括号之间的表达式`()`能被视为`true`或`false`。在这个程序中，我们提供的表达式`amount < bank_balance`，它确实被计算为`true`或者`false`，这取决于变量`bank_balance`中值的大小。
 
-You can even provide an alternative if the condition isn't true, called an `else` clause. Consider:
+如果条件是不正确的，你可以提供另一个选择，我们称之为`else`子句。考虑如下：
 
 ```js
 const ACCESSORY_PRICE = 9.99;
@@ -492,15 +492,15 @@ else {
 }
 ```
 
-Here, if `amount < bank_balance` is `true`, we'll print out `"I'll take the accessory!"` and add the `9.99` to our `amount` variable. Otherwise, the `else` clause says we'll just politely respond with `"No, thanks."` and leave `amount` unchanged.
+在这里，如果`amount < bank_balance`是`true`，我们就会打印出`"I'll take the accessory!"`并且为变量`amount`加上值`9.99`。否则，`else`子句就会输出`"No, thanks."`，并且变量`amount`不会发生改变。
 
-As we discussed in "Values & Types" earlier, values that aren't already of an expected type are often coerced to that type. The `if` statement expects a `boolean`, but if you pass it something that's not already `boolean`, coercion will occur.
+正如我们之前在“值和类型”中说讨论的那样，如果我们的值不是我们预期的类型，JS就会隐式的转换这个值到我们预期的类型。`if`语句希望得到一个`boolean`，但是如果你传递一个不是`boolean`类型的值过去，类型转换就会出现。
 
-JavaScript defines a list of specific values that are considered "falsy" because when coerced to a `boolean`, they become `false` -- these include values like `0` and `""`. Any other value not on the "falsy" list is automatically "truthy" -- when coerced to a `boolean` they become `true`. Truthy values include things like `99.99` and `"free"`. See "Truthy & Falsy" in Chapter 2 for more information.
+JavaScript定义了一些值，它们被认为是假值（`falsy`），因为当它们被强制转换为`boolean`，它们是`false`——这些假值包括像`0`和`""`等。其他不在这个名单中的值被认为是真值（`truthy`）——当他们会被强制转换为`true`。真值包括像`99.99`和`"free"`等值。请参阅第二章的“真值与假值”以获取更多信息。
 
-*Conditionals* exist in other forms besides the `if`. For example, the `switch` statement can be used as a shorthand for a series of `if..else` statements (see Chapter 2). Loops (see "Loops") use a *conditional* to determine if the loop should keep going or stop.
+**条件语句**除了在`if`中出现，也存在于其他形式的语句中。例如，`switch`语句可以当作是一系列`if..else`语句的简写（参见第二章）。循环（参见“循环”）使用**条件语句**来决定循环应该继续还是停止。
 
-**Note:** For deeper information about the coercions that can occur implicitly in the test expressions of *conditionals*, see Chapter 4 of the *Types & Grammar* title of this series.
+**注意：**想要获取更深层次的有关在**条件语句**中发生隐式转换的信息，请参阅这个系列中的“类型和语法”的第四章。
 
 ## Loops
 
