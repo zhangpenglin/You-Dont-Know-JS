@@ -11,9 +11,9 @@
 
 **注意：**正如我在第一章所说的，当你阅读学习本章的时候，你一定要自己尝试所有的代码。你要明白这里有些代码假定你的JavaScript有某些新版本的功能，我写作本书的时候用的是最新的JavaScript版本（第6版的ECMAScript，通常被称为“ES6”——JS的官方规范）。如果你恰好在使用老版本的，ES6版本前的浏览器，这些代码可能没法工作。你应该更新你当前的浏览器（如Chrome，Firefox或IE）到最新版本。
 
-## Values & Types
+## 值和类型
 
-As we asserted in Chapter 1, JavaScript has typed values, not typed variables. The following built-in types are available:
+正如我们在第1章所断言的，JavaScript的值是有类型的，但变量是没有类型的。以下是JavaScript的内置类型：
 
 * `string`
 * `number`
@@ -22,7 +22,7 @@ As we asserted in Chapter 1, JavaScript has typed values, not typed variables. T
 * `object`
 * `symbol` (new to ES6)
 
-JavaScript provides a `typeof` operator that can examine a value and tell you what type it is:
+JavaScript提供`typeof`运算符来检测值的类型：
 
 ```js
 var a;
@@ -47,15 +47,15 @@ a = { b: "c" };
 typeof a;				// "object"
 ```
 
-The return value from the `typeof` operator is always one of six (seven as of ES6! - the "symbol" type) string values. That is, `typeof "abc"` returns `"string"`, not `string`.
+`typeof`运算符的返回结果始终是六个中的某个（在ES6中是七种——“symbol”类型）字符串值。意思是`typeof "abc"`返回结果是`"string"`而不是`string`。
 
-Notice how in this snippet the `a` variable holds every different type of value, and that despite appearances, `typeof a` is not asking for the "type of `a`", but rather for the "type of the value currently in `a`." Only values have types in JavaScript; variables are just simple containers for those values.
+请注意，在这个代码片段中，变量`a`存储了不同类型的值，揭去表面，你会发现`typeof a`并不是询问变量`a`的类型，而是询问变量`a`当前存储的值的类型是什么。记住，在JavaScript中，只有值才有类型；变量只是存储值的容器。
 
-`typeof null` is an interesting case, because it errantly returns `"object"`, when you'd expect it to return `"null"`.
+`typeof null`是个有趣的案例，你期望它返回`"null"`，它却给你错误的返回了`"object"`。
 
-**Warning:** This is a long-standing bug in JS, but one that is likely never going to be fixed. Too much code on the Web relies on the bug and thus fixing it would cause a lot more bugs!
+**警告：**这是JS由来已久的错误，而且是一个可能永远不会被修复的错误。在Web网站上有太多的代码依赖于这个错误，如果修正这个错误会导致更多的其他错误！
 
-Also, note `a = undefined`. We're explicitly setting `a` to the `undefined` value, but that is behaviorally no different from a variable that has no value set yet, like with the `var a;` line at the top of the snippet. A variable can get to this "undefined" value state in several different ways, including functions that return no values and usage of the `void` operator.
+此外，还要注意`a = undefined`。我们明确设置变量`a`的值为`undefined`，但是这种行为和不给变量赋值没有任何区别，就像上面代码的第一行`var a;`。可以通过不同的方式给一个变量赋值为“undefined”，包括没有返回值的函数调用和使用运算符`void`。
 
 ### Objects
 
