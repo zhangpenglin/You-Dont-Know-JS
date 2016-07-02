@@ -57,9 +57,9 @@ typeof a;				// "object"
 
 此外，还要注意`a = undefined`。我们明确设置变量`a`的值为`undefined`，但是这种行为和不给变量赋值没有任何区别，就像上面代码的第一行`var a;`。可以通过不同的方式给一个变量赋值为“undefined”，包括没有返回值的函数调用和使用运算符`void`。
 
-### Objects
+### 对象
 
-The `object` type refers to a compound value where you can set properties (named locations) that each hold their own values of any type. This is perhaps one of the most useful value types in all of JavaScript.
+`object`类型是一个复合值，在这里你可以给它设置属性，每个属性都持有它们自己的任何类型的值。这或许是所有JavaScript中最有用的值类型之一。
 
 ```js
 var obj = {
@@ -77,15 +77,15 @@ obj["b"];	// 42
 obj["c"];	// true
 ```
 
-It may be helpful to think of this `obj` value visually:
+来看看下面这个`obj`的值（这样看起来似乎更好理解）：
 
 <img src="fig4.png">
 
-Properties can either be accessed with *dot notation* (i.e., `obj.a`) or *bracket notation* (i.e., `obj["a"]`). Dot notation is shorter and generally easier to read, and is thus preferred when possible.
+属性可以通过**点符号**（即`obj.a`）或者**括号符号**（即`obj["a"]`）来访问其值。点符号更短，并且更容易阅读，因此优选选择使用点符号（如果条件允许的话）。
 
-Bracket notation is useful if you have a property name that has special characters in it, like `obj["hello world!"]` -- such properties are often referred to as *keys* when accessed via bracket notation. The `[ ]` notation requires either a variable (explained next) or a `string` *literal* (which needs to be wrapped in `" .. "` or `' .. '`).
+括号符号会变得很有用当你想要访问的属性名称中含有特殊字符，比如`obj["hello world"]`——这种通过括号来访问的属性被称为**键**。`[]`符号需要一个变量（稍后解释）或者一个`string`（字符串）字面量（需要被包裹在`".."`或`'..'`中）。
 
-Of course, bracket notation is also useful if you want to access a property/key but the name is stored in another variable, such as:
+当然，当你想要访问的属性或键的名称值，存放在另外一个变量中，括号符号变得很有作用：
 
 ```js
 var obj = {
@@ -99,9 +99,9 @@ obj[b];			// "hello world"
 obj["b"];		// 42
 ```
 
-**Note:** For more information on JavaScript `object`s, see the *this & Object Prototypes* title of this series, specifically Chapter 3.
+**注意：**关于JavaScript对象的更多信息，请参阅本系列标题为“**this和对象原型**”的相关内容，特别是第三章。
 
-There are a couple of other value types that you will commonly interact with in JavaScript programs: *array* and *function*. But rather than being proper built-in types, these should be thought of more like subtypes -- specialized versions of the `object` type.
+在JavaScript程序中，还有一些其他的值类型经常会用到：`array`（数组）和`function`（函数）。但是它们不是标准的内置类型，更像是子类型——特殊版本的`object`（对象）类型。
 
 #### Arrays
 
