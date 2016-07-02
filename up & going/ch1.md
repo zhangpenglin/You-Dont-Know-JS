@@ -502,15 +502,15 @@ JavaScript定义了一些值，它们被认为是假值（`falsy`），因为当
 
 **注意：**想要获取更深层次的有关在**条件语句**中发生隐式转换的信息，请参阅这个系列中的“类型和语法”的第四章。
 
-## Loops
+## 循环
 
-During busy times, there's a waiting list for customers who need to speak to the phone store employee. While there's still people on that list, she just needs to keep serving the next customer.
+在繁忙的时候，手机店员工有一个想要购买手机客户等待名单。只要这个名单中还有人，她就会继续为下一个客户服务。
 
-Repeating a set of actions until a certain condition fails -- in other words, repeating only while the condition holds -- is the job of programming loops; loops can take different forms, but they all satisfy this basic behavior.
+重复一组动作，直到在一定条件下失败——换句话说，仅在条件成立才重复——这是编程循环所做的工作；循环可以有多种表现形式，但是它们都满足这个基本行为。
 
-A loop includes the test condition as well as a block (typically as `{ .. }`). Each time the loop block executes, that's called an *iteration*.
+一个循环包括测试条件以及一个代码块（通常为`{ .. }`）。每次循环执行这个代码块，我们称之为一次**迭代**。
 
-For example, the `while` loop and the `do..while` loop forms illustrate the concept of repeating a block of statements until a condition no longer evaluates to `true`:
+例如，`while`循环和`do..while`循环这种形式表示重复执行一个语句块，直到条件的计算结果不再为`true`：
 
 ```js
 while (numOfCustomers > 0) {
@@ -532,19 +532,19 @@ do {
 } while (numOfCustomers > 0);
 ```
 
-The only practical difference between these loops is whether the conditional is tested before the first iteration (`while`) or after the first iteration (`do..while`).
+这两个循环之间的唯一区别在于是否在第一次迭代之前（`while`）还是在第一次迭代之后（`do..while`）测试条件语句。
 
-In either form, if the conditional tests as `false`, the next iteration will not run. That means if the condition is initially `false`, a `while` loop will never run, but a `do..while` loop will run just the first time.
+在任一形式中，如果条件测试为`false`，将不会执行下一次迭代。这意味着，如果初始条件为`false`，`while`循环将永远不会执行，但`do..while`会循环一次。
 
-Sometimes you are looping for the intended purpose of counting a certain set of numbers, like from `0` to `9` (ten numbers). You can do that by setting a loop iteration variable like `i` at value `0` and incrementing it by `1` each iteration.
+有时为了某个目的你需要循环一组数字，就像从`0`到`9`（10个数字）.你可以通过设置循环迭代变量如`i`的值为`0`，然后每次迭代都递增`1`来实现它。
 
-**Warning:** For a variety of historical reasons, programming languages almost always count things in a zero-based fashion, meaning starting with `0` instead of `1`. If you're not familiar with that mode of thinking, it can be quite confusing at first. Take some time to practice counting starting with `0` to become more comfortable with it!
+**警告：**由于各种历史原因，编程语言几乎都是从0开始计算的，这意味着循环以`0`开始，而不是`1`。如果你不熟悉这种思维模式，刚开始可能会感到很迷惑。花一些时间去适应从`0`开始计数吧！
 
-The conditional is tested on each iteration, much as if there is an implied `if` statement inside the loop.
+每次循环都会进行条件测试，就像循环内部有个隐式的`if`声明。
 
-We can use JavaScript's `break` statement to stop a loop. Also, we can observe that it's awfully easy to create a loop that would otherwise run forever without a `break`ing mechanism.
+我们可以使用JavaScript的`break`语句来终止循环。如果没有`break`机制，你会发现你很容易就创建了一个永远不会停止的循环（死循环）。
 
-Let's illustrate:
+让我们来举例说明：
 
 ```js
 var i = 0;
@@ -562,9 +562,9 @@ while (true) {
 // 0 1 2 3 4 5 6 7 8 9
 ```
 
-**Warning:** This is not necessarily a practical form you'd want to use for your loops. It's presented here for illustration purposes only.
+**警告：**这不一定是你想使用的循环形式。它在这里出现仅仅是处于演示说明的目的。
 
-While a `while` (or `do..while`) can accomplish the task manually, there's another syntactic form called a `for` loop for just that purpose:
+虽然`while` (或`do..while`)能很好的完成循环的任务，但是这里还有另外一种循环形式也能完成循环操作，我们称之为`for`循环：
 
 ```js
 for (var i = 0; i <= 9; i = i + 1) {
@@ -573,11 +573,11 @@ for (var i = 0; i <= 9; i = i + 1) {
 // 0 1 2 3 4 5 6 7 8 9
 ```
 
-As you can see, in both cases the conditional `i <= 9` is `true` for the first 10 iterations (`i` of values `0` through `9`) of either loop form, but becomes `false` once `i` is value `10`.
+正如你所见，在两种循环形式中，条件语句`i <= 9`都是在第10次迭代（`i`的值从`0`递增到`9`）变成`false`（此时`i`的值为`10`）的。
 
-The `for` loop has three clauses: the initialization clause (`var i=0`), the conditional test clause (`i <= 9`), and the update clause (`i = i + 1`). So if you're going to do counting with your loop iterations, `for` is a more compact and often easier form to understand and write.
+`for`循环有三个子句：初始化语句（`var i=0`），条件测试语句（`i <= 9`）和更新语句（`i = i + 1`）。因此，如果你打算用循环迭代来做计算，`for`循环表现的更加紧凑，而且更容易理解和编写。
 
-There are other specialized loop forms that are intended to iterate over specific values, such as the properties of an object (see Chapter 2) where the implied conditional test is just whether all the properties have been processed. The "loop until a condition fails" concept holds no matter what the form of the loop.
+这里也有其他特殊的循环形式用于迭代特定的值，例如对象的属性（参见第二章），它隐含的条件测试是是否所有的属性都被处理过。不管循环以什么形式表现，但循环的核心理念就是“循环，直到条件失败”，切记！
 
 ## Functions
 

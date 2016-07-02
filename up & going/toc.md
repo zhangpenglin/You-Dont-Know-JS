@@ -13,7 +13,7 @@
 	* 变量
 	* 块
 	* 条件语句
-	* Loops
+	* 循环
 	* Functions
 	* Practice
 * 第二章: 进入JavaScript
