@@ -103,9 +103,9 @@ obj["b"];		// 42
 
 在JavaScript程序中，还有一些其他的值类型经常会用到：`array`（数组）和`function`（函数）。但是它们不是标准的内置类型，更像是子类型——特殊版本的`object`（对象）类型。
 
-#### Arrays
+#### 数组
 
-An array is an `object` that holds values (of any type) not particularly in named properties/keys, but rather in numerically indexed positions. For example:
+数组是一个`object`持有的值（可以是任何类型）没有特别的命名或键，而是数字索引位置。例如：
 
 ```js
 var arr = [
@@ -122,17 +122,17 @@ arr.length;		// 3
 typeof arr;		// "object"
 ```
 
-**Note:** Languages that start counting at zero, like JS does, use `0` as the index of the first element in the array.
+**注意：**那些从0开始计数的编程语言，比如JS，使用下标`0`作为数组的第一个元素。
 
-It may be helpful to think of `arr` visually:
+用图形化的形式来思考`arr`可能会比较有帮助：
 
 <img src="fig5.png">
 
-Because arrays are special objects (as `typeof` implies), they can also have properties, including the automatically updated `length` property.
+因为数组是特殊的对象（正如`typeof`所展示的那样），它也能有自己的属性，包括那个自动更新的`length`属性。
 
-You theoretically could use an array as a normal object with your own named properties, or you could use an `object` but only give it numeric properties (`0`, `1`, etc.) similar to an array. However, this would generally be considered improper usage of the respective types.
+理论上来说，你可以把数组当成一个正常的对象，给它设置你自己命名的属性，或者你也可以使用`object`对象，但是类似于数组一样只给它设置数字属性（`0`、`1`等）。然而，这通常被认为是各类型的不当使用。
 
-The best and most natural approach is to use arrays for numerically positioned values and use `object`s for named properties.
+使用数组最好并且最自然的方法就是使用数字下标的值，而使用`object`（对象）来表示命名属性。
 
 #### Functions
 
