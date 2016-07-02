@@ -717,24 +717,24 @@ function calculateFinalPurchaseAmount(amt) {
 
 **注意：**想要了解更多有关词法作用域的信息，请参阅本系列**作用域和闭包**的前三个章节。
 
-## Practice
+## 实践
 
-There is absolutely no substitute for practice in learning programming. No amount of articulate writing on my part is alone going to make you a programmer.
+学习编程最好的方法就是实践。对我而言，写再多的代码也不为过。（翻译不来，原句：There is absolutely no substitute for practice in learning programming. No amount of articulate writing on my part is alone going to make you a programmer.）
 
-With that in mind, let's try practicing some of the concepts we learned here in this chapter. I'll give the "requirements," and you try it first. Then consult the code listing below to see how I approached it.
+考虑到这一点，让我们试着练习一些我们在本章这里学到的概念。我给出了如下**需求**，你试着实现它们。然后可以参考一下我是如何实现的。
 
-* Write a program to calculate the total price of your phone purchase. You will keep purchasing phones (hint: loop!) until you run out of money in your bank account. You'll also buy accessories for each phone as long as your purchase amount is below your mental spending threshold.
-* After you've calculated your purchase amount, add in the tax, then print out the calculated purchase amount, properly formatted.
-* Finally, check the amount against your bank account balance to see if you can afford it or not.
-* You should set up some constants for the "tax rate," "phone price," "accessory price," and "spending threshold," as well as a variable for your "bank account balance.""
-* You should define functions for calculating the tax and for formatting the price with a "$" and rounding to two decimal places.
-* **Bonus Challenge:** Try to incorporate input into this program, perhaps with the `prompt(..)` covered in "Input" earlier. You may prompt the user for their bank account balance, for example. Have fun and be creative!
+* 编写一个程序来计算你购买的手机的总价。你会一直购买手机（提示：循环！）直到你银行账户里的钱花光为止。你还可以为每个手机购买配件，只要你的购买量低于你的心理消费门槛就行。
+* 在你计算完你的采购金额后，加上税收，然后打印出计算后的购买总额（格式化后输出）。
+* 最后，检查你的银行账户余额与当前购买价格，看看你能否买得起。
+* 你应该将诸如“税率”、“手机价格”、“配件价格”和“消费阈值”（“spending threshold”）设置为常量，以及将你的“银行账户余额”设置为变量。
+* 你应该定义计算税收和格式化价格（在价格前面加上“$”并且保留两位小数）的函数
+* **额外挑战：**尝试在这个程序中整合输入，可能是`prompt(..)`或者其他的。例如，你可以提示用户输入他们的银行账户余额。（原句：**Bonus Challenge:** Try to incorporate input into this program, perhaps with the `prompt(..)` covered in "Input" earlier. You may prompt the user for their bank account balance, for example. Have fun and be creative!）
 
-OK, go ahead. Try it. Don't peek at my code listing until you've given it a shot yourself!
+好的，开始实现它吧。尝试一下，在你做完之前，不要偷看我的代码哦！
 
-**Note:** Because this is a JavaScript book, I'm obviously going to solve the practice exercise in JavaScript. But you can do it in another language for now if you feel more comfortable.
+**注意：**因为这是一本讲解JavaScript的书，很显然我会用JavaScript来解决这些练习题。但是如果用其他语言实现对你来说很容易的话也是可以的。
 
-Here's my JavaScript solution for this exercise:
+下面是我用JavaScript实现的练习题解决方法：
 
 ```js
 const SPENDING_THRESHOLD = 200;
@@ -781,9 +781,9 @@ if (amount > bank_balance) {
 // You can't afford this purchase. :(
 ```
 
-**Note:** The simplest way to run this JavaScript program is to type it into the developer console of your nearest browser.
+**注意：**运行此JavaScript程序最简单的方法就是将其输入到浏览器的开发者控制台中。
 
-How did you do? It wouldn't hurt to try it again now that you've seen my code. And play around with changing some of the constants to see how the program runs with different values.
+你是如何实现的？在你看了我的实现代码之后，再去尝试一遍也无妨。试着改变一些变量的值，看看程序会如何运行。
 
 ## 小结
 

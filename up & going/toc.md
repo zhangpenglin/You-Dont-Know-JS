@@ -15,7 +15,7 @@
 	* 条件语句
 	* 循环
 	* 函数
-	* Practice
+	* 实践
 * 第二章: 进入JavaScript
 	* 值和类型
 	* Variables
