@@ -1,15 +1,15 @@
 # 你不知道的JavaScript: Up & Going
 # 第二章: 走进JavaScript
 
-In the previous chapter, I introduced the basic building blocks of programming, such as variables, loops, conditionals, and functions. Of course, all the code shown has been in JavaScript. But in this chapter, we want to focus specifically on things you need to know about JavaScript to get up and going as a JS developer.
+在前面的章节中，我介绍了编程的基本构建模块，如变量、循环、条件语句和函数。当然，所有的示例代码都是用JavaScript写的。但是在本章，我们会特别关注作为一个JS开发者你需要了解JavaScript的特性。
 
-We will introduce quite a few concepts in this chapter that will not be fully explored until subsequent *YDKJS* books. You can think of this chapter as an overview of the topics covered in detail throughout the rest of this series.
+在本章中，我们将介绍一些概念，但是不会充分挖掘，我们会在后续的**YDKJS**中详细深入的讲解。你可以将本章看作是介绍整个系列其他话题的概述。
 
-Especially if you're new to JavaScript, you should expect to spend quite a bit of time reviewing the concepts and code examples here multiple times. Any good foundation is laid brick by brick, so don't expect that you'll immediately understand it all the first pass through.
+特别是如果你刚学习JavaScript，你更应该多花点时间多次回顾下这些概念和示例代码。任何良好的基础都是一点一点搭建起来的，所以不要指望一开始你就能立刻掌握所有的东西。
 
-Your journey to deeply learn JavaScript starts here.
+你深入学习JavaScript的旅程将从这里开始。
 
-**Note:** As I said in Chapter 1, you should definitely try all this code yourself as you read and work through this chapter. Be aware that some of the code here assumes capabilities introduced in the newest version of JavaScript at the time of this writing (commonly referred to as "ES6" for the 6th edition of ECMAScript -- the official name of the JS specification). If you happen to be using an older, pre-ES6 browser, the code may not work. A recent update of a modern browser (like Chrome, Firefox, or IE) should be used.
+**注意：**正如我在第一章所说的，当你阅读学习本章的时候，你一定要自己尝试所有的代码。你要明白这里有些代码假定你的JavaScript有某些新版本的功能，我写作本书的时候用的是最新的JavaScript版本（第6版的ECMAScript，通常被称为“ES6”——JS的官方规范）。如果你恰好在使用老版本的，ES6版本前的浏览器，这些代码可能没法工作。你应该更新你当前的浏览器（如Chrome，Firefox或IE）到最新版本。
 
 ## Values & Types
 
