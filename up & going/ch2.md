@@ -327,27 +327,27 @@ a == b;		// false
 
 **注意：**关于不等比较规则的详细信息，请参阅ES5规范的第11.8.5章节，也可以参考本系列标题为“**类型和语法**”的第四章。
 
-## Variables
+## 变量
 
-In JavaScript, variable names (including function names) must be valid *identifiers*. The strict and complete rules for valid characters in identifiers are a little complex when you consider nontraditional characters such as Unicode. If you only consider typical ASCII alphanumeric characters, though, the rules are simple.
+在JavaScript中，变量名（包括函数名）必须是有效的**标识符**。关于有效标识符中严格和完整的规则，当你考虑到非传统字符（如Unicode）的时候有点复杂。但是如果你只考虑ASCII字母数字字符的话，这个规则就很简单了。
 
-An identifier must start with `a`-`z`, `A`-`Z`, `$`, or `_`. It can then contain any of those characters plus the numerals `0`-`9`.
+标识符必须以`a`-`z`、`A`-`Z`、`$`或`_`开头，第二个字符开始它可以包括任意这些字符和数字`0`-`9`。
 
-Generally, the same rules apply to a property name as to a variable identifier. However, certain words cannot be used as variables, but are OK as property names. These words are called "reserved words," and include the JS keywords (`for`, `in`, `if`, etc.) as well as `null`, `true`, and `false`.
+一般来说，变量标识符命名规则也适用于属性命名。然而，一些特定的单词不能被用作变量，但是可以用作属性名称。这些单词被称为“保留字”，并且包括JS关键字（`for`、`in`、`if`等）以及`null`、`true`和`false`。
 
-**Note:** For more information about reserved words, see Appendix A of the *Types & Grammar* title of this series.
+**注意：**有关保留字的信息信息，请参阅本系列标题为“**类型和语法**”的附录A。
 
-### Function Scopes
+### 函数作用域
 
-You use the `var` keyword to declare a variable that will belong to the current function scope, or the global scope if at the top level outside of any function.
+你可以使用`var`关键字在当前函数作用域或者全局作用域（在任何函数之外的顶层作用域）声明一个变量。
 
-#### Hoisting
+#### 提升
 
-Wherever a `var` appears inside a scope, that declaration is taken to belong to the entire scope and accessible everywhere throughout.
+只要`var`声明的变量出现在一个作用域中，该声明属于整个作用域，并且在该作用域任何地方都可以被访问到。
 
-Metaphorically, this behavior is called *hoisting*, when a `var` declaration is conceptually "moved" to the top of its enclosing scope. Technically, this process is more accurately explained by how code is compiled, but we can skip over those details for now.
+当`var`声明概念上被“**移动**”到封闭作用域的顶部，这个行为称为“提升”。从技术上讲，通过解释代码是如何编译的来解释这个过程会更准确，但是现在我们先跳过这些细节。
 
-Consider:
+考虑如下：
 
 ```js
 var a = 2;
@@ -367,11 +367,11 @@ function foo() {
 console.log( a );	// 2
 ```
 
-**Warning:** It's not common or a good idea to rely on variable *hoisting* to use a variable earlier in its scope than its `var` declaration appears; it can be quite confusing. It's much more common and accepted to use *hoisted* function declarations, as we do with the `foo()` call appearing before its formal declaration.
+**警告：**依靠变量**提升**在它的作用域里面较早的使用一个变量（在`var`声明之前出现），这通常并不常见，也不是一个好主意；它通常会让人感到迷惑。但是更普遍接受和使用的是函数声明**提升**，正如我们对`foo()`所做的那样，在正式声明之前使用它。
 
-#### Nested Scopes
+#### 嵌套作用域
 
-When you declare a variable, it is available anywhere in that scope, as well as any lower/inner scopes. For example:
+当你声明一个变量，在那个作用域里面任何地方，以及它低/内部作用域，都可以被访问到这个变量。例如：
 
 ```js
 function foo() {
@@ -397,9 +397,9 @@ function foo() {
 foo();
 ```
 
-Notice that `c` is not available inside of `bar()`, because it's declared only inside the inner `baz()` scope, and that `b` is not available to `foo()` for the same reason.
+注意到在`bar()`中不能访问到变量`c`，因为它是在内部的`baz()`函数作用域声明的，同理，函数`foo()`也不能访问到变量`b`。
 
-If you try to access a variable's value in a scope where it's not available, you'll get a `ReferenceError` thrown. If you try to set a variable that hasn't been declared, you'll either end up creating a variable in the top-level global scope (bad!) or getting an error, depending on "strict mode" (see "Strict Mode"). Let's take a look:
+如果你试图访问一个作用域中不存在的变量，程序会抛出`ReferenceError`异常。如果你试图给一个没有被声明过的变量赋值，你最终会在全局（顶级的）作用域（这很糟糕！）创建一个变量或者得到一个错误，这取决于你是否处于“严格模式”（参见“严格模式”）。让我们来看看如下例子：
 
 ```js
 function foo() {
@@ -410,9 +410,9 @@ foo();
 a;			// 1 -- oops, auto global variable :(
 ```
 
-This is a very bad practice. Don't do it! Always formally declare your variables.
+这是一个非常不好的做法。千万别这么做！（使用你的变量之前）应该始终先声明你的变量。
 
-In addition to creating declarations for variables at the function level, ES6 *lets* you declare variables to belong to individual blocks (pairs of `{ .. }`), using the `let` keyword. Besides some nuanced details, the scoping rules will behave roughly the same as we just saw with functions:
+除了在函数级作用域上创建变量声明，ES6新增加了**块级作用域**（`{ .. }`），通过使用`let`关键字，能够让你声明的变量属于一个单独的代码块。除了一些细致入微的细节，它的作用域规则和我们所看到的函数作用域大致相同：
 
 ```js
 function foo() {
@@ -434,9 +434,9 @@ foo();
 // 5 7 9
 ```
 
-Because of using `let` instead of `var`, `b` will belong only to the `if` statement and thus not to the whole `foo()` function's scope. Similarly, `c` belongs only to the `while` loop. Block scoping is very useful for managing your variable scopes in a more fine-grained fashion, which can make your code much easier to maintain over time.
+由于使用`let`代替`var`，`b`只属于`if`语句，而不是整个`foo()`的函数作用域。同样，`c`也只属于`while`循环。块作用域在更加细粒度管理变量作用域上非常有用，并且随着时间的推移能使你的代码更易于维护。
 
-**Note:** For more information about scope, see the *Scope & Closures* title of this series. See the *ES6 & Beyond* title of this series for more information about `let` block scoping.
+**注意：**有关作用域的详细信息，请参阅本系列标题为“**作用域和闭包**”的相关内容。有关`let`块作用域的更多信息，请参阅本系列标题为“**ES6及展望**”的相关内容。
 
 ## Conditionals
 
