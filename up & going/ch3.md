@@ -95,7 +95,7 @@ The latter part of the book turns attention to briefly glance at things that we 
 
 The future for JavaScript is bright. Isn't it time we start learning it!?
 
-## Review
+## 总结
 
 The *YDKJS* series is dedicated to the proposition that all JS developers can and should learn all of the parts of this great language. No person's opinion, no framework's assumptions, and no project's deadline should be the excuse for why you never learn and deeply understand JavaScript.
 

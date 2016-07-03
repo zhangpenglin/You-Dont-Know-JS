@@ -18,8 +18,8 @@
 	* 实践
 * 第二章: 进入JavaScript
 	* 值和类型
-	* Variables
-	* Conditionals
+	* 变量
+	* 条件语句
 	* Strict Mode
 	* Functions As Values
 	* `this` Keyword

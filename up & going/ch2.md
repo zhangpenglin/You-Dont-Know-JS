@@ -438,11 +438,11 @@ foo();
 
 **注意：**有关作用域的详细信息，请参阅本系列标题为“**作用域和闭包**”的相关内容。有关`let`块作用域的更多信息，请参阅本系列标题为“**ES6及展望**”的相关内容。
 
-## Conditionals
+## 条件语句
 
-In addition to the `if` statement we introduced briefly in Chapter 1, JavaScript provides a few other conditionals mechanisms that we should take a look at.
+除了我们在第一章简单介绍的`if`语句，JavaScript还提供了一些其他形式的条件语句，我们来看看。
 
-Sometimes you may find yourself writing a series of `if..else..if` statements like this:
+有时你会发现自己写了一系列`if..else..if`这样的语句：
 
 ```js
 if (a == 2) {
@@ -459,7 +459,7 @@ else {
 }
 ```
 
-This structure works, but it's a little verbose because you need to specify the `a` test for each case. Here's another option, the `switch` statement:
+这种结构虽然可以工作，但是它有点啰嗦，因为你需要为每种情况都测试`a`。下面是另外一种选项，`switch`（开关）语句：
 
 ```js
 switch (a) {
@@ -477,7 +477,7 @@ switch (a) {
 }
 ```
 
-The `break` is important if you want only the statement(s) in one `case` to run. If you omit `break` from a `case`, and that `case` matches or runs, execution will continue with the next `case`'s statements regardless of that `case` matching. This so called "fall through" is sometimes useful/desired:
+如果你只希望在一个`case`语句中运行，那`break`语句就非常重要了。如果省略了`case`中的`break`语句，当这个`case`匹配并且运行完后，会继续执行下一个`case`语句，不管这个`case`是否匹配。这种现象称为“fall through”（落空），有时会有用（但是大多数情况下会让你抓狂）。
 
 ```js
 switch (a) {
@@ -493,9 +493,9 @@ switch (a) {
 }
 ```
 
-Here, if `a` is either `2` or `10`, it will execute the "some cool stuff" code statements.
+在这里，如果`a`的值是`2`或`10`，就会执行“some cool stuff”这段代码。
 
-Another form of conditional in JavaScript is the "conditional operator," often called the "ternary operator." It's like a more concise form of a single `if..else` statement, such as:
+在JavaScript中另一种形式的条件语句是“条件运算符”，经常被称为“三元运算符”。它更像是一个`if..else`语句的简洁形式，例如：
 
 ```js
 var a = 42;
@@ -512,11 +512,11 @@ var b = (a > 41) ? "hello" : "world";
 // }
 ```
 
-If the test expression (`a > 41` here) evaluates as `true`, the first clause (`"hello"`) results, otherwise the second clause (`"world"`) results, and whatever the result is then gets assigned to `b`.
+如果测试条件（这里的`a > 41`）的计算结果是`true`，结果就是第一条（`"hello"`），否则的话结果就是第二条（`"world"`），不管结果是什么，最后都会将结果赋值给`b`。
 
-The conditional operator doesn't have to be used in an assignment, but that's definitely the most common usage.
+条件运算符可以不被用于赋值，当这绝对是它最常见的用法。
 
-**Note:** For more information about testing conditions and other patterns for `switch` and `? :`, see the *Types & Grammar* title of this series.
+**注意：**有关条件测试和其他形式如`switch`和`? :`的条件语句的更多信息，请参阅本系列标题为“类型和语法”的相关内容。
 
 ## Strict Mode
 
@@ -953,7 +953,7 @@ The same goes with `console.log(..)`; your browser provides such mechanisms and 
 
 This book, and this whole series, focuses on JavaScript the language. That's why you don't see any substantial coverage of these non-JavaScript JavaScript mechanisms. Nevertheless, you need to be aware of them, as they'll be in every JS program you write!
 
-## Review
+## 总结
 
 The first step to learning JavaScript's flavor of programming is to get a basic understanding of its core mechanisms like values, types, function closures, `this`, and prototypes.
 
