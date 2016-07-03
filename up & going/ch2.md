@@ -237,13 +237,13 @@ b;				// 42 -- the number!
 
 重要的是要记住，只要非`boolean`的值转换成`boolean`值，就一定会遵守上面那个“真”和“假”的列表。下次当你碰到看似一个值被转为`boolean`时实际上却没有时，你就一点都不会感到迷惑了。（原句：It's important to remember that a non-`boolean` value only follows this "truthy"/"falsy" coercion if it's actually coerced to a `boolean`. It's not all that difficult to confuse yourself with a situation that seems like it's coercing a value to a `boolean` when it's not.）
 
-#### Equality
+#### 相等
 
-There are four equality operators: `==`, `===`, `!=`, and `!==`. The `!` forms are of course the symmetric "not equal" versions of their counterparts; *non-equality* should not be confused with *inequality*.
+这里有四个相等运算符：`==`、`===`、`!=`和`!==`。`!`表示相等版本的对立面（不相等）；**不相等**（**non-equality**）不应该与**不等**（**inequality**）混为一谈。
 
-The difference between `==` and `===` is usually characterized that `==` checks for value equality and `===` checks for both value and type equality. However, this is inaccurate. The proper way to characterize them is that `==` checks for value equality with coercion allowed, and `===` checks for value equality without allowing coercion; `===` is often called "strict equality" for this reason.
+`==`和`===`的不同之处在于`==`检测值是否相等而`===`检测值和值的类型是否相等。然而，这么说是不准确的。准确来说，`==`检测值是否相等的时候允许发生转换（隐式转换），而`===`检测值的时候则不允许发生转换；这就是为什么`===`被称为“严格相等”的原因。
 
-Consider the implicit coercion that's allowed by the `==` loose-equality comparison and not allowed with the `===` strict-equality:
+考虑如下`==`非严格相等中发生的隐式转换和`===`严格相等：
 
 ```js
 var a = "42";
@@ -253,29 +253,29 @@ a == b;			// true
 a === b;		// false
 ```
 
-In the `a == b` comparison, JS notices that the types do not match, so it goes through an ordered series of steps to coerce one or both values to a different type until the types match, where then a simple value equality can be checked.
+在比较`a == b`时，JS发现二者类型不匹配，因此经过一系列有序的步骤，将其中一个或者两个值转换成不同的类型，直到二者类型匹配，这时就可以进行简单的值比较了。
 
-If you think about it, there's two possible ways `a == b` could give `true` via coercion. Either the comparison could end up as `42 == 42` or it could be `"42" == "42"`. So which is it?
+如果你仔细想想，会发现这里有两种可能的转换方式可以使`a == b`返回`true`。可能最终的比较是`42 == 42`或者是`"42" == "42"`。所以到底是哪个呢？
 
-The answer: `"42"` becomes `42`, to make the comparison `42 == 42`. In such a simple example, it doesn't really seem to matter which way that process goes, as the end result is the same. There are more complex cases where it matters not just what the end result of the comparison is, but *how* you get there.
+答案是`"42"`变成了`42`，最终的比较是`42 == 42`。在这个简单的例子中，最终的比较是什么形式的似乎变得无关紧要，反正最终的比较结果是一样的。还有更复杂的情况，真正重要的不是最终的比较结果，而是你知道**如何**得到这个比较结果。（原句：There are more complex cases where it matters not just what the end result of the comparison is, but *how* you get there.）
 
-The `a === b` produces `false`, because the coercion is not allowed, so the simple value comparison obviously fails. Many developers feel that `===` is more predictable, so they advocate always using that form and staying away from `==`. I think this view is very shortsighted. I believe `==` is a powerful tool that helps your program, *if you take the time to learn how it works.*
+`a === b`的结果是`false`，因为不允许发生强制转换，因此简单的值比较就会失败。许多的开发人员认为`===`的结果是更可预测的，所以他们主张始终使用这种形式，尽量避免使用`==`。我认为这种观点是非常短视的。我相信`==`是一个强大的工具，可以帮助的程序，**只要你花费时间去学习它是如何工作的**。
 
-We're not going to cover all the nitty-gritty details of how the coercion in `==` comparisons works here. Much of it is pretty sensible, but there are some important corner cases to be careful of. You can read section 11.9.3 of the ES5 specification (http://www.ecma-international.org/ecma-262/5.1/) to see the exact rules, and you'll be surprised at just how straightforward this mechanism is, compared to all the negative hype surrounding it.
+我不打算在这里讲解关于`==`相等比较中转换是如何工作的深入细节。其中很大一部分是相当容易觉察到的，但也有一些重要的边角情况需要额外小心。你可以阅读ES5规范中章节11.9.3，看看具体的规则，当你发现相对于所有周围的负面评论，这个机制是如此的简单，你会感到吃惊的。（http://www.ecma-international.org/ecma-262/5.1）
 
-To boil down a whole lot of details to a few simple takeaways, and help you know whether to use `==` or `===` in various situations, here are my simple rules:
+我帮你把一大堆的细节归纳为几个比较简单的规则，帮助你在各种情况下知道该使用`==`或`===`，下面是我的总结的规则：
 
-* If either value (aka side) in a comparison could be the `true` or `false` value, avoid `==` and use `===`.
-* If either value in a comparison could be of these specific values (`0`, `""`, or `[]` -- empty array), avoid `==` and use `===`.
-* In *all* other cases, you're safe to use `==`. Not only is it safe, but in many cases it simplifies your code in a way that improves readability.
+* 如果比较的两个值可能是`true`或`false`，避免使用`==`
+* 如果比较的两个值是这些特定值（`0`、`""`、`[]`——空数组），避免使用`==`
+* **所有**其他情况下，你都可以放心使用`==`。它不仅是安全的，在很多情况下，它可以通过提高可读性来简化你的代码。
 
-What these rules boil down to is requiring you to think critically about your code and about what kinds of values can come through variables that get compared for equality. If you can be certain about the values, and `==` is safe, use it! If you can't be certain about the values, use `===`. It's that simple.
+该总结什么样子的规则，需要你自己进行批判性的思考你的代码中什么类型的值能够进行相等比较。（原句：What these rules boil down to is requiring you to think critically about your code and about what kinds of values can come through variables that get compared for equality.）如果你对这些值很确定，那使用`==`就是安全的，尽管使用它吧！如果你对这些值不太确定，那就使用`===`。就是这么简单。
 
-The `!=` non-equality form pairs with `==`, and the `!==` form pairs with `===`. All the rules and observations we just discussed hold symmetrically for these non-equality comparisons.
+`!=`是`==`的不相等版本，`!==`是`===`的不相等版本。我们刚刚讨论的所有规则都适用于不相等比较。
 
-You should take special note of the `==` and `===` comparison rules if you're comparing two non-primitive values, like `object`s (including `function` and `array`). Because those values are actually held by reference, both `==` and `===` comparisons will simply check whether the references match, not anything about the underlying values.
+如果你比较两个非基本值，如`object`（包括`function`和`array`），你应该特别注意`==`和`===`的比较规则。因为这些值实际上是引用，而`==`和`===`比较只会检查引用是否相等，而不会检查它们对应的值是否相等。
 
-For example, `array`s are by default coerced to `string`s by simply joining all the values with commas (`,`) in between. You might think that two `array`s with the same contents would be `==` equal, but they're not:
+例如，默认情况下`array`（数组）转为`string`（字符串）是通过简单地把所有值通过逗号（`,`）连接在一起。你可能会认为两个拥有相同内容的`array`是相等的，但是实际上并不是这样的：
 
 ```js
 var a = [1,2,3];
@@ -287,9 +287,9 @@ b == c;		// true
 a == b;		// false
 ```
 
-**Note:** For more information about the `==` equality comparison rules, see the ES5 specification (section 11.9.3) and also consult Chapter 4 of the *Types & Grammar* title of this series; see Chapter 2 for more information about values versus references.
+**注：**有关`==`相等比较规则的详细信息，请参阅ES5规范（第11.9.3）和本系列标题为“**类型和语法**”的第四章；参阅第二章“**值和引用**”去了解更多信息。
 
-#### Inequality
+#### 不等
 
 The `<`, `>`, `<=`, and `>=` operators are used for inequality, referred to in the specification as "relational comparison." Typically they will be used with ordinally comparable values like `number`s. It's easy to understand that `3 < 4`.
 
