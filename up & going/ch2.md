@@ -291,13 +291,13 @@ a == b;		// false
 
 #### 不等
 
-The `<`, `>`, `<=`, and `>=` operators are used for inequality, referred to in the specification as "relational comparison." Typically they will be used with ordinally comparable values like `number`s. It's easy to understand that `3 < 4`.
+`<`、`>`、`<=`和`>=`运算符用于不等比较，就是规范中提到的“**关系比较**”。通常他们会用于比较有顺序的值，比如`number`。很容易理解`3 < 4`。
 
-But JavaScript `string` values can also be compared for inequality, using typical alphabetic rules (`"bar" < "foo"`).
+但是在JavaScript中`string`值也能被用于不等比较，它使用的是字母表规则（`"bar" < "foo"`）。
 
-What about coercion? Similar rules as `==` comparison (though not exactly identical!) apply to the inequality operators. Notably, there are no "strict inequality" operators that would disallow coercion the same way `===` "strict equality" does.
+强制转换？类似`==`比较的规则（尽管它们不完全相同！）引用到不等运算符上。值得注意的是，这里没有“**严格不等**”运算符用来禁止强制转换，就像`===`“**严格相等**”所做的。
 
-Consider:
+考虑如下：
 
 ```js
 var a = 41;
@@ -308,9 +308,9 @@ a < b;		// true
 b < c;		// true
 ```
 
-What happens here? In section 11.8.5 of the ES5 specification, it says that if both values in the `<` comparison are `string`s, as it is with `b < c`, the comparison is made lexicographically (aka alphabetically like a dictionary). But if one or both is not a `string`, as it is with `a < b`, then both values are coerced to be `number`s, and a typical numeric comparison occurs.
+上面比较发生了什么？在ES5规范的第11.8.5中提到，如果进行`<`比较的两个值都是`string`，就像上面的`b < c`，就会按照字典序进行比较（即按照字典里面的字母排列顺序）。但是如果其中一个或者两个都不是`string`，就像上面的`a < b`，那两个值都会被强制转换成`number`，然后进行数值比较。
 
-The biggest gotcha you may run into here with comparisons between potentially different value types -- remember, there are no "strict inequality" forms to use -- is when one of the values cannot be made into a valid number, such as:
+在不同类型的值比较中，你可能会遇到一个特别坑的情况——记住，这里没有“**严格不等**”的功能——当其中某个值不能被转换成一个有效的数字，例如：
 
 ```js
 var a = 42;
@@ -321,11 +321,11 @@ a > b;		// false
 a == b;		// false
 ```
 
-Wait, how can all three of those comparisons be `false`? Because the `b` value is being coerced to the "invalid number value" `NaN` in the `<` and `>` comparisons, and the specification says that `NaN` is neither greater-than nor less-than any other value.
+等等，怎么可能三个比较都是`false`呢？因为在`<`和`>`比较中`b`被强制转换成“无效的数字”`NaN`，ES规范指出`NaN`既不大于也不小于其他任何值。
 
-The `==` comparison fails for a different reason. `a == b` could fail if it's interpreted either as `42 == NaN` or `"42" == "foo"` -- as we explained earlier, the former is the case.
+`==`比较失败出于不同的原因。`a == b`可能被解释成`42 == NaN`或者`"42" == "foo"`（正如我们前面说提到的），但是结果都是`false`。（事实上，它被解释为`42 == NaN`）
 
-**Note:** For more information about the inequality comparison rules, see section 11.8.5 of the ES5 specification and also consult Chapter 4 of the *Types & Grammar* title of this series.
+**注意：**关于不等比较规则的详细信息，请参阅ES5规范的第11.8.5章节，也可以参考本系列标题为“**类型和语法**”的第四章。
 
 ## Variables
 
