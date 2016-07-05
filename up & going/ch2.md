@@ -518,11 +518,11 @@ var b = (a > 41) ? "hello" : "world";
 
 **注意：**有关条件测试和其他形式如`switch`和`? :`的条件语句的更多信息，请参阅本系列标题为“类型和语法”的相关内容。
 
-## Strict Mode
+## 严格模式
 
-ES5 added a "strict mode" to the language, which tightens the rules for certain behaviors. Generally, these restrictions are seen as keeping the code to a safer and more appropriate set of guidelines. Also, adhering to strict mode makes your code generally more optimizable by the engine. Strict mode is a big win for code, and you should use it for all your programs.
+ES5为JS添加了“**严格模式**”，它对某些行为的规则进行了限制。通常情况下，这些限制被视为将代码保持在一个更安全和更合适的集合中的一套准则。此外，使用严格模式能够让引擎更好的优化你的代码。严格模式是代码的一大胜利，你应该在你的所有程序中使用严格模式。
 
-You can opt in to strict mode for an individual function, or an entire file, depending on where you put the strict mode pragma:
+你可以选择在一个函数上使用严格模式，或者在整个文件中使用，这取决于你将编译标注放在哪里。
 
 ```js
 function foo() {
@@ -538,7 +538,7 @@ function foo() {
 // this code is not strict mode
 ```
 
-Compare that to:
+与此相比：
 
 ```js
 "use strict";
@@ -554,7 +554,7 @@ function foo() {
 // this code is strict mode
 ```
 
-One key difference (improvement!) with strict mode is disallowing the implicit auto-global variable declaration from omitting the `var`:
+使用严格模式与不使用严格模式的一个关键的区别（改善）在于严格模式禁止使用自动全局变量声明：
 
 ```js
 function foo() {
@@ -565,15 +565,15 @@ function foo() {
 foo();
 ```
 
-If you turn on strict mode in your code, and you get errors, or code starts behaving buggy, your temptation might be to avoid strict mode. But that instinct would be a bad idea to indulge. If strict mode causes issues in your program, almost certainly it's a sign that you have things in your program you should fix.
+如果你在你的代码中启用严格模式，当你得到错误提示或者代码开始出现bug了，你的本能反应可能关闭严格模式。但是沉浸在本能反应（躲避严格模式）可不是一个好主意。如果严格模式导致了你的程序出问题了，几乎可以肯定的是，你的程序中有问题，并且你应该解决这个问题。
 
-Not only will strict mode keep your code to a safer path, and not only will it make your code more optimizable, but it also represents the future direction of the language. It'd be easier on you to get used to strict mode now than to keep putting it off -- it'll only get harder to convert later!
+严格模式不仅会让你的代码保持在更安全的道路上，不仅会让你的代码更优化，它还代表了语言的未来发展方向。你现在就适应严格模式会比关闭严格模式更简单——越到后面代码就越难转换。
 
-**Note:** For more information about strict mode, see the Chapter 5 of the *Types & Grammar* title of this series.
+**注意：**关于严格模式的详细信息，请参阅本系列标题为“类型和语法”的第五章。
 
-## Functions As Values
+## 函数作为值
 
-So far, we've discussed functions as the primary mechanism of *scope* in JavaScript. You recall typical `function` declaration syntax as follows:
+到目前为止，我们已经讨论了函数**作用域**是JavaScript中的重要机制。你还记得典型的`function`（函数）声明语法如下：
 
 ```js
 function foo() {
@@ -581,13 +581,13 @@ function foo() {
 }
 ```
 
-Though it may not seem obvious from that syntax, `foo` is basically just a variable in the outer enclosing scope that's given a reference to the `function` being declared. That is, the `function` itself is a value, just like `42` or `[1,2,3]` would be.
+虽然从语法上看可能不明显，但是`foo`只是外层作用域的一个变量，指向刚刚声明的`function`。也就是说，`function`本身就是一个值，就像`42`或`[1,2,3]`一样。
 
-This may sound like a strange concept at first, so take a moment to ponder it. Not only can you pass a value (argument) *to* a function, but *a function itself can be a value* that's assigned to variables, or passed to or returned from other functions.
+起初听起来像是一个奇怪的概念，所以请花点时间去思考它。你不仅可以传递一个值（参数）**给**一个函数，而且**函数本身可以作为一个值**赋给变量，或者作为参数传递给其他函数以及作为其他函数的返回值。
 
-As such, a function value should be thought of as an expression, much like any other value or expression.
+这样，一个函数值应该被认为是一个表达式，就像任何其他值或表达式。
 
-Consider:
+考虑如下：
 
 ```js
 var foo = function() {
@@ -599,17 +599,17 @@ var x = function bar(){
 };
 ```
 
-The first function expression assigned to the `foo` variable is called *anonymous* because it has no `name`.
+分配变量`foo`的第一个函数表达式被称为**匿名**函数，因为它没有`name`（名字）。
 
-The second function expression is *named* (`bar`), even as a reference to it is also assigned to the `x` variable. *Named function expressions* are generally more preferable, though *anonymous function expressions* are still extremely common.
+第二个函数表达式是**命名**（`bar`）函数，尽管它的引用被赋值给变量`x`。**命名函数表达式**一般比较可取，虽然**匿名函数表达式**仍然是非常普遍的。
 
-For more information, see the *Scope & Closures* title of this series.
+想了解更多相关信息，请参阅本系列标题为“**作用域和闭包**”的相关内容。
 
-### Immediately Invoked Function Expressions (IIFEs)
+### 立即执行函数表达式
 
-In the previous snippet, neither of the function expressions are executed -- we could if we had included `foo()` or `x()`, for instance.
+在之前的代码片段中，没有任何一个函数表达式可以立即执行——除非我们使用`foo()`或`x()`来调用函数。
 
-There's another way to execute a function expression, which is typically referred to as an *immediately invoked function expression* (IIFE):
+还有另一种方法来执行一个函数表达式，通常为称为**立即执行函数表达式**（IIFE，**immediately invoked function expression**）：
 
 ```js
 (function IIFE(){
@@ -618,11 +618,11 @@ There's another way to execute a function expression, which is typically referre
 // "Hello!"
 ```
 
-The outer `( .. )` that surrounds the `(function IIFE(){ .. })` function expression is just a nuance of JS grammar needed to prevent it from being treated as a normal function declaration.
+围绕在`(function IIFE(){ .. })`函数表达式外层的`( .. )`是为了防止它被视为普通的函数声明，这是JS语法的细微之处。（原句：The outer `( .. )` that surrounds the `(function IIFE(){ .. })` function expression is just a nuance of JS grammar needed to prevent it from being treated as a normal function declaration.）
 
-The final `()` on the end of the expression -- the `})();` line -- is what actually executes the function expression referenced immediately before it.
+在表达式最后的那个`()`——`})();`——是它立即执行之前引用的函数表达式。
 
-That may seem strange, but it's not as foreign as first glance. Consider the similarities between `foo` and `IIFE` here:
+这看起来似乎有点奇怪，但第一眼看起来似乎也不是那么陌生。考虑`foo`和`IIFE`之间的相似之处：
 
 ```js
 function foo() { .. }
@@ -636,9 +636,9 @@ foo();
 (function IIFE(){ .. })();
 ```
 
-As you can see, listing the `(function IIFE(){ .. })` before its executing `()` is essentially the same as including `foo` before its executing `()`; in both cases, the function reference is executed with `()` immediately after it.
+如你所见，在执行`()`之前的声明`(function IIFE(){ .. })`和执行`()`之前函数`foo`的声明基本上是一样的；在这两种情况下，函数引用加上`()`会被立即执行。（原句：As you can see, listing the `(function IIFE(){ .. })` before its executing `()` is essentially the same as including `foo` before its executing `()`; in both cases, the function reference is executed with `()` immediately after it.）
 
-Because an IIFE is just a function, and functions create variable *scope*, using an IIFE in this fashion is often used to declare variables that won't affect the surrounding code outside the IIFE:
+因为IIFE仅仅只是一个函数，而函数会创建变量**作用域**，IIFE这种函数声明的方式，常用来声明不会影响IIFE外周边代码的变量（原句：using an IIFE in this fashion is often used to declare variables that won't affect the surrounding code outside the IIFE）：
 
 ```js
 var a = 42;
@@ -651,7 +651,7 @@ var a = 42;
 console.log( a );		// 42
 ```
 
-IIFEs can also have return values:
+IIFEs也可以有返回值：
 
 ```js
 var x = (function IIFE(){
@@ -661,15 +661,15 @@ var x = (function IIFE(){
 x;	// 42
 ```
 
-The `42` value gets `return`ed from the `IIFE`-named function being executed, and is then assigned to `x`.
+`IIFE`命名函数执行并返回了值`42`，然后该值被赋给变量`x`。
 
-### Closure
+### 闭包
 
-*Closure* is one of the most important, and often least understood, concepts in JavaScript. I won't cover it in deep detail here, and instead refer you to the *Scope & Closures* title of this series. But I want to say a few things about it so you understand the general concept. It will be one of the most important techniques in your JS skillset.
+**闭包**是JavaScript中最重要并且最少被理解的的概念。在这里我不会做深入讨论，而是指引你去阅读本系列标题为“作用域和闭包”的相关内容。但是我会在这里介绍一些关于闭包的知识让你对基本概念有所了解。这将是在你的JS技能组中最重要的技术之一。
 
-You can think of closure as a way to "remember" and continue to access a function's scope (its variables) even once the function has finished running.
+你可以把闭包理解为一种在函数运行完毕之后“记住”并且继续访问函数作用域（它的变量）的方法。（原句：You can think of closure as a way to "remember" and continue to access a function's scope (its variables) even once the function has finished running.）
 
-Consider:
+考虑如下：
 
 ```js
 function makeAdder(x) {
@@ -686,6 +686,8 @@ function makeAdder(x) {
 ```
 
 The reference to the inner `add(..)` function that gets returned with each call to the outer `makeAdder(..)` is able to remember whatever `x` value was passed in to `makeAdder(..)`. Now, let's use `makeAdder(..)`:
+
+到获取与每次调用外部`makeAdder（..）返回的内部`加（..）`函数的引用`能记住什么`x`值中`makeAdder（..）`通过。现在，让我们使用`makeAdder（..）`：
 
 ```js
 // `plusOne` gets a reference to the inner `add(..)`
