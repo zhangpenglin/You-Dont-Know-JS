@@ -20,8 +20,8 @@
 	* 值和类型
 	* 变量
 	* 条件语句
-	* Strict Mode
-	* Functions As Values
+	* 严格模式
+	* 函数作为值
 	* `this` Keyword
 	* Prototypes
 	* Old & New

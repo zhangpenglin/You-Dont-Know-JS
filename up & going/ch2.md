@@ -685,9 +685,7 @@ function makeAdder(x) {
 }
 ```
 
-The reference to the inner `add(..)` function that gets returned with each call to the outer `makeAdder(..)` is able to remember whatever `x` value was passed in to `makeAdder(..)`. Now, let's use `makeAdder(..)`:
-
-到获取与每次调用外部`makeAdder（..）返回的内部`加（..）`函数的引用`能记住什么`x`值中`makeAdder（..）`通过。现在，让我们使用`makeAdder（..）`：
+每次调用函数`makeAdder(..)`的时候，内部函数`add(..)`的引用都会被返回，并且会记住传递给`makeAdder(..)`函数的参数`x`的值。现在，让我来使用`makeAdder(..)`：
 
 ```js
 // `plusOne` gets a reference to the inner `add(..)`
@@ -706,16 +704,16 @@ plusOne( 41 );		// 42 <-- 1 + 41
 plusTen( 13 );		// 23 <-- 10 + 13
 ```
 
-More on how this code works:
+更多关于这些代码是如何工作的：
 
-1. When we call `makeAdder(1)`, we get back a reference to its inner `add(..)` that remembers `x` as `1`. We call this function reference `plusOne(..)`.
-2. When we call `makeAdder(10)`, we get back another reference to its inner `add(..)` that remembers `x` as `10`. We call this function reference `plusTen(..)`.
-3. When we call `plusOne(3)`, it adds `3` (its inner `y`) to the `1` (remembered by `x`), and we get `4` as the result.
-4. When we call `plusTen(13)`, it adds `13` (its inner `y`) to the `10` (remembered by `x`), and we get `23` as the result.
+1. 当我们调用`makeAdder(1)`，我们获得了一个内部函数`add(..)`的引用，并且它记住了变量`x`的值为`1`。我们给这个函数取个别名叫`plusOne(..)`。
+2. 当我们调用`makeAdder(10)`，我们获得了一个内部函数`add(..)`的引用，并且它记住了变量`x`的值为`10`。我们给这个函数取个别名叫`plusTen(..)`。
+3. 当我们调用`plusOne(3)`，它把`3`（其内部的`y`）加上`1`（被记住的`x`的值），于是我们得到了结果`4`。
+4. 当我们调用`plusTen(13)`，它把`13`（其内部的`y`）加上`10`（被记住的`x`的值），于是我们得到了结果`23`。
 
-Don't worry if this seems strange and confusing at first -- it can be! It'll take lots of practice to understand it fully.
+第一次看起来这似乎有点奇怪并且感到困惑，但是别担心，它就是这样子！你需要大量的实践去充分了解它。
 
-But trust me, once you do, it's one of the most powerful and useful techniques in all of programming. It's definitely worth the effort to let your brain simmer on closures for a bit. In the next section, we'll get a little more practice with closure.
+但是请相信我，一旦你掌握了它，这在所有编程中是最强大和最有用的技术之一。闭包绝对值得你付出巨大的努力去掌握它（原句：It's definitely worth the effort to let your brain simmer on closures for a bit.）。在接下来的部分，我们会使用闭包做更多的实践。
 
 #### Modules
 
