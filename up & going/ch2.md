@@ -715,11 +715,11 @@ plusTen( 13 );		// 23 <-- 10 + 13
 
 但是请相信我，一旦你掌握了它，这在所有编程中是最强大和最有用的技术之一。闭包绝对值得你付出巨大的努力去掌握它（原句：It's definitely worth the effort to let your brain simmer on closures for a bit.）。在接下来的部分，我们会使用闭包做更多的实践。
 
-#### Modules
+#### 模块
 
-The most common usage of closure in JavaScript is the module pattern. Modules let you define private implementation details (variables, functions) that are hidden from the outside world, as well as a public API that *is* accessible from the outside.
+闭包在JavaScript中最常见的用法就是模块模式。模块能够让你定义私有实现细节，将变量函数等与外界隔离，以及提供一个能从外界访问的公共API。
 
-Consider:
+考虑如下：
 
 ```js
 function User(){
@@ -745,23 +745,23 @@ var fred = User();
 fred.login( "fred", "12Battery34!" );
 ```
 
-The `User()` function serves as an outer scope that holds the variables `username` and `password`, as well as the inner `doLogin()` function; these are all private inner details of this `User` module that cannot be accessed from the outside world.
+函数`User()`提供了一个作用域保持变量`username`和`password`，以及内部函数`doLogin()`；这些都是`User`模块的私有内部细节，从外界不能访问它们。
 
-**Warning:** We are not calling `new User()` here, on purpose, despite the fact that probably seems more common to most readers. `User()` is just a function, not a class to be instantiated, so it's just called normally. Using `new` would be inappropriate and actually waste resources.
+**警告：**我们在这里故意不调用`new User()`，尽管对大多数读者来说可能更常见。`User()`只是一个函数，不是一个可以实例化的类，所以直接调用是正常的。使用`new`是不合适的，并且浪费资源。
 
-Executing `User()` creates an *instance* of the `User` module -- a whole new scope is created, and thus a whole new copy of each of these inner variables/functions. We assign this instance to `fred`. If we run `User()` again, we'd get a new instance entirely separate from `fred`.
+执行`User()`创建了`User`模块的一个**实例**——创建了一个全新的作用域，因此创建了里面每个变量/函数的一个全新副本。我们将这个实例赋值给`fred`。如果我们再一次运行`User()`，我们将得到一个完全独立于`fred`的全新实例。
 
-The inner `doLogin()` function has a closure over `username` and `password`, meaning it will retain its access to them even after the `User()` function finishes running.
+内部函数`doLogin()`有对`username`和`password`的闭包，这意味着即使函数`User()`运行完毕，`doLogin()`依然保留了对这两个变量的访问。
 
-`publicAPI` is an object with one property/method on it, `login`, which is a reference to the inner `doLogin()` function. When we return `publicAPI` from `User()`, it becomes the instance we call `fred`.
+`publicAPI`是有一个属性/方法的对象，它是内部函数`doLogin()`的一个引用。当我们从`User()`返回`publicAPI`，就成了`fred`的实例。
 
-At this point, the outer `User()` function has finished executing. Normally, you'd think the inner variables like `username` and `password` have gone away. But here they have not, because there's a closure in the `login()` function keeping them alive.
+此时，外部函数`User()`已经执行完毕了。通常情况下，你会觉得像`username`和`password`这样的变量已经消失了。但是实际上并没有，因为在函数`login()`中保留了对它们的引用，所以它们还存活着。
 
-That's why we can call `fred.login(..)` -- the same as calling the inner `doLogin(..)` -- and it can still access `username` and `password` inner variables.
+这就是为什么我们调用`fred.login(..)`——相当于调用内部的`doLogin(..)`——时，它仍然可以访问`username`和`password`这两个内部变量。
 
-There's a good chance that with just this brief glimpse at closure and the module pattern, some of it is still a bit confusing. That's OK! It takes some work to wrap your brain around it.
+这是个很好的机会让你开始接触闭包和模块模式，虽然有些知识点仍然让你感到迷惑。没关系！它确实需要你花些时间去仔细理解。
 
-From here, go read the *Scope & Closures* title of this series for a much more in-depth exploration.
+从这里开始，去阅读本系列标题为“作用域和闭包”相关内容，进行更深入的探索。
 
 ## `this` Identifier
 
