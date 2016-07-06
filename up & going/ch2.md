@@ -810,15 +810,15 @@ new foo();			// undefined
 
 **注意：**有关`this`的更多信息，请参阅本系列标题为“**this和对象原型**”的第一章和第二章。
 
-## Prototypes
+## 原型
 
-The prototype mechanism in JavaScript is quite complicated. We will only glance at it here. You will want to spend plenty of time reviewing Chapters 4-6 of the *this & Object Prototypes* title of this series for all the details.
+在JavaScript中原型机制是相当复杂的。我们只会在这里蜻蜓点水一下。想要了解更多的细节，你需要花费大量的时间来阅读理解本系列标题为“**this和对象原型**”第四到六章的相关内容。
 
-When you reference a property on an object, if that property doesn't exist, JavaScript will automatically use that object's internal prototype reference to find another object to look for the property on. You could think of this almost as a fallback if the property is missing.
+当你引用一个对象的属性时，如果那个属性不存在，JavaScript会自动使用该对象的内部原型引用去查找另外一个对象上是否有该属性。如果缺少该属性，你可以认为这是对象的一个后备。（真心有点绕口，原句自行翻译：When you reference a property on an object, if that property doesn't exist, JavaScript will automatically use that object's internal prototype reference to find another object to look for the property on. You could think of this almost as a fallback if the property is missing.）
 
-The internal prototype reference linkage from one object to its fallback happens at the time the object is created. The simplest way to illustrate it is with a built-in utility called `Object.create(..)`.
+从一个对象到它的后备对象之间建立原型引用连接发生在对象创建的时候。最简单的实现方法就是使用内置工具函数`Object.create(..)`。（原句：The internal prototype reference linkage from one object to its fallback happens at the time the object is created. The simplest way to illustrate it is with a built-in utility called `Object.create(..)`.）
 
-Consider:
+考虑如下：
 
 ```js
 var foo = {
@@ -834,17 +834,17 @@ bar.b;		// "hello world"
 bar.a;		// 42 <-- delegated to `foo`
 ```
 
-It may help to visualize the `foo` and `bar` objects and their relationship:
+下图可以帮助你理解`foo`和`bar`对象之间的关系：
 
 <img src="fig6.png">
 
-The `a` property doesn't actually exist on the `bar` object, but because `bar` is prototype-linked to `foo`, JavaScript automatically falls back to looking for `a` on the `foo` object, where it's found.
+`bar`对象上并没有属性`a`，但是因为`bar`的原型链接到`foo`，JavaScript自动往上回溯，在`foo`对象上寻找`a`属性，然后就找到了。
 
-This linkage may seem like a strange feature of the language. The most common way this feature is used -- and I would argue, abused -- is to try to emulate/fake a "class" mechanism with "inheritance."
+这种联系似乎是语言的一个奇怪特性。这种特性最常见的使用方式就是尝试模拟或伪装**类**的**继承**机制，而我认为这是在滥用此特性。（原句：This linkage may seem like a strange feature of the language. The most common way this feature is used -- and I would argue, abused -- is to try to emulate/fake a "class" mechanism with "inheritance."）
 
-But a more natural way of applying prototypes is a pattern called "behavior delegation," where you intentionally design your linked objects to be able to *delegate* from one to the other for parts of the needed behavior.
+使用原型更自然的方式是所谓的“行为代理”，在这里你有意设计你要链接的对象，使它能够**代理**你需要的部分行为。（原句：But a more natural way of applying prototypes is a pattern called "behavior delegation," where you intentionally design your linked objects to be able to *delegate* from one to the other for parts of the needed behavior.）
 
-**Note:** For more information about prototypes and behavior delegation, see Chapters 4-6 of the *this & Object Prototypes* title of this series.
+**注意：**有关原型和行为代理的详细信息，请参阅本系列标题为“**this和对象原型**”的第四到六章。
 
 ## Old & New
 
