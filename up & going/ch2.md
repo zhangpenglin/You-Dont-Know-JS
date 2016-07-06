@@ -846,23 +846,23 @@ bar.a;		// 42 <-- delegated to `foo`
 
 **注意：**有关原型和行为代理的详细信息，请参阅本系列标题为“**this和对象原型**”的第四到六章。
 
-## Old & New
+## 旧与新
 
-Some of the JS features we've already covered, and certainly many of the features covered in the rest of this series, are newer additions and will not necessarily be available in older browsers. In fact, some of the newest features in the specification aren't even implemented in any stable browsers yet.
+我们已经讲解了一些JS特性，在本系列的剩余部分还会讲解许多新增的其他特性，这些新特性在老的浏览器上不一定能运行。事实上，在JS详细说明中最新的功能，甚至没有在任何稳定版本的浏览器中实现过。
 
-So, what do you do with the new stuff? Do you just have to wait around for years or decades for all the old browsers to fade into obscurity?
+因此你会如何对待这些新特性呢？你会等上几年或者几十年，直到所有的老版本浏览器退出历史舞台吗？
 
-That's how many people think about the situation, but it's really not a healthy approach to JS.
+事实上，很多人就是这么对待新特性的，当它确实不是一个健康的方式来对待JS新特性（原句：but it's really not a healthy approach to JS）。
 
-There are two main techniques you can use to "bring" the newer JavaScript stuff to the older browsers: polyfilling and transpiling.
+这里有两个主要的技术能够把JavaScript新特性加入到旧的浏览器中：polyfilling和transpiling。（译者注：这两个单词太专业，翻译过来反而会误导大家，所以不予翻译。事实上，国内很多技术文章也没有对这两个词进行翻译）
 
 ### Polyfilling
 
-The word "polyfill" is an invented term (by Remy Sharp) (https://remysharp.com/2010/10/08/what-is-a-polyfill) used to refer to taking the definition of a newer feature and producing a piece of code that's equivalent to the behavior, but is able to run in older JS environments.
+“polyfill”这个单词是个发明术语(by Remy Sharp) (https://remysharp.com/2010/10/08/what-is-a-polyfill), 它被用来说明定义了一个新功能并且产生了一段等同于新功能行为的代码，但它能够在较旧的JS环境中运行。（原句：The word "polyfill" is an invented term (by Remy Sharp) (https://remysharp.com/2010/10/08/what-is-a-polyfill) used to refer to taking the definition of a newer feature and producing a piece of code that's equivalent to the behavior, but is able to run in older JS environments.）
 
-For example, ES6 defines a utility called `Number.isNaN(..)` to provide an accurate non-buggy check for `NaN` values, deprecating the original `isNaN(..)` utility. But it's easy to polyfill that utility so that you can start using it in your code regardless of whether the end user is in an ES6 browser or not.
+例如，ES6定义了一个名为`Number.isNaN(..)`的工具函数，能够准确检测一个值是否为`NaN`，弃用了原来的`isNaN(..)`工具函数。但是你可以很容易的ployfill这个工具函数，这样你就可以开始在代码中使用它，无论最终用户是否处于ES6浏览器中。
 
-Consider:
+考虑如下：
 
 ```js
 if (!Number.isNaN) {
@@ -872,13 +872,13 @@ if (!Number.isNaN) {
 }
 ```
 
-The `if` statement guards against applying the polyfill definition in ES6 browsers where it will already exist. If it's not already present, we define `Number.isNaN(..)`.
+`if`语句防止在已存在此函数的ES6浏览器中重复定义`Number.isNaN(..)`。如果它不存在，我们就定义`Number.isNaN(..)`。
 
-**Note:** The check we do here takes advantage of a quirk with `NaN` values, which is that they're the only value in the whole language that is not equal to itself. So the `NaN` value is the only one that would make `x !== x` be `true`.
+**注意：**我们在这里做的检测利用了`NaN`值的一个奇怪特性，就是它是整个语言当中唯一一个不等于它自己的值。因此`NaN`是唯一一个能够让`x !== x`返回`true`的值。
 
-Not all new features are fully polyfillable. Sometimes most of the behavior can be polyfilled, but there are still small deviations. You should be really, really careful in implementing a polyfill yourself, to make sure you are adhering to the specification as strictly as possible.
+并非所有的新特性都能被完全地polyfill。大多数的行为都可以被polyfilled，但仍然存在小的偏差。在你polyfill一个新功能的时候，你应该十分十分的小心，尽可能严格的遵守规范。
 
-Or better yet, use an already vetted set of polyfills that you can trust, such as those provided by ES5-Shim (https://github.com/es-shims/es5-shim) and ES6-Shim (https://github.com/es-shims/es6-shim).
+或者更好的是，使用一个已经审核过的polyfills，这个你值得信任，比如：ES5-Shim (https://github.com/es-shims/es5-shim) 和 ES6-Shim (https://github.com/es-shims/es6-shim)。
 
 ### Transpiling
 
