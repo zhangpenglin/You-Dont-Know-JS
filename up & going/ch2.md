@@ -763,17 +763,17 @@ fred.login( "fred", "12Battery34!" );
 
 从这里开始，去阅读本系列标题为“作用域和闭包”相关内容，进行更深入的探索。
 
-## `this` Identifier
+## this关键字
 
-Another very commonly misunderstood concept in JavaScript is the `this` identifier. Again, there's a couple of chapters on it in the *this & Object Prototypes* title of this series, so here we'll just briefly introduce the concept.
+在JavaScript中另一个非常普通误解的概念是`this`标识符。再次说明，在本系列标题为“**this和对象原型**”中有一系列章节会讲解this相关的内容，因此我们只是在这里对这个概念做个简单介绍。
 
-While it may often seem that `this` is related to "object-oriented patterns," in JS `this` is a different mechanism.
+虽然`this`可能常常看起来跟“面向对象的模式”相关，但是在JS中`this`是一个不同的机制。
 
-If a function has a `this` reference inside it, that `this` reference usually points to an `object`. But which `object` it points to depends on how the function was called.
+如果一个函数内部有`this`引用，那个`this`引用通常会指向一个`object`（对象）。但是指向哪个`object`取决于函数的调用方式。
 
-It's important to realize that `this` *does not* refer to the function itself, as is the most common misconception.
+认识到`this`**不指向**函数本身这点是非常重要的，因为这是最常见的误解。
 
-Here's a quick illustration:
+这里有一个快速说明：
 
 ```js
 function foo() {
@@ -799,16 +799,16 @@ foo.call( obj2 );	// "obj2"
 new foo();			// undefined
 ```
 
-There are four rules for how `this` gets set, and they're shown in those last four lines of that snippet.
+这里有四条关于`this`是如何设置的规则，并且在上面代码片段的最后四行显示出来了。
 
-1. `foo()` ends up setting `this` to the global object in non-strict mode -- in strict mode, `this` would be `undefined` and you'd get an error in accessing the `bar` property -- so `"global"` is the value found for `this.bar`.
-2. `obj1.foo()` sets `this` to the `obj1` object.
-3. `foo.call(obj2)` sets `this` to the `obj2` object.
-4. `new foo()` sets `this` to a brand new empty object.
+1. 在非严格模式下，`foo()`最终将`this`绑定在全局对象上，因此通过`this.bar`得到的值是`"global"`；在严格模式下，`this`是`undefined`，因此在你访问属性`bar`的时候会得到一个错误。
+2. `obj1.foo()`将`this`绑定在`obj1`对象上。
+3. `foo.call(obj2)`将`this`绑定在`obj2`对象上。
+4. `new foo()`将`this`绑定到一个全新的空对象上。
 
-Bottom line: to understand what `this` points to, you have to examine how the function in question was called. It will be one of those four ways just shown, and that will then answer what `this` is.
+要明白`this`指向谁，你必须明白这些函数是如何被调用的。它肯定是上面显示的四种方法之一，然后再回答`this`是什么。（原句：Bottom line: to understand what `this` points to, you have to examine how the function in question was called. It will be one of those four ways just shown, and that will then answer what `this` is.）
 
-**Note:** For more information about `this`, see Chapters 1 and 2 of the *this & Object Prototypes* title of this series.
+**注意：**有关`this`的更多信息，请参阅本系列标题为“**this和对象原型**”的第一章和第二章。
 
 ## Prototypes
 

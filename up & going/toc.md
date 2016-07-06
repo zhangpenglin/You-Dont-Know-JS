@@ -22,7 +22,7 @@
 	* 条件语句
 	* 严格模式
 	* 函数作为值
-	* `this` Keyword
+	* this关键字
 	* Prototypes
 	* Old & New
 	* Non-JavaScript
