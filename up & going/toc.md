@@ -23,8 +23,8 @@
 	* 严格模式
 	* 函数作为值
 	* this关键字
-	* Prototypes
-	* Old & New
+	* 原型
+	* 旧与新
 	* Non-JavaScript
 * 第三章: 进入你不知道的JavaScript
 	* 作用域和闭包

@@ -880,23 +880,23 @@ if (!Number.isNaN) {
 
 或者更好的是，使用一个已经审核过的polyfills，这个你值得信任，比如：ES5-Shim (https://github.com/es-shims/es5-shim) 和 ES6-Shim (https://github.com/es-shims/es6-shim)。
 
-### Transpiling
+### Transpiling（转换）
 
-There's no way to polyfill new syntax that has been added to the language. The new syntax would throw an error in the old JS engine as unrecognized/invalid.
+这里没有办法polyfill已被添加到语言新语法。新的语法将在旧JS引擎中抛出一个未确认或无效的错误。
 
-So the better option is to use a tool that converts your newer code into older code equivalents. This process is commonly called "transpiling," a term for transforming + compiling.
+所以，更好的选择是使用一个工具把新的代码转换成等价的旧的代码。这个过程通常被称为“transpiling”，一个转换+编译的术语。（原句：a term for transforming + compiling）
 
-Essentially, your source code is authored in the new syntax form, but what you deploy to the browser is the transpiled code in old syntax form. You typically insert the transpiler into your build process, similar to your code linter or your minifier.
+从本质上来讲，你用新的语法格式写的源代码，但是部署到浏览器上的代码是transpiled之后的旧的语法格式的代码。你通常在你的构建（build）过程中插入transpiler（转换器），就像你的code linter和minifier一样。（译者注：code linter应该是指JSLint，minifier应该是指压缩代码的工具）
 
-You might wonder why you'd go to the trouble to write new syntax only to have it transpiled away to older code -- why not just write the older code directly?
+你可能想知道，为什么要这么麻烦去用新的语法格式写代码，然后还要把它transpiled成旧的代码——为什么不直接写旧的语法格式的代码？
 
-There are several important reasons you should care about transpiling:
+关于transpiling，这里有几个重要的原因：
 
-* The new syntax added to the language is designed to make your code more readable and maintainable. The older equivalents are often much more convoluted. You should prefer writing newer and cleaner syntax, not only for yourself but for all other members of the development team.
-* If you transpile only for older browsers, but serve the new syntax to the newest browsers, you get to take advantage of browser performance optimizations with the new syntax. This also lets browser makers have more real-world code to test their implementations and optimizations on.
-* Using the new syntax earlier allows it to be tested more robustly in the real world, which provides earlier feedback to the JavaScript committee (TC39). If issues are found early enough, they can be changed/fixed before those language design mistakes become permanent.
+* 添加到语言的新语法的目的是提高你的代码的可读性和可维护性。与之等价的旧代码常常令人费解。你应该优先选择写更新更清晰的新语法格式的代码，不仅为自己，也为了开发团队的所有其他成员。
+* 如果你只是为旧浏览器transpile，但用新的语法去服务最新的浏览器，新的语法格式能充分利用新浏览器的性能优化（原句：you get to take advantage of browser performance optimizations with the new syntax）。这也让浏览器开发者有更多真实的代码来测试自己的实现和优化。
+* 在现实世界中更早的使用新的语法，能够给JavaScript委员会（TC39）提供早期反馈，使得新的语法能够被测试得更健壮。如果问题发现的早，它们就能在这些语言设计失误变成永远之前被修改或修复。
 
-Here's a quick example of transpiling. ES6 adds a feature called "default parameter values." It looks like this:
+下面是transpiling的一个简单的例子。 ES6增加了一个功能叫做“函数参数默认值”（default parameter values.）。它看起来像这样：
 
 ```js
 function foo(a = 2) {
@@ -907,7 +907,7 @@ foo();		// 2
 foo( 42 );	// 42
 ```
 
-Simple, right? Helpful, too! But it's new syntax that's invalid in pre-ES6 engines. So what will a transpiler do with that code to make it run in older environments?
+简单又实用，对吧！但是新语法在ES6之前的引擎中是无效的。那transpiler该如何做，使之在旧的环境中运行？
 
 ```js
 function foo() {
@@ -916,17 +916,17 @@ function foo() {
 }
 ```
 
-As you can see, it checks to see if the `arguments[0]` value is `void 0` (aka `undefined`), and if so provides the `2` default value; otherwise, it assigns whatever was passed.
+如你所见，它会检查`arguments[0]`的值是否是`void 0`（即`undefined`），如果是就提供`2`作为默认值；否则，就把传递进来的值赋值给`a`。
 
-In addition to being able to now use the nicer syntax even in older browsers, looking at the transpiled code actually explains the intended behavior more clearly.
+现在除了能够使用更好的语法（即使在旧浏览器中），看看transpiled之后的代码实际上更清楚地解释了预期的行为。
 
-You may not have realized just from looking at the ES6 version that `undefined` is the only value that can't get explicitly passed in for a default-value parameter, but the transpiled code makes that much more clear.
+只是看ES6版本的代码，你可能没有意识到如果你想要使用默认参数，`undefined`是唯一一个不能显式传递进去的值，但是transpiled之后的代码能够让你看得更清楚。（译者注：你想要传递`undefined`进去，而不是使用默认值`2`；但是你无法做到这一点，因为如果你不传递参数进去，第一个参数的值是`undefined`，而底层实现就是通过判断第一个参数是不是`undefined`来决定是否使用默认值，所以当你传递`undefined`进去，代码会认为没有传递参数，所以使用了默认值`2`，这算是一个bug）
 
-The last important detail to emphasize about transpilers is that they should now be thought of as a standard part of the JS development ecosystem and process. JS is going to continue to evolve, much more quickly than before, so every few months new syntax and new features will be added.
+要强调有关transpilers的最后一个重要的细节是，它们现在应该被认为是JS的开发生态系统和流程的一个标准部分。JS会继续发展，比以前更加快速，所以每隔几个月新语法和新功能就会被添加进来。
 
-If you use a transpiler by default, you'll always be able to make that switch to newer syntax whenever you find it useful, rather than always waiting for years for today's browsers to phase out.
+如果你默认使用一个transpiler，你应该总是能够切换到新的语法，而不是总在等待多年直到今天的浏览器逐步淘汰。（原句：If you use a transpiler by default, you'll always be able to make that switch to newer syntax whenever you find it useful, rather than always waiting for years for today's browsers to phase out.）
 
-There are quite a few great transpilers for you to choose from. Here are some good options at the time of this writing:
+这里有很多非常棒的transpilers（转换器）你可以选择。以下是在写这篇文章的时候一些好的选项：
 
 * Babel (https://babeljs.io) (formerly 6to5): Transpiles ES6+ into ES5
 * Traceur (https://github.com/google/traceur-compiler): Transpiles ES6, ES7, and beyond into ES5
