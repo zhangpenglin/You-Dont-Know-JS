@@ -1,5 +1,5 @@
 # 你不知道的JavaScript: Up & Going
-# Foreword
+# 前言
 
 What was the last new thing you learned?
 

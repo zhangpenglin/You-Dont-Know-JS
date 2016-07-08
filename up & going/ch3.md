@@ -1,13 +1,13 @@
 # 你不知道的JavaScript: Up & Going
 # 第三章: 走进YDKJS
 
-What is this series all about? Put simply, it's about taking seriously the task of learning *all parts of JavaScript*, not just some subset of the language that someone called "the good parts," and not just whatever minimal amount you need to get your job done at work.
+这个系列的书在讲什么呢？简单来说，它是关于认真对待如何学习**JavaScript的所有部分**，而不仅仅是这门语言的一些子集，有人称之为“**the good parts**”（译者注：这里指的是Douglas Crockford 写的《JavaScript语言精粹》），也不是让你完成工作任务所需的最少知识。
 
-Serious developers in other languages expect to put in the effort to learn most or all of the language(s) they primarily write in, but JS developers seem to stand out from the crowd in the sense of typically not learning very much of the language. This is not a good thing, and it's not something we should continue to allow to be the norm.
+其他语言中的认真的开发者会尽他们最大的努力去学习大部分或全部的关于他们主要使用的编程语言的相关知识，但是JS开发者似乎独树一帜，因为他们通常不学习很多的关于JavaScript的知识（也能很好的完成他们的工作）。这可不是一件好事，我们不应该让它称为常态。
 
-The *You Don't Know JS* (*YDKJS*) series stands in stark contrast to the typical approaches to learning JS, and is unlike almost any other JS books you will read. It challenges you to go beyond your comfort zone and to ask the deeper "why" questions for every single behavior you encounter. Are you up for that challenge?
+**你不知道的JavaScript**（**YDKJS**）系列书籍与典型学习JS的方法形成了鲜明的对比，不像几乎其他任何关于JS的书籍。它会不断的挑战你，让你走出你的舒适区，并且在你遇到的每一个行为都会问更深层次的“为什么”的问题。你准备好接受挑战了吗？（原句：The *You Don't Know JS* (*YDKJS*) series stands in stark contrast to the typical approaches to learning JS, and is unlike almost any other JS books you will read. It challenges you to go beyond your comfort zone and to ask the deeper "why" questions for every single behavior you encounter. Are you up for that challenge?）
 
-I'm going to use this final chapter to briefly summarize what to expect from the rest of the books in the series, and how to most effectively go about building a foundation of JS learning on top of *YDKJS*.
+我打算在最后一章简要地总结一下本系列剩余书籍的内容，以及在**YDKJS**基础之上，如何最有效地建立JS学习的基础。
 
 ## 作用域和闭包
 

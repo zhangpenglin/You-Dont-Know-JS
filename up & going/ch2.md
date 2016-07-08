@@ -931,32 +931,32 @@ function foo() {
 * Babel (https://babeljs.io) (formerly 6to5): Transpiles ES6+ into ES5
 * Traceur (https://github.com/google/traceur-compiler): Transpiles ES6, ES7, and beyond into ES5
 
-## Non-JavaScript
+## 非JavaScript
 
-So far, the only things we've covered are in the JS language itself. The reality is that most JS is written to run in and interact with environments like browsers. A good chunk of the stuff that you write in your code is, strictly speaking, not directly controlled by JavaScript. That probably sounds a little strange.
+到目前为止，我们已经介绍的东西都是JS语言本身。现实情况是，大多数写的JS都是运行在像浏览器的环境中，与它们互动。你写的很大一部分代码，严格来说，不是直接由JavaScript控制的。这听起来有点怪怪的。
 
-The most common non-JavaScript JavaScript you'll encounter is the DOM API. For example:
+你遇到的最常见的非JavaScript的JavaScript，就是DOM API。例如：
 
 ```js
 var el = document.getElementById( "foo" );
 ```
 
-The `document` variable exists as a global variable when your code is running in a browser. It's not provided by the JS engine, nor is it particularly controlled by the JavaScript specification. It takes the form of something that looks an awful lot like a normal JS `object`, but it's not really exactly that. It's a special `object,` often called a "host object."
+当你的代码在浏览器中运行时`document`变量作为一个全局变量而存在。它不是由JS引擎提供的，也不是特别受JavaScript规范控制。它看起来特别像一个正常的JS`object`（对象），但是它真不是这样的。它是一个特殊的`object`（对象），通常称为`host object`（宿主对象）。
 
-Moreover, the `getElementById(..)` method on `document` looks like a normal JS function, but it's just a thinly exposed interface to a built-in method provided by the DOM from your browser. In some (newer-generation) browsers, this layer may also be in JS, but traditionally the DOM and its behavior is implemented in something more like C/C++.
+此外，`document`对象上的`getElementById(..)`方法看起来像一个正常的JS函数，但它仅仅只是你浏览器中的DOM提供的一个内置方法暴露出来的接口。传统的DOM及其行为是被类似C/C++的语言实现的，在某些（新一代的）浏览器，这层也可能是JS。（原句：Moreover, the `getElementById(..)` method on `document` looks like a normal JS function, but it's just a thinly exposed interface to a built-in method provided by the DOM from your browser. In some (newer-generation) browsers, this layer may also be in JS, but traditionally the DOM and its behavior is implemented in something more like C/C++.）
 
-Another example is with input/output (I/O).
+另一个例子是输入/输出（I/O）。
 
-Everyone's favorite `alert(..)` pops up a message box in the user's browser window. `alert(..)` is provided to your JS program by the browser, not by the JS engine itself. The call you make sends the message to the browser internals and it handles drawing and displaying the message box.
+大家都喜欢用的`alert(..)`，会在用户浏览器窗口弹出一个消息框。`alert(..)`是由浏览器提供到你的JS程序中，而不是JS引擎提供的。你的`alert(..)`调用信息会被发送到浏览器的内部，它负责处理绘制并显示该消息框。
 
-The same goes with `console.log(..)`; your browser provides such mechanisms and hooks them up to the developer tools.
+同样，`console.log(..)`也是一样的机理；你的浏览器提供了这样的机制将它们和开发者工具挂钩起来。
 
-This book, and this whole series, focuses on JavaScript the language. That's why you don't see any substantial coverage of these non-JavaScript JavaScript mechanisms. Nevertheless, you need to be aware of them, as they'll be in every JS program you write!
+这个系列的书籍，专注于JavaScript语言本身。这就是你为什么看不到任何实质性的关于非JavaScript机制的内容。不过，你需要了解它们，因为它们会在你写的每一个JS程序中！
 
 ## 总结
 
-The first step to learning JavaScript's flavor of programming is to get a basic understanding of its core mechanisms like values, types, function closures, `this`, and prototypes.
+学习JavaScript编程的第一步是了解它的核心机制，例如：值、类型、函数闭包、`this`和原型等。
 
-Of course, each of these topics deserves much greater coverage than you've seen here, but that's why they have chapters and books dedicated to them throughout the rest of this series. After you feel pretty comfortable with the concepts and code samples in this chapter, the rest of the series awaits you to really dig in and get to know the language deeply.
+当然，每个主题都应该有更多的覆盖内容，比你在这里看到的多得多，这就是为什么在整个系列当中它们有专门的章节和书籍。在你熟悉了本章中的概念和代码实例之后，这个系列的其余部分正等待着你真正挖掘并深入了解这门语言。
 
-The final chapter of this book will briefly summarize each of the other titles in the series and the other concepts they cover besides what we've already explored.
+这本书的最后一章将简要总结每个系列中的标题和一些我们没有在本章讨论到的其他概念。

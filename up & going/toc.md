@@ -25,7 +25,7 @@
 	* this关键字
 	* 原型
 	* 旧与新
-	* Non-JavaScript
+	* 非JavaScript
 * 第三章: 进入你不知道的JavaScript
 	* 作用域和闭包
 	* this和对象原型
