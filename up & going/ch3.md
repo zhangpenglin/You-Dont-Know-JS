@@ -23,37 +23,21 @@ JS引擎在执行之前会立即编译你的代码（有些引擎会在执行时
 
 ## this和对象原型
 
-Perhaps one of the most widespread and persistent mistruths about JavaScript is that the `this` keyword refers to the function it appears in. Terribly mistaken.
+关于JavaScript最普遍和持久的误解（mistruths）可能就是`this`指向它出现在的那个函数。错误至极！
 
-The `this` keyword is dynamically bound based on how the function in question is executed, and it turns out there are four simple rules to understand and fully determine `this` binding.
+`this`是基于函数执行的上下文来执行动态绑定，这里有四条简单的规则去理解和完全确定`this`绑定到哪。
 
-Closely related to the `this` keyword is the object prototype mechanism, which is a look-up chain for properties, similar to how lexical scope variables are found. But wrapped up in the prototypes is the other huge miscue about JS: the idea of emulating (fake) classes and (so-called "prototypal") inheritance.
+与`this`密切相关的是对象原型机制，它是一个属性查找链，与词法作用域查找变量类似。将原型包裹起来是JS的另外一大败笔：模拟类和（所谓的“原型”）继承。（译者注：ES6中的类并非静态语言如Java中的类，它是类似于JavaScript原型继承的语法糖，其底层的实现还是通过原型继承来实现的。这段翻译起来感觉很奇怪，为了不误导大家，还请看原句：Closely related to the `this` keyword is the object prototype mechanism, which is a look-up chain for properties, similar to how lexical scope variables are found. But wrapped up in the prototypes is the other huge miscue about JS: the idea of emulating (fake) classes and (so-called "prototypal") inheritance.）
 
-Unfortunately, the desire to bring class and inheritance design pattern thinking to JavaScript is just about the worst thing you could try to do, because while the syntax may trick you into thinking there's something like classes present, in fact the prototype mechanism is fundamentally opposite in its behavior.
+不幸的是，把类和继承的设计模式思想带入JavaScript中是你可以尝试做的最糟糕的事情，因为语法上可能诱导你认为这里确实有类似类的东西存在，其实在它行为背后的基础还是原型机制。
 
-What's at issue is whether it's better to ignore the mismatch and pretend that what you're implementing is "inheritance," or whether it's more appropriate to learn and embrace how the object prototype system actually works. The latter is more appropriately named "behavior delegation."
+现在问题是，你是忽略这种不匹配假装你在使用“继承”，还是学习和拥抱对象原型系统实际上是如何工作的。后者更恰当的命名为“行为代理”。
 
-This is more than syntactic preference. Delegation is an entirely different, and more powerful, design pattern, one that replaces the need to design with classes and inheritance. But these assertions will absolutely fly in the face of nearly every other blog post, book, and conference talk on the subject for the entirety of JavaScript's lifetime.
+这不仅仅是语法偏好。代理是一个完全不同的，功能更加强大机制，而设计模式只是一个用类和继承来弥补语言设计缺陷的东西。当然，我的这些断言肯定会打那些在JavaScript整个生命周期中讨论这个主题的几乎所有的博客、书籍和会议的的脸。（原句：This is more than syntactic preference. Delegation is an entirely different, and more powerful, design pattern, one that replaces the need to design with classes and inheritance. But these assertions will absolutely fly in the face of nearly every other blog post, book, and conference talk on the subject for the entirety of JavaScript's lifetime.）
 
-The claims I make regarding delegation versus inheritance come not from a dislike of the language and its syntax, but from the desire to see the true capability of the language properly leveraged and the endless confusion and frustration wiped away.
+我做出关于代理与继承的宣言，并非来自对语言和语法的反感，而是发自内心的希望大家看到JS语言真正的能力并发挥它真正的价值，并且希望将那无尽的迷惑和沮丧扫除。（原句：The claims I make regarding delegation versus inheritance come not from a dislike of the language and its syntax, but from the desire to see the true capability of the language properly leveraged and the endless confusion and frustration wiped away.）
 
-But the case I make regarding prototypes and delegation is a much more involved one than what I will indulge here. If you're ready to reconsider everything you think you know about JavaScript "classes" and "inheritance," I offer you the chance to "take the red pill" (*Matrix* 1999) and check out Chapters 4-6 of the *this & Object Prototypes* title of this series.
-
-也许关于JavaScript最普遍和持久的mistruths之一就是`this`关键字是指它出现在功能误得要命。
-
-该`this`关键字是基于如何有问题的函数执行动态绑定，它原来有四个简单的规则理解和完全确定`this`约束力。
-
-密切相关的`this`关键字是对象原型机制，这是对的属性，类似范围变量是如何词汇发现查找链。但在原型包裹起来大约是JS的其他巨大miscue的：模拟（假）班和（所谓的“原型”）继承的想法。
-
-不幸的是，把类和继承的设计模式思维的JavaScript的愿望就是你可以尝试做的最糟糕的事情，因为虽然语法可能诱使您的思想有什么东西像现在班，其实原型机制是从根本上对它的行为。
-
-什么是在问题是它是否是更好地忽略不匹配，假装你实施的是“继承”，或者它是否更适合学习和拥抱对象原型系统实际上是如何工作的。后者是更恰当地命名为“行为的代表团。”
-
-这比句法偏好更多。代表团是完全不同的，功能更强大，设计模式，一个替换的需求与类和继承来设计的。但是，这些断言将在几乎所有其他的博客文章，书籍，和会议通话脸绝对飞对JavaScript的一生的全部主题。
-
-我做出关于代表团与继承的索赔并非来自语言，它的语法的反感，而是从希望看到的语言能力，真正正确的杠杆和无尽的困惑和无奈擦干。
-
-但是我做出关于原型和授权的情况下是一个更参与人比什么，我会在这里尽情享受。如果你准备重新考虑一切你认为你知道关于JavaScript的“类”和“继承，”我给你“采取红色药丸”（*矩阵* 1999），并检查了章的4-6的机会*这与对象原型*这一系列的称号。
+我做出关于原型和代理的案例是更贴近JS的特性，以至于我会在这里尽情享受（忽略这蹩脚的翻译，请看原句：But the case I make regarding prototypes and delegation is a much more involved one than what I will indulge here.）。如果你准备重新考虑一切你认为你知道的关于JavaScript的“类”和“继承”，我为你提供了“选择红色药丸”的机会（源自黑客帝国：矩阵，1999），请查阅本系列标题为“this和对象原型”的第四到六章。
 
 ## 类型和语法
 
