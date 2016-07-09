@@ -55,49 +55,27 @@ JS引擎在执行之前会立即编译你的代码（有些引擎会在执行时
 
 ## 异步和性能
 
-The first three titles of this series focus on the core mechanics of the language, but the fourth title branches out slightly to cover patterns on top of the language mechanics for managing asynchronous programming. Asynchrony is not only critical to the performance of our applications, it's increasingly becoming *the* critical factor in writability and maintainability.
+这个系列的前三本书的内容都集中在语言的核心机制，但是第四本书稍微分支出来讲解语言机制的顶层模式：管理异步编程。异步不仅是程序性能的关键，也日益成为在可写性和可维护性上的关键因素。（原句：The first three titles of this series focus on the core mechanics of the language, but the fourth title branches out slightly to cover patterns on top of the language mechanics for managing asynchronous programming. Asynchrony is not only critical to the performance of our applications, it's increasingly becoming *the* critical factor in writability and maintainability.）
 
-The book starts first by clearing up a lot of terminology and concept confusion around things like "async," "parallel," and "concurrent," and explains in depth how such things do and do not apply to JS.
+书中首先开始通过清楚很多关于异步编程的术语和容易混淆的概念，如“异步”、“并行”和“并发”，并且深入解释了这样的事情如何做，哪些不适用于JS。（原句：The book starts first by clearing up a lot of terminology and concept confusion around things like "async," "parallel," and "concurrent," and explains in depth how such things do and do not apply to JS.）
 
-Then we move into examining callbacks as the primary method of enabling asynchrony. But it's here that we quickly see that the callback alone is hopelessly insufficient for the modern demands of asynchronous programming. We identify two major deficiencies of callbacks-only coding: *Inversion of Control* (IoC) trust loss and lack of linear reason-ability.
+然后，我们讲解使异步成为可能的主要方法回调。但就是在这里，我们看到只有回调是不够的，它很难满足现代异步编程的需求。我们看到只有回调的代码的两个重大缺陷：**控制反转**（IoC，*Inversion of Control*）的不靠谱和缺乏线性编码能力。（原句：Then we move into examining callbacks as the primary method of enabling asynchrony. But it's here that we quickly see that the callback alone is hopelessly insufficient for the modern demands of asynchronous programming. We identify two major deficiencies of callbacks-only coding: *Inversion of Control* (IoC) trust loss and lack of linear reason-ability.）
 
-To address these two major deficiencies, ES6 introduces two new mechanisms (and indeed, patterns): promises and generators.
+为了解决这两个重大缺陷，ES6引入了两个新的机制（事实上，是模式）：promises and generators（专业术语，你懂的）。
 
-Promises are a time-independent wrapper around a "future value," which lets you reason about and compose them regardless of if the value is ready or not yet. Moreover, they effectively solve the IoC trust issues by routing callbacks through a trustable and composable promise mechanism.
+Promises是一个与时间无关的“未来值”包裹器，它可以让你在不管值是否准备就绪的情况下使用和组合它们。此外，它们将路由回调通过一个可信和可组合的promise（承若）机制，高效地解决了IoC信任问题。（原句：Promises are a time-independent wrapper around a "future value," which lets you reason about and compose them regardless of if the value is ready or not yet. Moreover, they effectively solve the IoC trust issues by routing callbacks through a trustable and composable promise mechanism.）
 
-前三标题这一系列集中在语言的核心机制，但在第四标题分支出来微微覆盖上的语言力学用于管理异步编程的顶部图案。异步不仅提供了应用程序的性能关键，它日益成为*在可写性和可维护性*关键因素。
+Generators为JS函数引入一种新的执行模式，它在`yield`点可以被暂停然后可以异步的恢复状态。Generator这种暂定-恢复的能力使得代码看起来是同步顺序的，但幕后却是以异步的方式处理。通过这样做，我们解决了回调带来的非线性和跳跃式的混乱，从而使我们的异步代码看起来像同步调用，这是多么美好的事情。（原句：Generators introduce a new mode of execution for JS functions, whereby the generator can be paused at `yield` points and be resumed asynchronously later. The pause-and-resume capability enables synchronous, sequential looking code in the generator to be processed asynchronously behind the scenes. By doing so, we address the non-linear, non-local-jump confusions of callbacks and thereby make our asynchronous code sync-looking so as to be more reason-able.）
 
-书中首先开始通过清除了很多周围的事物的术语和概念混淆，如“异步”，“平行”和“同步”，并在深入这样的事情怎么做，并不适用于JS解释说。
+但是，promises和generators的组合才是迄今为止JavaScript中最有效的异步编程模式。事实上，在将要到来的ES7中，大部分关于未来异步的成熟机制，肯定是建立在这个基础上的。如果你想要在异步的世界中更有效的编程，你必须要十分熟悉结合promises和generators。（原句：But it's the combination of promises and generators that "yields" our most effective asynchronous coding pattern to date in JavaScript. In fact, much of the future sophistication of asynchrony coming in ES7 and later will certainly be built on this foundation. To be serious about programming effectively in an async world, you're going to need to get really comfortable with combining promises and generators.）
 
-然后，我们进入检查回调为使不同步的主要方法。但在这里，我们很快看到单独的回调是异步编程的现代需求绝望不足。我们确定了两个重大缺陷回调只编码：*控制*（IOC）的信任丧失和缺乏线性理由能力的反转。
+如果promises和generators是关于如何提高程序的并发性，从而在短时间内处理更多的任务的模式，那JS在关于性能优化的方面有许多值得探索的地方。
 
-要解决这两个重大缺陷，ES6引入了两个新的机制（而事实上，图案）：承诺和发电机。
+第五章深入研究了使用Web Workers来提高程序并行能力和用SIMD提高数据并行，以及低级别的优化技术，如ASM.js。第六章讲解了通过合适的基准测试技术（包括担心什么样的性能问题以及忽略什么问题）的视角来看待性能优化。（原句：Chapter 5 delves into topics like program parallelism with Web Workers and data parallelism with SIMD, as well as low-level optimization techniques like ASM.js. Chapter 6 takes a look at performance optimization from the perspective of proper benchmarking techniques, including what kinds of performance to worry about and what to ignore.）
 
-承诺是围绕“未来价值”，它可以让你推理，也不管是否值已准备就绪或尚未撰写他们与时间无关包装。此外，他们有效地通过一个可信和可组合的承诺机制路由回调解决了国际奥委会的信任问题。
+编写高效的JavaScript意味着编写可以打破在广泛的浏览器和其他环境中动态运行的限制的代码。这需要大量复杂和详细的计划，以及我们自身的努力，将程序从“它能运行”进阶成“它能很好的运行”。（原句：Writing JavaScript effectively means writing code that can break the constraint barriers of being run dynamically in a wide range of browsers and other environments. It requires a lot of intricate and detailed planning and effort on our parts to take a program from "it works" to "it works well."）
 
-Generators introduce a new mode of execution for JS functions, whereby the generator can be paused at `yield` points and be resumed asynchronously later. The pause-and-resume capability enables synchronous, sequential looking code in the generator to be processed asynchronously behind the scenes. By doing so, we address the non-linear, non-local-jump confusions of callbacks and thereby make our asynchronous code sync-looking so as to be more reason-able.
-
-But it's the combination of promises and generators that "yields" our most effective asynchronous coding pattern to date in JavaScript. In fact, much of the future sophistication of asynchrony coming in ES7 and later will certainly be built on this foundation. To be serious about programming effectively in an async world, you're going to need to get really comfortable with combining promises and generators.
-
-If promises and generators are about expressing patterns that let our programs run more concurrently and thus get more processing accomplished in a shorter period, JS has many other facets of performance optimization worth exploring.
-
-Chapter 5 delves into topics like program parallelism with Web Workers and data parallelism with SIMD, as well as low-level optimization techniques like ASM.js. Chapter 6 takes a look at performance optimization from the perspective of proper benchmarking techniques, including what kinds of performance to worry about and what to ignore.
-
-Writing JavaScript effectively means writing code that can break the constraint barriers of being run dynamically in a wide range of browsers and other environments. It requires a lot of intricate and detailed planning and effort on our parts to take a program from "it works" to "it works well."
-
-The *Async & Performance* title is designed to give you all the tools and skills you need to write reasonable and performant JavaScript code.
-
-发电机引入执行的JS功能，从而产生可以在`yield`点被暂停和异步后来恢复的新模式。暂停-和恢复能力可在发电机同步，顺序看代码以异步方式在幕后进行处理。通过这样做，我们处理回调的非线性，非本地跳混乱，从而使我们的异步代码同步寻找以便更多的理由，能。
-
-但它的承诺和发电机的“产量”我们最有效的异步编码图案迄今为止在JavaScript中的组合。事实上，大部分的非同步ES7未来的未来复杂的和以后肯定会建立在这个基础。要认真对待异步的世界有效编程，你将需要得到相结合的承诺和发电机真的很舒服。
-
-如果承诺和发电机大约表达模式，让我们的节目更同时运行，从而获得更多的处理在更短的时间完成的，JS具有性能优化值得探讨的许多其他方面。
-
-第5章深入研究了像网络工作者和SIMD数据并行，以及低级别的优化技术，如ASM.js.程序的并行主题第6章看一看在性能优化，从适当的基准测试技术，包括担心什么样的性能问题以及忽略的视角。
-
-编写JavaScript实际上意味着编写代码，可以打破在广泛的浏览器和其他环境的动态中运行的制约障碍。这需要大量的对我们的零件复杂和详细的规划和努力，采取程序从“工作原理”到“它工作得很好。”
-
-在*异步与性能*标题的目的是让你所有你需要编写合理，高性能JavaScript代码的工具和技能。
+“**异步和性能**”这本书提供了所有的工具和技能让你编写合理的、高性能的JavaScript代码。
 
 ## ES6及展望
 
