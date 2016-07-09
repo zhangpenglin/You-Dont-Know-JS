@@ -21,8 +21,9 @@
 
 * ch1.md翻译完成
 * ch2.md翻译完成
-* ch3.md正在翻译
+* ch3.md翻译完成
 * apA.md翻译完成
+* foreword.md正在翻译
 
 # 翻译错误
 

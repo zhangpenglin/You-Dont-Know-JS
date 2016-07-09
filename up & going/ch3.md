@@ -57,7 +57,7 @@ JS引擎在执行之前会立即编译你的代码（有些引擎会在执行时
 
 这个系列的前三本书的内容都集中在语言的核心机制，但是第四本书稍微分支出来讲解语言机制的顶层模式：管理异步编程。异步不仅是程序性能的关键，也日益成为在可写性和可维护性上的关键因素。（原句：The first three titles of this series focus on the core mechanics of the language, but the fourth title branches out slightly to cover patterns on top of the language mechanics for managing asynchronous programming. Asynchrony is not only critical to the performance of our applications, it's increasingly becoming *the* critical factor in writability and maintainability.）
 
-书中首先开始通过清楚很多关于异步编程的术语和容易混淆的概念，如“异步”、“并行”和“并发”，并且深入解释了这样的事情如何做，哪些不适用于JS。（原句：The book starts first by clearing up a lot of terminology and concept confusion around things like "async," "parallel," and "concurrent," and explains in depth how such things do and do not apply to JS.）
+书中首先开始通过理清很多关于异步编程的术语和容易混淆的概念，如“异步”、“并行”和“并发”，并且深入解释了这样的事情如何做，哪些不适用于JS。（原句：The book starts first by clearing up a lot of terminology and concept confusion around things like "async," "parallel," and "concurrent," and explains in depth how such things do and do not apply to JS.）
 
 然后，我们讲解使异步成为可能的主要方法回调。但就是在这里，我们看到只有回调是不够的，它很难满足现代异步编程的需求。我们看到只有回调的代码的两个重大缺陷：**控制反转**（IoC，*Inversion of Control*）的不靠谱和缺乏线性编码能力。（原句：Then we move into examining callbacks as the primary method of enabling asynchrony. But it's here that we quickly see that the callback alone is hopelessly insufficient for the modern demands of asynchronous programming. We identify two major deficiencies of callbacks-only coding: *Inversion of Control* (IoC) trust loss and lack of linear reason-ability.）
 
@@ -77,50 +77,28 @@ Generators为JS函数引入一种新的执行模式，它在`yield`点可以被�
 
 “**异步和性能**”这本书提供了所有的工具和技能让你编写合理的、高性能的JavaScript代码。
 
-## ES6及展望
+## 超越ES6
 
-No matter how much you feel you've mastered JavaScript to this point, the truth is that JavaScript is never going to stop evolving, and moreover, the rate of evolution is increasing rapidly. This fact is almost a metaphor for the spirit of this series, to embrace that we'll never fully *know* every part of JS, because as soon as you master it all, there's going to be new stuff coming down the line that you'll need to learn.
+目前为止，不管你觉得自己已经掌握了JavaScript，事实是JavaScript是永远不会停止进化，而且，进化的速度变得更快了。这一事实也是这个系列的精神隐喻，拥抱我们永远不会完全**知道**JS的每一个部分这个事实，因为当你掌握了一切的时候，马上就会有新的东西出现，你又需要继续学习。
 
-This title is dedicated to both the short- and mid-term visions of where the language is headed, not just the *known* stuff like ES6 but the *likely* stuff beyond.
+这个标题暗指这门语言短期和中期的发展远景，不仅仅是ES6中我们所知道的，也超越了当前的东西。（翻译不来，原句：This title is dedicated to both the short- and mid-term visions of where the language is headed, not just the *known* stuff like ES6 but the *likely* stuff beyond.）
 
-While all the titles of this series embrace the state of JavaScript at the time of this writing, which is mid-way through ES6 adoption, the primary focus in the series has been more on ES5. Now, we want to turn our attention to ES6, ES7, and ...
+这一系列的书籍都是在拥抱书写本书时候JavaScript当前的状态，而ES6是中途加进来的，所以你会发现本系列的书主要还是集中在ES5上。现在，我希望把我们的注意力集中在ES6，ES7.....
 
-Since ES6 is nearly complete at the time of this writing, *ES6 & Beyond* starts by dividing up the concrete stuff from the ES6 landscape into several key categories, including new syntax, new data structures (collections), and new processing capabilities and APIs. We cover each of these new ES6 features, in varying levels of detail, including reviewing details that are touched on in other books of this series.
+在写这篇文章的时候，ES6基本快完成了，**超越ES6**一书从ES6的视角将具体的东西分成几个主要的类别，其中包括新的语法，新的数据结构（集合），和新的处理功能和API。我们会在不同级别的细节上覆盖这些ES6新特性，包括重新审查我们已经在本系列其他书中提到的细节。
 
-不管你多么觉得自己已经掌握的JavaScript这一点，事实是，JavaScript是永远不会停止进化，而且，进化的速度迅速增加。这一事实几乎是这个系列的精神隐喻，拥抱，我们永远不会完全*知道* JS的每一个部分，因为只要你掌握了这一切，也将是未来的路线新的东西，你“会需要学习。
+以下是一些ES6值得让我们兴奋的东西：destructuring（解构）, default parameter values（函数默认值）, symbols（符号）, concise methods, computed properties（计算属性）, arrow functions, block scoping（块作用域）, promises, generators, iterators, modules, proxies, weakmaps以及很多很多其他特性！Phew, ES6 packs quite a punch！（大概表达的意思就是ES6真他妈的棒！）
 
-这个称号是专门为那里的语言为首的短期和中期愿景，不只是* *闻名的东西，如ES6但* *可能超越的东西。
+本书第一部分是你所需要学习在未来几年中你将要编写和探索的新的和改进的JavaScript的所有东西的路线图。（真的很绕口啊，原句：The first part of the book is a roadmap for all the stuff you need to learn to get ready for the new and improved JavaScript you'll be writing and exploring over the next couple of years.）
 
-虽然这一系列的所有冠军揽在写这篇文章，这是中途通过ES6通过时的JavaScript的状态，在该系列的主要焦点已经更多的ES5。现在，我们希望把我们的注意ES6，ES7，并...
+本书后半部分将注意力放在我们希望在不久的将来能在JavaScript中看到的东西。这里最重要的认识是，后ES6时代，JS更可能是根据功能来更新，而不是单纯根据版本来更新，这意味着我们期望在不就的未来可以看到的东西可能比你想象的来得更快。
 
-由于ES6是在写这篇文章的时候几乎完全，* ES6＆Beyond的*开始被瓜分从ES6景观的具体的东西分成几个主要类别，其中包括新的语法，新的数据结构（集合），以及新的处理功能和API 。我们互相覆盖这些新ES6的特性，在不同级别的细节，包括在这一系列的其他书籍触及审查的细节。
-
-Some exciting ES6 things to look forward to reading about: destructuring, default parameter values, symbols, concise methods, computed properties, arrow functions, block scoping, promises, generators, iterators, modules, proxies, weakmaps, and much, much more! Phew, ES6 packs quite a punch!
-
-The first part of the book is a roadmap for all the stuff you need to learn to get ready for the new and improved JavaScript you'll be writing and exploring over the next couple of years.
-
-The latter part of the book turns attention to briefly glance at things that we can likely expect to see in the near future of JavaScript. The most important realization here is that post-ES6, JS is likely going to evolve feature by feature rather than version by version, which means we can expect to see these near-future things coming much sooner than you might imagine.
-
-The future for JavaScript is bright. Isn't it time we start learning it!?
-
-一些令人兴奋的事情ES6期待念叨：解构，默认参数值，符号，简洁的方法，计算性能，箭头功能块作用域，承诺，发电机，迭代器，模块，代理，weakmaps，和很多很多！呼，包ES6相当一记重拳！
-
-本书的第一部分是你需要学习做好准备为你编写和探索，在未来几年新的和改进的JavaScript的所有东西的路线图。
-
-本书的后半部分的东西，我们可以预计可能在JavaScript中的不久的将来看到注意力转向短暂的一瞥。这里最重要的认识是，后ES6，JS很可能将通过功能，而不是通过版本版本进化功能，这意味着我们可以期待看到这些近未来东西进来更快比你想象。
-
-未来针对JavaScript是光明的。是不是时候，我们开始学习吧！？
+JavaScript的未来是光明的，是时候开始学习它了！
 
 ## 总结
 
-The *YDKJS* series is dedicated to the proposition that all JS developers can and should learn all of the parts of this great language. No person's opinion, no framework's assumptions, and no project's deadline should be the excuse for why you never learn and deeply understand JavaScript.
+**YDKJS**系列坚持认为所有的JS开发者可以并且应该学习这门伟大语言的所有部分。不用管别人的意见，不用管框架的假设，不用管项目的最后期限，这些都不应该成为你从来不学习和深入理解JavaScript的借口。
 
-We take each important area of focus in the language and dedicate a short but very dense book to fully explore all the parts of it that you perhaps thought you knew but probably didn't fully.
+我们在语言的各重要领域贡献一本短小精悍的书，充分发掘你认为你已经知道的，但可能没有充分理解的所有部分。
 
-"You Don't Know JS" isn't a criticism or an insult. It's a realization that all of us, myself included, must come to terms with. Learning JavaScript isn't an end goal but a process. We don't know JavaScript, yet. But we will!
-
-在* YDKJS*系列是献给所有JS开发人员可以和应该学习这一切伟大的语言部分的命题。任何人的意见，没有任何框架的假设，并没有项目的最后期限应该是为什么你从来没有学习和深刻理解JavaScript的借口。
-
-我们采取集中各重要领域的语言和奉献一个简短但非常密集的书，充分发掘你也许以为你知道的，但可能没有充分的所有部分。
-
-“你不知道JS”是不是批评或侮辱。这是一个认识到我们所有的人，包括我自己，一定要来的条款。学习JavaScript是不是最终目标，而是一个过程。我们不知道的JavaScript，但。但我们会！
+“**You Don't Know JS**”并不是批评或侮辱（在座的各位）。这是我们所有人，包括我自己，一定要意识到的东西。学习JavaScript并不是最终目标，而是一个过程。我们现在不知道的JavaScript，在不远的未来我们肯定会知道！

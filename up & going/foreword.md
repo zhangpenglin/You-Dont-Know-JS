@@ -1,9 +1,13 @@
 # 你不知道的JavaScript: Up & Going
 # 前言
 
-What was the last new thing you learned?
+你最近学了什么新东西？
 
 Perhaps it was a foreign language, like Italian or German. Or maybe it was a graphics editor, like Photoshop. Or a cooking technique or woodworking or an exercise routine. I want you to remember that feeling when you finally got it: the lightbulb moment. When things went from blurry to crystal clear, as you mastered the table saw or understood the difference between masculine and feminine nouns in French. How did it feel? Pretty amazing, right?
+
+也许是一门外语，像意大利语或德语。也许是一个图形编辑器，路Photoshop。也许是烹饪技术或木工或例行演习。
+
+我希望你能记住的感觉，当你终于得到了它：灯泡的时刻。当事情从模糊到晶莹剔透的，因为你掌握了台锯或理解法国男性和女性的名词的区别。感觉如何？相当惊人的，对不对？
 
 Now I want you to travel back a little bit further in your memory to right before you learned your new skill. How did *that* feel? Probably slightly intimidating and maybe a little bit frustrating, right? At one point, we all did not know the things that we know now and that’s totally OK; we all start somewhere. Learning new material is an exciting adventure, especially if you are looking to learn the subject efficiently.
 
