@@ -1,21 +1,21 @@
-# You Don't Know JS: Types & Grammar
-# Chapter 1: Types
+# 你不知道的JavaScript: 类型和语法
+# Chapter 1: 类型
 
-Most developers would say that a dynamic language (like JS) does not have *types*. Let's see what the ES5.1 specification (http://www.ecma-international.org/ecma-262/5.1/) has to say on the topic:
+大多数开发者会说，动态语言（如JS）没有**类型**。让我们来看看ES5.1规范 (http://www.ecma-international.org/ecma-262/5.1/) 中关于这个话题的解释：
 
-> Algorithms within this specification manipulate values each of which has an associated type. The possible value types are exactly those defined in this clause. Types are further sub classified into ECMAScript language types and specification types.
+> Algorithms within this specification manipulate values each of which has an associated type. The possible value types are exactly those defined in this clause. Types are further sub classified into ECMAScript language types and specification types.（本说明书中的算法操作中的每个值都有一个与之关联的类型。本节定义了所有的值类型。类型进一步细分为ECMAScript语言类型和规范类型。）
 >
-> An ECMAScript language type corresponds to values that are directly manipulated by an ECMAScript programmer using the ECMAScript language. The ECMAScript language types are Undefined, Null, Boolean, String, Number, and Object.
+> An ECMAScript language type corresponds to values that are directly manipulated by an ECMAScript programmer using the ECMAScript language. The ECMAScript language types are Undefined, Null, Boolean, String, Number, and Object.（ECMAScript语言的类型直接对应到使用ECMAScript语言的程序员操作的值。ECMAScript语言的类型有Undefined，Null，Boolean，String，Number，and Object。）
 
-Now, if you're a fan of strongly typed (statically typed) languages, you may object to this usage of the word "type." In those languages, "type" means a whole lot *more* than it does here in JS.
+如果你是强类型（静态类型）语言的拥泵，你可能会反对单词“类型”的这种用法。在这些语言中，“类型”的含义比在JS中意味着更多（原句：In those languages, "type" means a whole lot *more* than it does here in JS）。
 
-Some people say JS shouldn't claim to have "types," and they should instead be called "tags" or perhaps "subtypes".
+有些人认为JS不应该声称有“类型”，它们应该被称作“标签”或“子类型”。
 
-Bah! We're going to use this rough definition (the same one that seems to drive the wording of the spec): a *type* is an intrinsic, built-in set of characteristics that uniquely identifies the behavior of a particular value and distinguishes it from other values, both to the engine **and to the developer**.
+呸！我们将使用这种粗糙的定义（似乎和规范的提法是同一个）：**类型**是固有的，内置的一套特征，唯一标识一个特定值的行为并告诉**JS引擎**和**开发者**将它和其他值区分开。（原句：Bah! We're going to use this rough definition (the same one that seems to drive the wording of the spec): a *type* is an intrinsic, built-in set of characteristics that uniquely identifies the behavior of a particular value and distinguishes it from other values, both to the **engine** and to the **developer**.）
 
-In other words, if both the engine and the developer treat value `42` (the number) differently than they treat value `"42"` (the string), then those two values have different *types* -- `number` and `string`, respectively. When you use `42`, you are *intending* to do something numeric, like math. But when you use `"42"`, you are *intending* to do something string'ish, like outputting to the page, etc. **These two values have different types.**
+换句话说，如果引擎和开发者对待`42`（数字）不同于他们对待`"42"`（字符串），则这两个值的**类型**就不同——分别是`number`类型和`string`类型。当你使用`42`，你可能**打算**做一些数值操作，如数学计算。但是当你使用`"42"`，你**打算**做一些字符串操作，如输出到页面等。**这两个值就有不同的类型。**
 
-That's by no means a perfect definition. But it's good enough for this discussion. And it's consistent with how JS describes itself.
+这决不是一个完美的定义。但它的这种讨论已经足够了，并且它和JS如何描述自己保持一致。
 
 # A Type By Any Other Name...
 
