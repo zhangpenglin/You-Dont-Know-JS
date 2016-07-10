@@ -19,16 +19,16 @@
 
 ### Up & Going
 
-* foreword.md正在翻译
-* ch1.md将要翻译
+* foreword.md翻译完成
+* ch1.md正在翻译
 * ch2.md将要翻译
 * ch3.md将要翻译
 * ch4.md将要翻译
 * ch5.md将要翻译
 * apA.md将要翻译
-* apB.md将要翻译
-* toc.md将要翻译
-* README.md将要翻译
+* apB.md翻译完成
+* toc.md正在翻译
+* README.md翻译完成
 
 
 # 翻译错误

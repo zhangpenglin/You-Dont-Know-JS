@@ -1,32 +1,32 @@
-# You Don't Know JS: Types & Grammar
+# 你不知道的JavaScript: 类型和语法
 
-## Table of Contents
+## 目录
 
-* Foreword
-* Preface
-* Chapter 1: Types
+* 前言
+* 序
+* 第一章：类型
 	* A Type By Any Other Name...
 	* Built-in Types
 	* Values as Types
-* Chapter 2: Values
+* 第二章：值
 	* Arrays
 	* Strings
 	* Numbers
 	* Special Values
 	* Value vs Reference
-* Chapter 3: Natives
+* 第三章：本地类型
 	* Internal `[[Class]]`
 	* Boxing Wrappers
 	* Unboxing
 	* Natives as Constructors
-* Chapter 4: Coercion
+* 第四章：强制转换
 	* Converting Values
 	* Abstract Value Operations
 	* Explicit Coercion
 	* Implicit Coercion
 	* Loose Equals vs Strict Equals
 	* Abstract Relational Comparison
-* Chapter 5: Grammar
+* 第五章：语法
 	* Statements & Expressions
 	* Operator Precedence
 	* Automatic Semicolons
@@ -34,6 +34,6 @@
 	* Function Arguments
 	* `try..finally`
 	* `switch`
-* Appendix A: Mixed Environment JavaScript
-* Appendix B: Acknowledgments
+* 附录A：混合环境中的JavaScript
+* 附录B：致谢
 

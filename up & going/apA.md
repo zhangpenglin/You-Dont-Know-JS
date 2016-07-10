@@ -7,7 +7,7 @@
 
 我还要感谢我在O'Reilly的编辑Simon St.Laurent和Brian MacDonald，以及全体编辑和营销人员。与他们共事真是太棒了，他们在“开源”图书写作、编辑和出版的这次尝试过程中对我无比包容。
 
-感谢在该系列书编写过程提出修改建议和帮忙纠错的朋友，他们的贡献令本书增色不少，这些人包括但不限于Shelley Powers, Tim Ferro, Evan Borden, Forrest L. Norvell, Jennifer Davis, Jesse Harlin, Kris Kowal, Rick Waldron, Jordan Harband, Benjamin Gruenbaum, Vyacheslav Egorov, David Nolen。感谢Jenn Lukas为本书第一部分“作用域和闭包”作序，写得很棒。
+感谢在该系列书编写过程提出修改建议和帮忙纠错的朋友，他们的贡献令本书增色不少，这些人包括但不限于Shelley Powers, Tim Ferro, Evan Borden, Forrest L. Norvell, Jennifer Davis, Jesse Harlin, Kris Kowal, Rick Waldron, Jordan Harband, Benjamin Gruenbaum, Vyacheslav Egorov, David Nolen。感谢Jenn Lukas为本书“up & going”作序，写得很棒。
 
 感谢社区中的所有人，包括TC39委员会的成员，他们分享了许多知识并且一直耐心而且细致地回答我接连不断的问题。这些人包括但不限于John-David Dalton, Juriy "kangax" Zaytsev, Mathias Bynens, Axel Rauschmayer, Nicholas Zakas, Angus Croll, Reginald Braithwaite, Dave Herman, Brendan Eich, Allen Wirfs-Brock, Bradley Meck, Domenic Denicola, David Walsh, Tim Disney, Peter van der Zee, Andrea Giammarchi, Kit Cambridge, Eric Elliott以及其他人，原谅我无法在这里一一列出。
 

@@ -1,11 +1,11 @@
-# 你不知道的JavaScript：类型和语法
-# 第二章：Values
+# You Don't Know JS: Types & Grammar
+# Chapter 2: Values
 
 `array`s, `string`s, and `number`s are the most basic building-blocks of any program, but JavaScript has some unique characteristics with these types that may either delight or confound you.
 
 Let's look at several of the built-in value types in JS, and explore how we can more fully understand and correctly leverage their behaviors.
 
-## 数组
+## Arrays
 
 As compared to other type-enforced languages, JavaScript `array`s are just containers for any type of value, from `string` to `number` to `object` to even another `array` (which is how you get multidimensional `array`s).
 
@@ -31,7 +31,7 @@ a[2] = [ 3 ];
 a.length;	// 3
 ```
 
-**警告：** Using `delete` on an `array` value will remove that slot from the `array`, but even if you remove the final element, it does **not** update the `length` property, so be careful! We'll cover the `delete` operator itself in more detail in Chapter 5.
+**Warning:** Using `delete` on an `array` value will remove that slot from the `array`, but even if you remove the final element, it does **not** update the `length` property, so be careful! We'll cover the `delete` operator itself in more detail in Chapter 5.
 
 Be careful about creating "sparse" `array`s (leaving or creating empty/missing slots):
 
@@ -63,7 +63,6 @@ a.foobar;		// 2
 ```
 
 However, a gotcha to be aware of is that if a `string` value intended as a key can be coerced to a standard base-10 `number`, then it is assumed that you wanted to use it as a `number` index rather than as a `string` key!
-然而，你需要特别注意的是，如果你将一个字符串类型的数字作为key传入数组，它会被强制转换为十进制的`number`类型，然后它认为你想要用数字下标而不是字符串键。
 
 ```js
 var a = [ ];

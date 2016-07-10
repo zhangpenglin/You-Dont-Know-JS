@@ -1,5 +1,5 @@
-# 你不知道的JavaScript：类型和语法
-# 第一章：类型
+# You Don't Know JS: Types & Grammar
+# Chapter 1: Types
 
 Most developers would say that a dynamic language (like JS) does not have *types*. Let's see what the ES5.1 specification (http://www.ecma-international.org/ecma-262/5.1/) has to say on the topic:
 
@@ -33,9 +33,9 @@ Coercion confusion is perhaps one of the most profound frustrations for JavaScri
 
 Armed with a full understanding of JavaScript types, we're aiming to illustrate why coercion's *bad reputation* is largely overhyped and somewhat undeserved -- to flip your perspective, to seeing coercion's power and usefulness. But first, we have to get a much better grip on values and types.
 
-## 内置类型
+## Built-in Types
 
-JavaScript 定义了七种内置类型
+JavaScript defines seven built-in types:
 
 * `null`
 * `undefined`
@@ -45,7 +45,7 @@ JavaScript 定义了七种内置类型
 * `object`
 * `symbol` -- added in ES6!
 
-**注意:** 除了`object`类型，其他类型都叫“基本类型”。
+**Note:** All of these types except `object` are called "primitives".
 
 The `typeof` operator inspects the type of the given value, and always returns one of seven string values -- surprisingly, there's not an exact 1-to-1 match with the seven built-in types we just listed.
 
@@ -62,7 +62,7 @@ typeof Symbol()      === "symbol";    // true
 
 These six listed types have values of the corresponding type and return a string value of the same name, as shown. `Symbol` is a new data type as of ES6, and will be covered in Chapter 3.
 
-As you may have noticed, I excluded `null` from the above listing. It's *special* -- special in the sense that it's buggy(bug) when combined with the `typeof` operator:
+As you may have noticed, I excluded `null` from the above listing. It's *special* -- special in the sense that it's buggy when combined with the `typeof` operator:
 
 ```js
 typeof null === "object"; // true
@@ -70,7 +70,7 @@ typeof null === "object"; // true
 
 It would have been nice (and correct!) if it returned `"null"`, but this original bug in JS has persisted for nearly two decades, and will likely never be fixed because there's too much existing web content that relies on its buggy behavior that "fixing" the bug would *create* more "bugs" and break a lot of web software.
 
-If you want to test for a `null` value using its type, you need a compound(组合的) condition:
+If you want to test for a `null` value using its type, you need a compound condition:
 
 ```js
 var a = null;
