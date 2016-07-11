@@ -112,15 +112,15 @@ typeof [1,2,3] === "object"; // true
 
 不，它只是对象。数组拥有被数字索引的附加特性（相对于普通对象被字符串键索引）以及维护一个自动更新的`.length`属性，在这种情况下，把它当作对象的**子类型**是最合适的。
 
-## Values as Types
+## 值类型
 
-In JavaScript, variables don't have types -- **values have types**. Variables can hold any value, at any time.
+在JavaScript中，变量没有类型——**值才有类型**。变量可以在任何时间保存任何类型的值。
 
-Another way to think about JS types is that JS doesn't have "type enforcement," in that the engine doesn't insist that a *variable* always holds values of the *same initial type* that it starts out with. A variable can, in one assignment statement, hold a `string`, and in the next hold a `number`, and so on.
+从另外一个角度思考JS类型就是JS没有“类型强制访问控制”（type enforcement），表现在引擎并不要求一个**变量**始终保持它的初始化值的类型。变量可以在一个赋值语句中保存`string`类型的值，在下一个赋值语句中又保存`number`类型的值。
 
-The *value* `42` has an intrinsic type of `number`, and its *type* cannot be changed. Another value, like `"42"` with the `string` type, can be created *from* the `number` value `42` through a process called **coercion** (see Chapter 4).
+值`42`的类型是`number`，它的**类型**不能改变。另外一个值，比如`"42"`是`string`类型，它可以是`number`类型的值`42`通过**强制转换**产生的。（参见第四章）
 
-If you use `typeof` against a variable, it's not asking "what's the type of the variable?" as it may seem, since JS variables have no types. Instead, it's asking "what's the type of the value *in* the variable?"
+如果你对一个变量使用`typeof`，它并不是在问“这个变量是什么类型？”，尽管它看起来像，因为JS变量并没有类型。相反，它是在问：“变量**里面的值**是什么类型？”
 
 ```js
 var a = 42;
@@ -130,17 +130,17 @@ a = true;
 typeof a; // "boolean"
 ```
 
-The `typeof` operator always returns a string. So:
+`typeof`运算符始终返回一个字符串，所以：
 
 ```js
 typeof typeof 42; // "string"
 ```
 
-The first `typeof 42` returns `"number"`, and `typeof "number"` is `"string"`.
+第一个`typeof 42`返回`"number"`，而`typeof "number"`的结果是`"string"`。
 
-### `undefined` vs "undeclared"
+### `undefined`与`undeclared`
 
-Variables that have no value *currently*, actually have the `undefined` value. Calling `typeof` against such variables will return `"undefined"`:
+当前没有值的变量，实际上它们的值是`undefined`。对这些变量使用`typeof`会返回`"undefined"`：
 
 ```js
 var a;
@@ -157,11 +157,11 @@ typeof b; // "undefined"
 typeof c; // "undefined"
 ```
 
-It's tempting for most developers to think of the word "undefined" and think of it as a synonym for "undeclared." However, in JS, these two concepts are quite different.
+对大多数JS开发者来说，很容易认为单词`undefined`就是`undeclared`的代名词。然而，在JS中这两个概念是完全不同的。
 
-An "undefined" variable is one that has been declared in the accessible scope, but *at the moment* has no other value in it. By contrast, an "undeclared" variable is one that has not been formally declared in the accessible scope.
+一个`undefined`的变量是指在可访问作用域中声明了，但是在**当前**时间，变量里面没有存放值。相反，一个`undeclared`的变量是指在可访问作用域中没有声明的变量。
 
-Consider:
+考虑如下：
 
 ```js
 var a;
@@ -170,9 +170,9 @@ a; // undefined
 b; // ReferenceError: b is not defined
 ```
 
-An annoying confusion is the error message that browsers assign to this condition. As you can see, the message is "b is not defined," which is of course very easy and reasonable to confuse with "b is undefined." Yet again, "undefined" and "is not defined" are very different things. It'd be nice if the browsers said something like "b is not found" or "b is not declared," to reduce the confusion!
+最恼人的困惑是浏览器在这种情况下的给出的报错信息。如你所见，错误信息是“b is not defined”，这很容易也很合理的与“b is undefined”相混淆。再次强调，“undefined”和“is not defined”是很不同的事情。如果浏览器告诉我们的错误信息是“b is not found”或“b is not declared”，会减少很多的困惑！
 
-There's also a special behavior associated with `typeof` as it relates to undeclared variables that even further reinforces the confusion. Consider:
+`typeof`操作符有一个与未声明变量（undeclared variables）相关的特殊行为，这个特殊行为进一步加深了混乱。考虑如下：
 
 ```js
 var a;
@@ -182,11 +182,11 @@ typeof a; // "undefined"
 typeof b; // "undefined"
 ```
 
-The `typeof` operator returns `"undefined"` even for "undeclared" (or "not defined") variables. Notice that there was no error thrown when we executed `typeof b`, even though `b` is an undeclared variable. This is a special safety guard in the behavior of `typeof`.
+`typeof`运算符返回`"undefined"`，尽管这个变量是“undeclared”（或“not defined”，未定义的变量）。请注意，当我们执行`typeof b`的时候没有抛出任何错误，尽管`b`是一个未声明的变量。这是`typeof`的特殊安全保护机制造成的。
 
-Similar to above, it would have been nice if `typeof` used with an undeclared variable returned "undeclared" instead of conflating the result value with the different "undefined" case.
+如果`typeof`针对未声明的变量返回“undeclared”，而不是将两种完全不同情况混为一谈都返回“undefined”，这该多好啊！
 
-### `typeof` Undeclared
+### typeof undeclared
 
 Nevertheless, this safety guard is a useful feature when dealing with JavaScript in the browser, where multiple script files can load variables into the shared global namespace.
 
@@ -287,7 +287,7 @@ function doSomethingCool(FeatureXYZ) {
 
 There are lots of options when designing such functionality. No one pattern here is "correct" or "wrong" -- there are various tradeoffs to each approach. But overall, it's nice that the `typeof` undeclared safety guard gives us more options.
 
-## Review
+## 小结
 
 JavaScript has seven built-in *types*: `null`, `undefined`,  `boolean`, `number`, `string`, `object`, `symbol`. They can be identified by the `typeof` operator.
 

@@ -7,7 +7,7 @@
 * 第一章：类型
 	* A Type By Any Other Name...
 	* 内置类型
-	* Values as Types
+	* 值类型
 * 第二章：值
 	* Arrays
 	* Strings
