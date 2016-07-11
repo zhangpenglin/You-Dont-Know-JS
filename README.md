@@ -20,8 +20,8 @@
 ### Up & Going
 
 * foreword.md翻译完成
-* ch1.md正在翻译
-* ch2.md将要翻译
+* ch1.md翻译完成
+* ch2.md正在翻译
 * ch3.md将要翻译
 * ch4.md将要翻译
 * ch5.md将要翻译

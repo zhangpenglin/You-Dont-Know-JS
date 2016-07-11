@@ -188,13 +188,13 @@ typeof b; // "undefined"
 
 ### typeof undeclared
 
-Nevertheless, this safety guard is a useful feature when dealing with JavaScript in the browser, where multiple script files can load variables into the shared global namespace.
+然而，这种安全保护机制用在浏览器中处理多个脚本文件加载变量到共享的全局命名空间的时候，是一个有用的功能。（原句：Nevertheless, this safety guard is a useful feature when dealing with JavaScript in the browser, where multiple script files can load variables into the shared global namespace.）
 
-**Note:** Many developers believe there should never be any variables in the global namespace, and that everything should be contained in modules and private/separate namespaces. This is great in theory but nearly impossible in practicality; still it's a good goal to strive toward! Fortunately, ES6 added first-class support for modules, which will eventually make that much more practical.
+**注意：**许多开发者认为不应该在全局命名空间中声明变量，任何的这一切都应该被包含在模块或者私有空间中。在理论上来说这个想法非常伟大，但是实际上几乎不可能；但它仍然是一个很好的值得努力奋斗的目标！幸运的是，ES6非常好的支持了模块，它最终会变得更加的实用。
 
-As a simple example, imagine having a "debug mode" in your program that is controlled by a global variable (flag) called `DEBUG`. You'd want to check if that variable was declared before performing a debug task like logging a message to the console. A top-level global `var DEBUG = true` declaration would only be included in a "debug.js" file, which you only load into the browser when you're in development/testing, but not in production.
+举一个简单的例子，假设在你的程序中有“调试模式”，它被一个叫`DEBUG`的全局变量（也称为旗帜变量）控制着。在执行一个调试任务（如记录信息到控制台）之前，你可能要检查这个变量是否存在。全局变量声明`var DEBUG = true`只会存在于“debug.js”文件中，这个文件你只会在开发或测试的时候载入浏览器，在生产环境中就不会了。
 
-However, you have to take care in how you check for the global `DEBUG` variable in the rest of your application code, so that you don't throw a `ReferenceError`. The safety guard on `typeof` is our friend in this case.
+然而，在你的代码中检查全局变量`DEBUG`的时候要特别小心，防止它抛出`ReferenceError`。在这种情况下，`typeof`的安全防护机制就是我们的好朋友了：）
 
 ```js
 // oops, this would throw an error!
@@ -208,7 +208,7 @@ if (typeof DEBUG !== "undefined") {
 }
 ```
 
-This sort of check is useful even if you're not dealing with user-defined variables (like `DEBUG`). If you are doing a feature check for a built-in API, you may also find it helpful to check without throwing an error:
+即使你不处理用户定义的变量（如`DEBUG`），这种检查也是十分有用的。如果你正在做一个内置的API功能检查，你会发现用它来检查有助于防止抛出错误：
 
 ```js
 if (typeof atob === "undefined") {
@@ -216,9 +216,9 @@ if (typeof atob === "undefined") {
 }
 ```
 
-**Note:** If you're defining a "polyfill" for a feature if it doesn't already exist, you probably want to avoid using `var` to make the `atob` declaration. If you declare `var atob` inside the `if` statement, this declaration is hoisted (see the *Scope & Closures* title of this series) to the top of the scope, even if the `if` condition doesn't pass (because the global `atob` already exists!). In some browsers and for some special types of global built-in variables (often called "host objects"), this duplicate declaration may throw an error. Omitting the `var` prevents this hoisted declaration.
+**注意：**如果你正在为一个功能定义`polyfill`，如果它不存在，你可能想避免使用`var`声明`atob`。如果你在`if`语句中声明`var atob`，这个声明会被**提升**（参见本系列的**作用域和闭包**）到顶层作用域，即使`if`没有被执行（因为此时全局变量`atob`已经存在！）。在某些浏览器和一些特殊类型的全局内置变量（通常称为“宿主对象”，host objects），这种重复声明变量可能会抛出错误。省略`var`防止了这种变量**提升**。
 
-Another way of doing these checks against global variables but without the safety guard feature of `typeof` is to observe that all global variables are also properties of the global object, which in the browser is basically the `window` object. So, the above checks could have been done (quite safely) as:
+另一种不使用`typeof`安全保护功能来检查全局变量的方法是检测全局对象的属性（全局变量会作为属性挂载在一个全局对象），在浏览器中一般是`window`对象。因此，上述的检查也可以这么做（相当地安全）：
 
 ```js
 if (window.DEBUG) {
@@ -230,11 +230,11 @@ if (!window.atob) {
 }
 ```
 
-Unlike referencing undeclared variables, there is no `ReferenceError` thrown if you try to access an object property (even on the global `window` object) that doesn't exist.
+不像引用未声明的变量，如果你尝试访问对象的一个不存在的属性（即使是全局对象`window`），它不会抛出`ReferenceError`。
 
-On the other hand, manually referencing the global variable with a `window` reference is something some developers prefer to avoid, especially if your code needs to run in multiple JS environments (not just browsers, but server-side node.js, for instance), where the global variable may not always be called `window`.
+另一方面，一些开发者希望避免直接引用全局变量`window`，特别是当你的代码需要在多个JS环境中运行（不仅是浏览器，例如服务端的NodeJS），其中的全局变量的名称并不总叫`window`。
 
-Technically, this safety guard on `typeof` is useful even if you're not using global variables, though these circumstances are less common, and some developers may find this design approach less desirable. Imagine a utility function that you want others to copy-and-paste into their programs or modules, in which you want to check to see if the including program has defined a certain variable (so that you can use it) or not:
+从技术上讲，即使你不使用全局变量（虽然这些情况不太常见），`typeof`的安全保护机制也很有用，有些开发者可能发现这种设计方法不太理想。假设有一段代码（别人可以复制粘贴到自己的程序中）或模块，在这段代码中你想要检查某个特定变量是否被定义过（这样你就可以使用它）：
 
 ```js
 function doSomethingCool() {
@@ -248,7 +248,7 @@ function doSomethingCool() {
 }
 ```
 
-`doSomethingCool()` tests for a variable called `FeatureXYZ`, and if found, uses it, but if not, uses its own. Now, if someone includes this utility in their module/program, it safely checks if they've defined `FeatureXYZ` or not:
+`doSomethingCool()`函数中检查变量`FeatureXYZ`是否存在，如果存在，就用存在的那个函数；如果不存在，就用自己定义的。现在，如果有人将这个工具函数包含进自己的模块/程序中，就可以很安全的检测`FeatureXYZ`是否被定义过：
 
 ```js
 // an IIFE (see "Immediately Invoked Function Expressions"
@@ -271,9 +271,9 @@ function doSomethingCool() {
 })();
 ```
 
-Here, `FeatureXYZ` is not at all a global variable, but we're still using the safety guard of `typeof` to make it safe to check for. And importantly, here there is *no* object we can use (like we did for global variables with `window.___`) to make the check, so `typeof` is quite helpful.
+在这里，`FeatureXYZ`并不是全局变量，但是我们仍然可以使用`typeof`的安全保护机制来检测它是否安全可用。更重要的是，这里**没有**可用的对象（就像我们之间使用的全局变量`window.___`）来做检测，因此`typeof`是非常有帮助的。
 
-Other developers would prefer a design pattern called "dependency injection," where instead of `doSomethingCool()` inspecting implicitly for `FeatureXYZ` to be defined outside/around it, it would need to have the dependency explicitly passed in, like:
+其他的开发者可能更喜欢使用一种叫做“依赖注入”（dependency injection）的设计模式，不像`doSomethingCool()`需要隐式的检查`FeatureXYZ`是否在外部或周围定义过，它只需要明确的将这个依赖（作为参数）传递进来，如：
 
 ```js
 function doSomethingCool(FeatureXYZ) {
@@ -285,16 +285,16 @@ function doSomethingCool(FeatureXYZ) {
 }
 ```
 
-There are lots of options when designing such functionality. No one pattern here is "correct" or "wrong" -- there are various tradeoffs to each approach. But overall, it's nice that the `typeof` undeclared safety guard gives us more options.
+这里有很多的选项来设计这种功能。没有哪种模式是正确的或错误了——每种方法都需要权衡（there are various tradeoffs to each approach）。但总体来说，`typeof`的安全保护机制为我们提供了更多的选择。
 
 ## 小结
 
-JavaScript has seven built-in *types*: `null`, `undefined`,  `boolean`, `number`, `string`, `object`, `symbol`. They can be identified by the `typeof` operator.
+JavaScript有七个内置类型：`null`, `undefined`,  `boolean`, `number`, `string`, `object`, `symbol`。它们可以通过`typeof`操作符被标识。
 
-Variables don't have types, but the values in them do. These types define intrinsic behavior of the values.
+变量没有类型，但是变量里面的值有类型。这些类型定义了值的固有行为。
 
-Many developers will assume "undefined" and "undeclared" are roughly the same thing, but in JavaScript, they're quite different. `undefined` is a value that a declared variable can hold. "Undeclared" means a variable has never been declared.
+许多开发者认为“undefined”和“undeclared”是大致相同的事情，但是在JavaScript中，它们是完全不同的事情。`undefined`是指声明了一个可以存放值的变量，只是当前没有值。“Undeclared”则是指一个没有被声明的变量。
 
-JavaScript unfortunately kind of conflates these two terms, not only in its error messages ("ReferenceError: a is not defined") but also in the return values of `typeof`, which is `"undefined"` for both cases.
+很不幸的是JavaScript合并了这两个概念，不仅在错误信息（"ReferenceError: a is not defined"）上，而且在`typeof`的返回值上（都返回`"undefined"`）。
 
-However, the safety guard (preventing an error) on `typeof` when used against an undeclared variable can be helpful in certain cases.
+然而，`typeof`操作符的安全保护（防止错误被抛出）机制，在某些特定的情况下检测没有声明过的变量时很有帮助。
