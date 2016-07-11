@@ -6,7 +6,7 @@
 * 序
 * 第一章：类型
 	* A Type By Any Other Name...
-	* Built-in Types
+	* 内置类型
 	* Values as Types
 * 第二章：值
 	* Arrays

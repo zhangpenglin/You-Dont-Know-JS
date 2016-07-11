@@ -17,25 +17,25 @@
 
 这决不是一个完美的定义。但它的这种讨论已经足够了，并且它和JS如何描述自己保持一致。
 
-# A Type By Any Other Name...
+## A Type By Any Other Name...
 
-Beyond academic definition disagreements, why does it matter if JavaScript has *types* or not?
+除了学术定义的分歧，为什么JavaScript有没有**类型**很重要？
 
-Having a proper understanding of each *type* and its intrinsic behavior is absolutely essential to understanding how to properly and accurately convert values to different types (see Coercion, Chapter 4). Nearly every JS program ever written will need to handle value coercion in some shape or form, so it's important you do so responsibly and with confidence.
+正确理解每个**类型**和其内在的行为对于理解如何正确和准确地转换值到不同类型（参见第四章，强制转换）是必不可少的。几乎每个写过的JS程序在某个程度或形式上都要处理值的类型转换，因此带着责任心和信心去做这些事情是非常重要的。
 
-If you have the `number` value `42`, but you want to treat it like a `string`, such as pulling out the `"2"` as a character in position `1`, you obviously must first convert (coerce) the value from `number` to `string`.
+如果你有数字`42`，但是你想把它当作字符串来用，如将`"2"`从位置`1`拉出，很显然你必须先将数字（强制）转换成字符串。
 
-That seems simple enough.
+这似乎很简单。
 
-But there are many different ways that such coercion can happen. Some of these ways are explicit, easy to reason about, and reliable. But if you're not careful, coercion can happen in very strange and surprising ways.
+但有很多不同的方法，这种强制转换可能发生。有些方法是明确的，很容易推导，并且很可靠。但是如果你不小心的话，强制转换可能以一种很奇怪和令人惊讶的方式发生。
 
-Coercion confusion is perhaps one of the most profound frustrations for JavaScript developers. It has often been criticized as being so *dangerous* as to be considered a flaw in the design of the language, to be shunned and avoided.
+强制转换的困惑也许是JavaScript开发人员最深刻的挫折之一。它经常因为**危险**而被批评，甚至被认为是语言的设计缺陷，应该避而远之。
 
-Armed with a full understanding of JavaScript types, we're aiming to illustrate why coercion's *bad reputation* is largely overhyped and somewhat undeserved -- to flip your perspective, to seeing coercion's power and usefulness. But first, we have to get a much better grip on values and types.
+在你完全理解JavaScript类型之后，我们会说明，为什么强制转换的“坏名声”在很大程度上是言过其实，我们会翻转你的视角，看到强制转换的能力和用处。但是在此之前，我们首先要牢牢掌握值和类型的相关知识。
 
-## Built-in Types
+## 内置类型
 
-JavaScript defines seven built-in types:
+JavaScript定义了7种内置类型：
 
 * `null`
 * `undefined`
@@ -45,9 +45,9 @@ JavaScript defines seven built-in types:
 * `object`
 * `symbol` -- added in ES6!
 
-**Note:** All of these types except `object` are called "primitives".
+**注意：**所有这些类型除了`object`都被称为“原始类型”。
 
-The `typeof` operator inspects the type of the given value, and always returns one of seven string values -- surprisingly, there's not an exact 1-to-1 match with the seven built-in types we just listed.
+`typeof`操作符检测给定值的类型，并始终返回7个字符串之一——很奇怪吧，它并没有跟我们刚刚列出的7个内置类型一一对应。（译者注：作者的意思是举的例子只返回了六种类型，没有和上面列举的七种内置类型一一对应。剧透一下，这是为后面讲解`null`和`function`埋下伏笔。原句：The `typeof` operator inspects the type of the given value, and always returns one of seven string values -- surprisingly, there's not an exact 1-to-1 match with the seven built-in types we just listed.）
 
 ```js
 typeof undefined     === "undefined"; // true
@@ -60,17 +60,17 @@ typeof { life: 42 }  === "object";    // true
 typeof Symbol()      === "symbol";    // true
 ```
 
-These six listed types have values of the corresponding type and return a string value of the same name, as shown. `Symbol` is a new data type as of ES6, and will be covered in Chapter 3.
+如上所示，列出的6个类型都有相应的类型值，并返回一个与类型名同名的字符串。`Symbol`是ES6新增的数据类型，我们会在第三章讲解。
 
-As you may have noticed, I excluded `null` from the above listing. It's *special* -- special in the sense that it's buggy when combined with the `typeof` operator:
+你可能已经注意到了，我把`null`从上面清单中排除了。它很**特殊**——特别是当它和`typeof`运算符结合的时候，
 
 ```js
 typeof null === "object"; // true
 ```
 
-It would have been nice (and correct!) if it returned `"null"`, but this original bug in JS has persisted for nearly two decades, and will likely never be fixed because there's too much existing web content that relies on its buggy behavior that "fixing" the bug would *create* more "bugs" and break a lot of web software.
+如果它返回`"null"`就好了（给人感觉也是正确的！），但是JS这个原始的bug已经持续了将近20年，并且可能永远不会被修复，因为有太多的现存Web内容依赖这个bug的行为，如果修复了这个bug就会创建更多的bug，从而破坏很多的网络程序。
 
-If you want to test for a `null` value using its type, you need a compound condition:
+如果你想要用它的类型来检测`null`值，你需要一个复合条件判断：
 
 ```js
 var a = null;
@@ -78,17 +78,17 @@ var a = null;
 (!a && typeof a === "object"); // true
 ```
 
-`null` is the only primitive value that is "falsy" (aka false-like; see Chapter 4) but that also returns `"object"` from the `typeof` check.
+`null`是唯一一个既是“falsy”（假值，参见第四章）又在`typeof`检测下返回`"object"`的基本类型。
 
-So what's the seventh string value that `typeof` can return?
+那么`typeof`返回的第七个字符串是什么？
 
 ```js
 typeof function a(){ /* .. */ } === "function"; // true
 ```
 
-It's easy to think that `function` would be a top-level built-in type in JS, especially given this behavior of the `typeof` operator. However, if you read the spec, you'll see it's actually a "subtype" of object. Specifically, a function is referred to as a "callable object" -- an object that has an internal `[[Call]]` property that allows it to be invoked.
+我们很容易就想到`function`是JS中顶级的内置类型，特别是考虑到`typeof`操作符的这种行为。然而，如果你阅读了规范，你就会发现它其实是对象的一个“子类型”。具体来说，函数被称作是一个“可调用的对象”（callable object）——一个拥有内置属性`[[Call]]`的对象，允许它被调用。
 
-The fact that functions are actually objects is quite useful. Most importantly, they can have properties. For example:
+知道函数实际上是对象这个事实是非常有用的。最重要的是，你知道它们可以具有属性。例如：
 
 ```js
 function a(b,c) {
@@ -96,21 +96,21 @@ function a(b,c) {
 }
 ```
 
-The function object has a `length` property set to the number of formal parameters it is declared with.
+这个函数对象有一个`length`属性，它的值是函数声明时正式命名的参数的个数。
 
 ```js
 a.length; // 2
 ```
 
-Since you declared the function with two formal named parameters (`b` and `c`), the "length of the function" is `2`.
+既然你声明的这个函数有两个正式命名的参数（`b`和`c`），**函数的长度**（**length of the function**）就是`2`。
 
-What about arrays? They're native to JS, so are they a special type?
+那关于数组呢？它也是JS的原生类型，所以它也是一种特殊类型吗？
 
 ```js
 typeof [1,2,3] === "object"; // true
 ```
 
-Nope, just objects. It's most appropriate to think of them also as a "subtype" of object (see Chapter 3), in this case with the additional characteristics of being numerically indexed (as opposed to just being string-keyed like plain objects) and maintaining an automatically updated `.length` property.
+不，它只是对象。数组拥有被数字索引的附加特性（相对于普通对象被字符串键索引）以及维护一个自动更新的`.length`属性，在这种情况下，把它当作对象的**子类型**是最合适的。
 
 ## Values as Types
 
