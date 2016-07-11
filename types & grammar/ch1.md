@@ -1,5 +1,5 @@
 # 你不知道的JavaScript: 类型和语法
-# Chapter 1: 类型
+# 第一章: 类型
 
 大多数开发者会说，动态语言（如JS）没有**类型**。让我们来看看ES5.1规范 (http://www.ecma-international.org/ecma-262/5.1/) 中关于这个话题的解释：
 

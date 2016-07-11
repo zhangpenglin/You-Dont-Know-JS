@@ -1,5 +1,5 @@
-# You Don't Know JS: Types & Grammar
-# Chapter 4: Coercion
+# 你不知道的JavaScript: 类型和语法
+# 第四章：强制转换
 
 Now that we much more fully understand JavaScript's types and values, we turn our attention to a very controversial topic: coercion.
 

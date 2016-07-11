@@ -1,5 +1,5 @@
-# You Don't Know JS: Types & Grammar
-# Chapter 5: Grammar
+# 你不知道的JavaScript: 类型和语法
+# 第五章：语法
 
 The last major topic we want to tackle is how JavaScript's language syntax works (aka its grammar). You may think you know how to write JS, but there's an awful lot of nuance to various parts of the language grammar that lead to confusion and misconception, so we want to dive into those parts and clear some things up.
 

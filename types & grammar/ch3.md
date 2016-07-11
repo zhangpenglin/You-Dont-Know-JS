@@ -1,5 +1,5 @@
-# You Don't Know JS: Types & Grammar
-# Chapter 3: Natives
+# 你不知道的JavaScript: 类型和语法
+# 第三章：本地类型
 
 Several times in Chapters 1 and 2, we alluded to various built-ins, usually called "natives," like `String` and `Number`. Let's examine those in detail now.
 
