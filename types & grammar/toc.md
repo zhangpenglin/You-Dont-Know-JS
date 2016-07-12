@@ -9,7 +9,7 @@
 	* 内置类型
 	* 值类型
 * 第二章：值
-	* Arrays
+	* 数组
 	* Strings
 	* Numbers
 	* Special Values
