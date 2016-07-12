@@ -210,15 +210,15 @@ c; // "oof"
 
 另一种解决方法是：如果你经常把你的字符串当作字符数组来使用，那你最好直接把它存入数组而不是字符串中。这样你就没必要每次都将字符串转换为数组。当你真正需要字符串表示时，你可以调用数组的`join("")`方法。
 
-## Numbers
+## 数字
 
-JavaScript has just one numeric type: `number`. This type includes both "integer" values and fractional decimal numbers. I say "integer" in quotes because it's long been a criticism of JS that there are not true integers, as there are in other languages. That may change at some point in the future, but for now, we just have `number`s for everything.
+JavaScript只有一个数值类型：`number`。这个类型包括十进制“整数”和小数。我用引号引起“整数”，是因为在JS中没有真正的整数，而其他语言中有。未来可能会改变，但现在，我们只有`number`类型。
 
-So, in JS, an "integer" is just a value that has no fractional decimal value. That is, `42.0` is as much an "integer" as `42`.
+所以在JS中，一个“整数”就是没有小数的十进制数字。也就是说，`42.0`和“整数”`42`是等价的。
 
-Like most modern languages, including practically all scripting languages, the implementation of JavaScript's `number`s is based on the "IEEE 754" standard, often called "floating-point." JavaScript specifically uses the "double precision" format (aka "64-bit binary") of the standard.
+像大多数现代语言，包括几乎所有的脚本语言，JavaScript的`number`是基于“IEEE 754”标准实现的，通常称为“浮点数”。JavaScript具体使用标准的“双精度”格式（又名“64位二进制”）。
 
-There are many great write-ups on the Web about the nitty-gritty details of how binary floating-point numbers are stored in memory, and the implications of those choices. Because understanding bit patterns in memory is not strictly necessary to understand how to correctly use `number`s in JS, we'll leave it as an exercise for the interested reader if you'd like to dig further into IEEE 754 details.
+在网上有许多有关二进制浮点数是如何在内存中存储以及各种选项带来的影响的讨论。因为了解内存位模式对于如何在JS中正确使用`number`并非绝对必要，我们把它作为一个练习，有兴趣的读者可以进一步深入IEEE 754的细节。（原句：There are many great write-ups on the Web about the nitty-gritty details of how binary floating-point numbers are stored in memory, and the implications of those choices. Because understanding bit patterns in memory is not strictly necessary to understand how to correctly use `number`s in JS, we'll leave it as an exercise for the interested reader if you'd like to dig further into IEEE 754 details.）
 
 ### Numeric Syntax
 

@@ -11,7 +11,7 @@
 * 第二章：值
 	* 数组
 	* 字符串
-	* Numbers
+	* 数字
 	* Special Values
 	* Value vs Reference
 * 第三章：本地类型
