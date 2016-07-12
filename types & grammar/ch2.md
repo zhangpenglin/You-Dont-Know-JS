@@ -104,18 +104,18 @@ var arr = Array.from( arguments );
 
 **注意：**`Array.from(..)`有几个强大的功能，在本系列标题为“超越ES6”中会讲解更多的细节。
 
-## Strings
+## 字符串
 
-It's a very common belief that `string`s are essentially just `array`s of characters. While the implementation under the covers may or may not use `array`s, it's important to realize that JavaScript `string`s are really not the same as `array`s of characters. The similarity is mostly just skin-deep.
+大家普遍认为字符串其实就是字符数组。但是其底层实现可能使用或不使用数组，我们需要认识到JavaScript中的字符串与字符数组是不一样的。它们仅仅是表面上相似。
 
-For example, let's consider these two values:
+例如，让我们考虑下面两个值：
 
 ```js
 var a = "foo";
 var b = ["f","o","o"];
 ```
 
-Strings do have a shallow resemblance to `array`s -- `array`-likes, as above -- for instance, both of them having a `length` property, an `indexOf(..)` method (`array` version only as of ES5), and a `concat(..)` method:
+字符串确实跟数组很相似（但那仅仅是表面上相似，你可以把它理解为我们上面提到过的类数组对象），例如，它们都有`length`属性，`indexOf(..)`方法（数组是在ES5才有的）和`concat(..)`方法：
 
 ```js
 a.length;							// 3
@@ -134,7 +134,7 @@ a;									// "foo"
 b;									// ["f","o","o"]
 ```
 
-So, they're both basically just "arrays of characters", right? **Not exactly**:
+因此它俩基本上就是“字符数组”，对吗？**不完全是**：
 
 ```js
 a[1] = "O";
@@ -144,9 +144,9 @@ a; // "foo"
 b; // ["f","O","o"]
 ```
 
-JavaScript `string`s are immutable, while `array`s are quite mutable. Moreover, the `a[1]` character position access form was not always widely valid JavaScript. Older versions of IE did not allow that syntax (but now they do). Instead, the *correct* approach has been `a.charAt(1)`.
+JavaScript中的字符串是不可修改的，而数组是可以修改的。此外，`a[1]`这种下标访问字符的形式在JavaScript中没有广泛使用。老版本的IE不支持这种语法格式（但新版本支持）。正确的做法是使用`a.charAt(1)`这种形式。
 
-A further consequence of immutable `string`s is that none of the `string` methods that alter its contents can modify in-place, but rather must create and return new `string`s. By contrast, many of the methods that change `array` contents actually *do* modify in-place.
+字符串不允许修改的另外一个后果就是，没有任何一个改变其内容的字符串方法能够直接修改字符串，而是必须创建并返回新的字符串。相比之下，很多修改数组内容的方法确实是直接修改了数组的内容。
 
 ```js
 c = a.toUpperCase();
@@ -158,7 +158,7 @@ b.push( "!" );
 b;			// ["f","O","o","!"]
 ```
 
-Also, many of the `array` methods that could be helpful when dealing with `string`s are not actually available for them, but we can "borrow" non-mutation `array` methods against our `string`:
+数组的许多方法在处理字符串上非常方便，然而字符串却没有这些方法，但是我们可以“借用”数组的非修改方法来操作字符串：（原句：Also, many of the `array` methods that could be helpful when dealing with `string`s are not actually available for them, but we can "borrow" non-mutation `array` methods against our `string`:）
 
 ```js
 a.join;			// undefined
@@ -173,7 +173,7 @@ c;				// "f-o-o"
 d;				// "F.O.O."
 ```
 
-Let's take another example: reversing a `string` (incidentally, a common JavaScript interview trivia question!). `array`s have a `reverse()` in-place mutator method, but `string`s do not:
+我们来看另外一个例子：反转一个字符串（顺便提一句，这是一个很常见的JavaScript面试题！）。数组有`reverse()`方法能立即修改数组内容，但是字符串并没有：
 
 ```js
 a.reverse;		// undefined
@@ -182,7 +182,7 @@ b.reverse();	// ["!","o","O","f"]
 b;				// ["!","o","O","f"]
 ```
 
-Unfortunately, this "borrowing" doesn't work with `array` mutators, because `string`s are immutable and thus can't be modified in place:
+不幸的是，这种“借用”的方式在数组修改方法上不起作用，因为字符串是不可修改的，因此不能直接修改其内容：
 
 ```js
 Array.prototype.reverse.call( a );
@@ -190,7 +190,7 @@ Array.prototype.reverse.call( a );
 // for "foo" :(
 ```
 
-Another workaround (aka hack) is to convert the `string` into an `array`, perform the desired operation, then convert it back to a `string`.
+另一个解决方法（又称hack）是先将字符串转换成数组，执行所需的操作，然后再把它转回字符串。
 
 ```js
 var c = a
@@ -204,11 +204,11 @@ var c = a
 c; // "oof"
 ```
 
-If that feels ugly, it is. Nevertheless, *it works* for simple `string`s, so if you need something quick-n-dirty, often such an approach gets the job done.
+看起来很丑陋，确实如此。然而，对简单字符串来说，它确实能工作，因此如果你需要快速操作字符串的话，这种方法就能够完成任务。
 
-**Warning:** Be careful! This approach **doesn't work** for `string`s with complex (unicode) characters in them (astral symbols, multibyte characters, etc.). You need more sophisticated library utilities that are unicode-aware for such operations to be handled accurately. Consult Mathias Bynens' work on the subject: *Esrever* (https://github.com/mathiasbynens/esrever).
+**警告：**特别小心！这种方法不能用于操作含有复杂字符（Unicode）的字符串（特殊符号，多字节字符等）。你需要更复杂工具库（考虑到了Unicode字符）来准确地实现这样的操作。你可以参考Mathias Bynens的实现：**Esrever** (https://github.com/mathiasbynens/esrever) . 
 
-The other way to look at this is: if you are more commonly doing tasks on your "strings" that treat them as basically *arrays of characters*, perhaps it's better to just actually store them as `array`s rather than as `string`s. You'll probably save yourself a lot of hassle of converting from `string` to `array` each time. You can always call `join("")` on the `array` *of characters* whenever you actually need the `string` representation.
+另一种解决方法是：如果你经常把你的字符串当作字符数组来使用，那你最好直接把它存入数组而不是字符串中。这样你就没必要每次都将字符串转换为数组。当你真正需要字符串表示时，你可以调用数组的`join("")`方法。
 
 ## Numbers
 

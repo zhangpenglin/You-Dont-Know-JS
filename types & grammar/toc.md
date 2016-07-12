@@ -10,7 +10,7 @@
 	* 值类型
 * 第二章：值
 	* 数组
-	* Strings
+	* 字符串
 	* Numbers
 	* Special Values
 	* Value vs Reference
