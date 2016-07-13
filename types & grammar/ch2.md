@@ -353,29 +353,29 @@ var onemilliononehundredthousand = 1.1E6;	// means 1.1 * 10^6
 
 为了你的同事着想，千万不要使用`0O363`这种格式。把`0`和大写的`O`放在一起就是想搞混淆。始终使用小写字符`0x`、`0b`和`0o`。
 
-### Small Decimal Values
+### 十进制小数
 
-The most (in)famous side effect of using binary floating-point numbers (which, remember, is true of **all** languages that use IEEE 754 -- not *just* JavaScript as many assume/pretend) is:
+使用二进制浮点数最著名的副作用（请记住，是所有使用IEEE 754的语言——不仅是JavaScript）：
 
 ```js
 0.1 + 0.2 === 0.3; // false
 ```
 
-Mathematically, we know that statement should be `true`. Why is it `false`?
+在数学计算上，我们知道表达式的结果应该是`true`。但是这里为什么是`false`？
 
-Simply put, the representations for `0.1` and `0.2` in binary floating-point are not exact, so when they are added, the result is not exactly `0.3`. It's **really** close: `0.30000000000000004`, but if your comparison fails, "close" is irrelevant.
+简单地说，`0.1`和`0.2`的二进制浮点表示并不是完全精确的，所以当它们相加，得到的结果并不是精确的`0.3`。而是非常接近`0.3`的`0.30000000000000004`，但是如果你比较失败，非常接近是没有用的（原句：but if your comparison fails, "close" is irrelevant）。
 
-**Note:** Should JavaScript switch to a different `number` implementation that has exact representations for all values? Some think so. There have been many alternatives presented over the years. None of them have been accepted yet, and perhaps never will. As easy as it may seem to just wave a hand and say, "fix that bug already!", it's not nearly that easy. If it were, it most definitely would have been changed a long time ago.
+**注意：**有人会想，为什么不把JavaScript的数字实现切换到一种对所有值都精确表示的形式？这些年出现了很多的替代实现。至今没有一个被采用的，也许永远不会被采用。看起来似乎很容易，你只要挥一挥手，说：“修复这个bug了！”，但是它真的没有这么容易。如果真这么容易，肯定早就改变了。（原句：**Note:** Should JavaScript switch to a different `number` implementation that has exact representations for all values? Some think so. There have been many alternatives presented over the years. None of them have been accepted yet, and perhaps never will. As easy as it may seem to just wave a hand and say, "fix that bug already!", it's not nearly that easy. If it were, it most definitely would have been changed a long time ago.）
 
-Now, the question is, if some `number`s can't be *trusted* to be exact, does that mean we can't use `number`s at all? **Of course not.**
+现在的问题是，如果有些数字不能精确表示，那是不是意味着我们就不能使用数字了？**当然不是！**
 
-There are some applications where you need to be more careful, especially when dealing with fractional decimal values. There are also plenty of (maybe most?) applications that only deal with whole numbers ("integers"), and moreover, only deal with numbers in the millions or trillions at maximum. These applications have been, and always will be, **perfectly safe** to use numeric operations in JS.
+这里有一些应用你需要特别小心，尤其是进行十进制小数运算的时候。也有大量的（也许是大多数）应用只需要处理整数，而且，处理的最大值在百万或者亿万。在这些应用中可以（永远）很安全的使用JS数值运算。
 
-What if we *did* need to compare two `number`s, like `0.1 + 0.2` to `0.3`, knowing that the simple equality test fails?
+如果我们确实需要比较两个数字，如`0.1 + 0.2`和`0.3`，即使我们已经知道简单的相等测试会失败。
 
-The most commonly accepted practice is to use a tiny "rounding error" value as the *tolerance* for comparison. This tiny value is often called "machine epsilon," which is commonly `2^-52` (`2.220446049250313e-16`) for the kind of `number`s in JavaScript.
+最普遍接受的做法是使用一个微小的**舍入误差**值作为比较的公差值。这个微小的值通常被称为“机器精度”，在JavaScript中通常是`2^-52` (`2.220446049250313e-16`)这个值。
 
-As of ES6, `Number.EPSILON` is predefined with this tolerance value, so you'd want to use it, but you can safely polyfill the definition for pre-ES6:
+在ES6中，`Number.EPSILON`就是这个预定义的公差值，你可以直接使用它。如果你想要在ES6之前的版本中安全使用它，你也可以很容易的进行polyfill。
 
 ```js
 if (!Number.EPSILON) {
@@ -383,7 +383,7 @@ if (!Number.EPSILON) {
 }
 ```
 
-We can use this `Number.EPSILON` to compare two `number`s for "equality" (within the rounding error tolerance):
+我们可以使用这个`Number.EPSILON`来比较两个数字是否相等（在舍入误差范围内）：
 
 ```js
 function numbersCloseEnoughToEqual(n1,n2) {
@@ -397,7 +397,7 @@ numbersCloseEnoughToEqual( a, b );					// true
 numbersCloseEnoughToEqual( 0.0000001, 0.0000002 );	// false
 ```
 
-The maximum floating-point value that can be represented is roughly `1.798e+308` (which is really, really, really huge!), predefined for you as `Number.MAX_VALUE`. On the small end, `Number.MIN_VALUE` is roughly `5e-324`, which isn't negative but is really close to zero!
+浮点数的最大值大致是`1.798e+308`（它是真的，真的，真的很巨大的！重要的事情说三遍），预定义的变量`Number.MAX_VALUE`就是这个值。在最小值上，`Number.MIN_VALUE`大概是`5e-324`，它不是负数，但是它非常接近于零！
 
 ### Safe Integer Ranges
 
