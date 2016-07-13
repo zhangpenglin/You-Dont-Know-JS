@@ -220,32 +220,31 @@ JavaScript只有一个数值类型：`number`。这个类型包括十进制“�
 
 在网上有许多有关二进制浮点数是如何在内存中存储以及各种选项带来的影响的讨论。因为了解内存位模式对于如何在JS中正确使用`number`并非绝对必要，我们把它作为一个练习，有兴趣的读者可以进一步深入IEEE 754的细节。（原句：There are many great write-ups on the Web about the nitty-gritty details of how binary floating-point numbers are stored in memory, and the implications of those choices. Because understanding bit patterns in memory is not strictly necessary to understand how to correctly use `number`s in JS, we'll leave it as an exercise for the interested reader if you'd like to dig further into IEEE 754 details.）
 
-### Numeric Syntax
+### 数值语法
 
-Number literals are expressed in JavaScript generally as base-10 decimal literals. For example:
-
+在JavaScript中数字字面量用十进制数字表示。例如：
 ```js
 var a = 42;
 var b = 42.3;
 ```
 
-The leading portion of a decimal value, if `0`, is optional:
+十进制值的左边部分，如果是`0`，可以省略：
 
 ```js
 var a = 0.42;
 var b = .42;
 ```
 
-Similarly, the trailing portion (the fractional) of a decimal value after the `.`, if `0`, is optional:
+同理，十进制值的尾部（小数点之后的数字），如果是`0`，也可以省略：
 
 ```js
 var a = 42.0;
 var b = 42.;
 ```
 
-**Warning:** `42.` is pretty uncommon, and probably not a great idea if you're trying to avoid confusion when other people read your code. But it is, nevertheless, valid.
+**警告：**`42.`这种形式很罕见，如果你不想给看你代码的人造成混淆，请别这么写。尽管这么写是正确且有效的。
 
-By default, most `number`s will be outputted as base-10 decimals, with trailing fractional `0`s removed. So:
+默认情况下，大多数的`number`作为十进制输出的时候，会去掉小数点后边的`0`。如下：
 
 ```js
 var a = 42.300;
@@ -255,7 +254,7 @@ a; // 42.3
 b; // 42
 ```
 
-Very large or very small `number`s will by default be outputted in exponent form, the same as the output of the `toExponential()` method, like:
+非常大或者非常小的`number`默认以指数的形式输出，与`toExponential()`方法的输出格式相同，比如：
 
 ```js
 var a = 5E10;
@@ -269,7 +268,7 @@ var c = 1 / a;
 c;					// 2e-11
 ```
 
-Because `number` values can be boxed with the `Number` object wrapper (see Chapter 3), `number` values can access methods that are built into the `Number.prototype` (see Chapter 3). For example, the `toFixed(..)` method allows you to specify how many fractional decimal places you'd like the value to be represented with:
+因为`number`值会被装箱成`Number`对象（参见第三章），`number`值可以访问`Number.prototype`（参见第三章）的内置方法。例如，`toFixed(..)`方法允许你指定多少位十进制小数来展示输出：
 
 ```js
 var a = 42.59;
@@ -281,9 +280,9 @@ a.toFixed( 3 ); // "42.590"
 a.toFixed( 4 ); // "42.5900"
 ```
 
-Notice that the output is actually a `string` representation of the `number`, and that the value is `0`-padded on the right-hand side if you ask for more decimals than the value holds.
+注意，输出实际上是数字的字符串表现形式，如果你要求更多的小数位数，它会在右边用`0`填充。（原句：Notice that the output is actually a `string` representation of the `number`, and that the value is `0`-padded on the right-hand side if you ask for more decimals than the value holds.）
 
-`toPrecision(..)` is similar, but specifies how many *significant digits* should be used to represent the value:
+`toPrecision(..)`是类似的，它是指定多少**有效位数**来表示值的：
 
 ```js
 var a = 42.59;
@@ -296,7 +295,7 @@ a.toPrecision( 5 ); // "42.590"
 a.toPrecision( 6 ); // "42.5900"
 ```
 
-You don't have to use a variable with the value in it to access these methods; you can access these methods directly on `number` literals. But you have to be careful with the `.` operator. Since `.` is a valid numeric character, it will first be interpreted as part of the `number` literal, if possible, instead of being interpreted as a property accessor.
+你可以不使用带值的变量来访问这些方法；可以直接用数字字面量来访问。但是你得特别小心`.`操作符。因为`.`是一个有效的数字字符，如果可能的话，它会优先被解释为数字直面量的一部分，而不是解释成属性访问符。
 
 ```js
 // invalid syntax:
@@ -308,30 +307,30 @@ You don't have to use a variable with the value in it to access these methods; y
 42..toFixed( 3 );	// "42.000"
 ```
 
-`42.toFixed(3)` is invalid syntax, because the `.` is swallowed up as part of the `42.` literal (which is valid -- see above!), and so then there's no `.` property operator present to make the `.toFixed` access.
+`42.toFixed(3)`是无效的语法，因为`.`被解释成`42.`字面量（这是有效的，上面提到过！）的一部分，因此这里没有属性操作符`.`来访问`.toFixed`。
 
-`42..toFixed(3)` works because the first `.` is part of the `number` and the second `.` is the property operator. But it probably looks strange, and indeed it's very rare to see something like that in actual JavaScript code. In fact, it's pretty uncommon to access methods directly on any of the primitive values. Uncommon doesn't mean *bad* or *wrong*.
+`42..toFixed(3)`可以工作是因为第一个`.`是数字的一部分，第二个`.`是属性操作符。但它可能看起来很奇怪，实际上在JavaScript代码中很少见到类似的代码。事实上，直接通过字面量来访问方法不太常见。但不常见不意味着**不好的**或**错误的**。
 
-**Note:** There are libraries that extend the built-in `Number.prototype` (see Chapter 3) to provide extra operations on/with `number`s, and so in those cases, it's perfectly valid to use something like `10..makeItRain()` to set off a 10-second money raining animation, or something else silly like that.
+**注意：**这里有许多库扩展了内置的`Number.prototype`（参见第三章），提供了对数字的额外操作，所以在这种情况下，使用类似`10..makeItRain()`掀起10秒下钱雨的动画这种格式很有效，或是其他像这么愚蠢的东西（原句：it's perfectly valid to use something like `10..makeItRain()` to set off a 10-second money raining animation, or something else silly like that.）。
 
-This is also technically valid (notice the space):
+技术上来说，下面这个格式也是有效的（注意42后面的空格）：
 
 ```js
 42 .toFixed(3); // "42.000"
 ```
 
-However, with the `number` literal specifically, **this is particularly confusing coding style** and will serve no other purpose but to confuse other developers (and your future self). Avoid it.
+然而，这种特殊形式的数字字面量，**是特别混乱的编码风格**，它一无是处，除了混淆其他开发者（和未来的你）。请避免使用它！
 
-`number`s can also be specified in exponent form, which is common when representing larger `number`s, such as:
+数字也可以使用指数形式，代表较大的数字，比如：
 
 ```js
 var onethousand = 1E3;						// means 1 * 10^3
 var onemilliononehundredthousand = 1.1E6;	// means 1.1 * 10^6
 ```
 
-`number` literals can also be expressed in other bases, like binary, octal, and hexadecimal.
+数字字面量也可以表示成其他进制，如二进制、八进制和十六进制。
 
-These formats work in current versions of JavaScript:
+这些格式在当前的JavaScript版本中可以工作：
 
 ```js
 0xf3; // hexadecimal for: 243
@@ -340,9 +339,9 @@ These formats work in current versions of JavaScript:
 0363; // octal for: 243
 ```
 
-**Note:** Starting with ES6 + `strict` mode, the `0363` form of octal literals is no longer allowed (see below for the new form). The `0363` form is still allowed in non-`strict` mode, but you should stop using it anyway, to be future-friendly (and because you should be using `strict` mode by now!).
+**注意：**在ES6的严格模式下（`strict` mode），`0363`这种八进制形式的字面量是不允许的（下面会给出最新的格式）。`0363`这种格式在非严格模式下依然是可用的，但是你应该停止使用它，为了对未来更友好（因此你现在就应该开始使用严格模式）。
 
-As of ES6, the following new forms are also valid:
+对于ES6来说，下面的新格式也是有效的：
 
 ```js
 0o363;		// octal for: 243
@@ -352,7 +351,7 @@ As of ES6, the following new forms are also valid:
 0B11110011; // ditto
 ```
 
-Please do your fellow developers a favor: never use the `0O363` form. `0` next to capital `O` is just asking for confusion. Always use the lowercase predicates `0x`, `0b`, and `0o`.
+为了你的同事着想，千万不要使用`0O363`这种格式。把`0`和大写的`O`放在一起就是想搞混淆。始终使用小写字符`0x`、`0b`和`0o`。
 
 ### Small Decimal Values
 
