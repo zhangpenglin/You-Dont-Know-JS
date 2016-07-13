@@ -515,11 +515,11 @@ foo();
 
 **好朋友永远不会让好朋友覆盖`undefined`。**（原句：**Friends don't let friends override `undefined`.** Ever.）
 
-#### `void` Operator
+#### `void`操作符
 
-While `undefined` is a built-in identifier that holds (unless modified -- see above!) the built-in `undefined` value, another way to get this value is the `void` operator.
+`undefined`是一个内置的标识符存储了内置的`undefined`值，另外一种获取该值的方法是`void`操作符。
 
-The expression `void ___` "voids" out any value, so that the result of the expression is always the `undefined` value. It doesn't modify the existing value; it just ensures that no value comes back from the operator expression.
+表达式`void ___`会“清空”任何值，因此表达式的结果总是`undefined`值。它不会修改现有的值；它只是确保`void`表达式不会返回任何值。
 
 ```js
 var a = 42;
@@ -527,11 +527,11 @@ var a = 42;
 console.log( void a, a ); // undefined 42
 ```
 
-By convention (mostly from C-language programming), to represent the `undefined` value stand-alone by using `void`, you'd use `void 0` (though clearly even `void true` or any other `void` expression does the same thing). There's no practical difference between `void 0`, `void 1`, and `undefined`.
+按照惯例（主要来自C语言编程），单独使用`void`来表示`undefined`值，你需要使用`void 0`（尽管`void true`或其他`void`表达式都可以做同样的事情）。其实`void 0`、`void 1`和`undefined`实际上没有什么不同。
 
-But the `void` operator can be useful in a few other circumstances, if you need to ensure that an expression has no result value (even if it has side effects).
+在一些其他情况下，`void`操作符也很有用，如果你需要确保一个表达式不返回任何值（即使这个函数会产生副作用）。
 
-For example:
+例如：
 
 ```js
 function doSomething() {
@@ -553,9 +553,9 @@ if (doSomething()) {
 }
 ```
 
-Here, the `setTimeout(..)` function returns a numeric value (the unique identifier of the timer interval, if you wanted to cancel it), but we want to `void` that out so that the return value of our function doesn't give a false-positive with the `if` statement.
+在这里，`setTimeout(..)`函数返回一个数字值（这是计时器的唯一标识符，你取消计时器的时候要用到），但是我们想将这个结果清空，这样我们函数的返回值就通不过`if`语句（返回值为假）。
 
-Many devs prefer to just do these actions separately, which works the same but doesn't use the `void` operator:
+很多开发者更喜欢将这两个动作分开，虽然做同样的事情，但是不使用`void`操作符：
 
 ```js
 if (!APP.ready) {
@@ -565,7 +565,7 @@ if (!APP.ready) {
 }
 ```
 
-In general, if there's ever a place where a value exists (from some expression) and you'd find it useful for the value to be `undefined` instead, use the `void` operator. That probably won't be terribly common in your programs, but in the rare cases you do need it, it can be quite helpful.
+一般情况下，如果有个地方有一个值（从一些表达式返回的），然后你发现用`undefined`代替它会很有用，请用`void`操作符。这在你的程序中可能并不常见，但在极少数情况下你会需要它，它会变得非常有用。
 
 ### Special Numbers
 
