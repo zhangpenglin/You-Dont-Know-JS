@@ -450,15 +450,15 @@ if (!Number.isSafeInteger) {
 }
 ```
 
-### 32-bit (Signed) Integers
+### 32位（有符号）整数
 
-While integers can range up to roughly 9 quadrillion safely (53 bits), there are some numeric operations (like the bitwise operators) that are only defined for 32-bit `number`s, so the "safe range" for `number`s used in that way must be much smaller.
+虽然整数的安全范围可以达到约900万亿，但还有一些数字操作（如位运算符），这些只适用于32位数字，以这种方式使用的数字的“安全范围”要小得多。
 
-The range then is `Math.pow(-2,31)` (`-2147483648`, about -2.1 billion) up to `Math.pow(2,31)-1` (`2147483647`, about +2.1 billion).
+这个范围是`Math.pow(-2,31)`（`-2147483648`，大约-21亿）到`Math.pow(2,31)-1`（`2147483647`，大约21亿）。
 
-To force a `number` value in `a` to a 32-bit signed integer value, use `a | 0`. This works because the `|` bitwise operator only works for 32-bit integer values (meaning it can only pay attention to 32 bits and any other bits will be lost). Then, "or'ing" with zero is essentially a no-op bitwise speaking.
+要把一个数字强制转换成32位有符号整数值，使用`a | 0`。这可以工作，因为`|`位运算符仅适用于32位整数（这意味着它可以只关注32位，其他位将丢失）。所以，与0进行或运算本质上是一个无操作符位运算（请忽略我的翻译，看原句：Then, "or'ing" with zero is essentially a no-op bitwise speaking）。
 
-**Note:** Certain special values (which we will cover in the next section) such as `NaN` and `Infinity` are not "32-bit safe," in that those values when passed to a bitwise operator will pass through the abstract operation `ToInt32` (see Chapter 4) and become simply the `+0` value for the purpose of that bitwise operation.
+**注意：**某些特殊值（我们将在下一节介绍），如`NaN`和`Infinity`不是“32位安全”的，因为当这些值传给位操作符时，它们会经过一个抽象操作`ToInt32`（参见第四章）变成简单的`+0`值，然后才进行位运算操作。
 
 ## Special Values
 
