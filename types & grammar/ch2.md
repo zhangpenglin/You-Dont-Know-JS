@@ -411,9 +411,9 @@ JS程序面临处理大数字的场景主要是来自数据库64位的ID等，64
 
 幸运的是，在如此大的ID数字上进行数值运算并不常见。但是，如果你**确实**需要对这么大的数字进行数学运算，就目前情况，你需要使用**大数字**工具处理包。大数字处理可能在未来的JavaScript版本中得到官方支持。
 
-### Testing for Integers
+### 整数检测
 
-To test if a value is an integer, you can use the ES6-specified `Number.isInteger(..)`:
+想要测试一个值是不是整数，你可以使用ES6指定的`Number.isInteger(..)`方法：
 
 ```js
 Number.isInteger( 42 );		// true
@@ -421,7 +421,7 @@ Number.isInteger( 42.000 );	// true
 Number.isInteger( 42.3 );	// false
 ```
 
-To polyfill `Number.isInteger(..)` for pre-ES6:
+在ES6之前的版本，你可以这样polyfill方法`Number.isInteger(..)`：
 
 ```js
 if (!Number.isInteger) {
@@ -431,7 +431,7 @@ if (!Number.isInteger) {
 }
 ```
 
-To test if a value is a *safe integer*, use the ES6-specified `Number.isSafeInteger(..)`:
+想要测试一个值是不是**安全整数**，使用ES6指定的`Number.isSafeInteger(..)`：
 
 ```js
 Number.isSafeInteger( Number.MAX_SAFE_INTEGER );	// true
@@ -439,7 +439,7 @@ Number.isSafeInteger( Math.pow( 2, 53 ) );			// false
 Number.isSafeInteger( Math.pow( 2, 53 ) - 1 );		// true
 ```
 
-To polyfill `Number.isSafeInteger(..)` in pre-ES6 browsers:
+在ES6之前，你可以这么polyfill方法`Number.isSafeInteger(..)`：
 
 ```js
 if (!Number.isSafeInteger) {
