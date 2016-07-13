@@ -460,29 +460,29 @@ if (!Number.isSafeInteger) {
 
 **注意：**某些特殊值（我们将在下一节介绍），如`NaN`和`Infinity`不是“32位安全”的，因为当这些值传给位操作符时，它们会经过一个抽象操作`ToInt32`（参见第四章）变成简单的`+0`值，然后才进行位运算操作。
 
-## Special Values
+## 特殊值
 
-There are several special values spread across the various types that the *alert* JS developer needs to be aware of, and use properly.
+这里有几个特殊的值，横跨各种类型，我们在这**提醒**JS开发者需要特别注意，并且正常使用。
 
-### The Non-value Values
+### 非值的值（The Non-value Values）
 
-For the `undefined` type, there is one and only one value: `undefined`. For the `null` type, there is one and only one value: `null`. So for both of them, the label is both its type and its value.
+对于`undefined`类型，有且只有一个值：`undefined`。对于`null`类型，有且只有一个值：`null`。因此对于这两者，这个标签既是类型又是它对应的值。
 
-Both `undefined` and `null` are often taken to be interchangeable as either "empty" values or "non" values. Other developers prefer to distinguish between them with nuance. For example:
+`undefined`和`null`经常被认为是空值或非值。有些开发者更喜欢用细微差别来区分它们。例如：
 
-* `null` is an empty value
-* `undefined` is a missing value
+* `null`是一个空值
+* `undefined`是一个缺失值
 
-Or:
+或：
 
-* `undefined` hasn't had a value yet
-* `null` had a value and doesn't anymore
+* `undefined`表示当前变量还没有值
+* `null`表示曾经有值，但现在没有
 
-Regardless of how you choose to "define" and use these two values, `null` is a special keyword, not an identifier, and thus you cannot treat it as a variable to assign to (why would you!?). However, `undefined` *is* (unfortunately) an identifier. Uh oh.
+无论你选择如何“定义”和使用这两个值，`null`是一个特殊的关键字，而不是一个标识符，因此你不能把它当作变量然后赋值给它（你为什么想这么做！？）。然而，`undefined`**是**（很不幸地！）一个标识符。
 
 ### Undefined
 
-In non-`strict` mode, it's actually possible (though incredibly ill-advised!) to assign a value to the globally provided `undefined` identifier:
+在非严格模式中，你可以给全局标识符`undefined`赋值（这是非常不明智的做法）：
 
 ```js
 function foo() {
@@ -501,7 +501,7 @@ function foo() {
 foo();
 ```
 
-In both non-`strict` mode and `strict` mode, however, you can create a local variable of the name `undefined`. But again, this is a terrible idea!
+在非严格模式和严格模式中，你可以创建一个名为`undefined`的局部变量。但同样，这是一个非常糟糕的想法！
 
 ```js
 function foo() {
@@ -513,7 +513,7 @@ function foo() {
 foo();
 ```
 
-**Friends don't let friends override `undefined`.** Ever.
+**好朋友永远不会让好朋友覆盖`undefined`。**（原句：**Friends don't let friends override `undefined`.** Ever.）
 
 #### `void` Operator
 
