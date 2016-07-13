@@ -399,17 +399,17 @@ numbersCloseEnoughToEqual( 0.0000001, 0.0000002 );	// false
 
 浮点数的最大值大致是`1.798e+308`（它是真的，真的，真的很巨大的！重要的事情说三遍），预定义的变量`Number.MAX_VALUE`就是这个值。在最小值上，`Number.MIN_VALUE`大概是`5e-324`，它不是负数，但是它非常接近于零！
 
-### Safe Integer Ranges
+### 整数安全范围
 
-Because of how `number`s are represented, there is a range of "safe" values for the whole `number` "integers", and it's significantly less than `Number.MAX_VALUE`.
+我们现在知道数字是如何表示的，所以你应该明白数字中“整数”有一个**安全范围**值，很显然它比`Number.MAX_VALUE`要小。（原句：Because of how `number`s are represented, there is a range of "safe" values for the whole `number` "integers", and it's significantly less than `Number.MAX_VALUE`.）
 
-The maximum integer that can "safely" be represented (that is, there's a guarantee that the requested value is actually representable unambiguously) is `2^53 - 1`, which is `9007199254740991`. If you insert your commas, you'll see that this is just over 9 quadrillion. So that's pretty darn big for `number`s to range up to.
+可以**安全地**表示（就是遵循规定，能够准确无误的表示，原句：that is, there's a guarantee that the requested value is actually representable unambiguously）的最大整数是`2^53 - 1`，即`9007199254740991`。如果你插入逗号数一数，你会发现它刚刚超过9万亿。这对数字来说是一个相当大的范围。
 
-This value is actually automatically predefined in ES6, as `Number.MAX_SAFE_INTEGER`. Unsurprisingly, there's a minimum value, `-9007199254740991`, and it's defined in ES6 as `Number.MIN_SAFE_INTEGER`.
+这个值实际上是ES6自动预定义的，即`Number.MAX_SAFE_INTEGER`。毫不奇怪，这里也有一个最小值，`-9007199254740991`，它在ES6中定义为`Number.MIN_SAFE_INTEGER`。
 
-The main way that JS programs are confronted with dealing with such large numbers is when dealing with 64-bit IDs from databases, etc. 64-bit numbers cannot be represented accurately with the `number` type, so must be stored in (and transmitted to/from) JavaScript using `string` representation.
+JS程序面临处理大数字的场景主要是来自数据库64位的ID等，64位数字不能用数字类型准确表示，因此必须存储在JavaScript字符串中然后进行展示。
 
-Numeric operations on such large ID `number` values (besides comparison, which will be fine with `string`s) aren't all that common, thankfully. But if you *do* need to perform math on these very large values, for now you'll need to use a *big number* utility. Big numbers may get official support in a future version of JavaScript.
+幸运的是，在如此大的ID数字上进行数值运算并不常见。但是，如果你**确实**需要对这么大的数字进行数学运算，就目前情况，你需要使用**大数字**工具处理包。大数字处理可能在未来的JavaScript版本中得到官方支持。
 
 ### Testing for Integers
 
