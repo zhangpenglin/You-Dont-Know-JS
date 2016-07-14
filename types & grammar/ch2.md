@@ -567,17 +567,17 @@ if (!APP.ready) {
 
 一般情况下，如果有个地方有一个值（从一些表达式返回的），然后你发现用`undefined`代替它会很有用，请用`void`操作符。这在你的程序中可能并不常见，但在极少数情况下你会需要它，它会变得非常有用。
 
-### Special Numbers
+### 特殊数字
 
-The `number` type includes several special values. We'll take a look at each in detail.
+数字类型包括几个特殊的值。我们将详细地看看每个特殊值。
 
-#### The Not Number, Number
+#### 非数字的数字（The Not Number, Number）
 
-Any mathematic operation you perform without both operands being `number`s (or values that can be interpreted as regular `number`s in base 10 or base 16) will result in the operation failing to produce a valid `number`, in which case you will get the `NaN` value.
+任何的数学运算操作，如果操作符两边不都是数字（可以被解释为常规的数字，十进制或十六进制都行）将会导致操作未能产生一个有效的数字，在这种情况下，你会得到一个`NaN`值。
 
-`NaN` literally stands for "not a `number`", though this label/description is very poor and misleading, as we'll see shortly. It would be much more accurate to think of `NaN` as being "invalid number," "failed number," or even "bad number," than to think of it as "not a number."
+`NaN`字面上的意思是“not a `number`”，然而这个描述非常差劲并且容易误导人，我们下面就会看到。使用“invalid number”（无效的数字）、“failed number”（失败的数字）甚至“bad number”（不好的数字）来表述`NaN`会比“not a number”（不是一个数字）更加准确。
 
-For example:
+举个例子：
 
 ```js
 var a = 2 / "foo";		// NaN
@@ -586,10 +586,11 @@ typeof a === "number";	// true
 ```
 
 In other words: "the type of not-a-number is 'number'!" Hooray for confusing names and semantics.
+换句话说：“not-a-number的类型是数字！”。这名字和语义真会误导人！
 
-`NaN` is a kind of "sentinel value" (an otherwise normal value that's assigned a special meaning) that represents a special kind of error condition within the `number` set. The error condition is, in essence: "I tried to perform a mathematic operation but failed, so here's the failed `number` result instead."
+`NaN`是一种“标记值”（一个正常的值，但是它被赋予了特殊含义），它表示`number`集合中一种特殊的错误情况。这种错误情况，在本质上是说：“我试图执行一个数学运算，但失败了，所以我给你这个失败的数字结果。”
 
-So, if you have a value in some variable and want to test to see if it's this special failed-number `NaN`, you might think you could directly compare to `NaN` itself, as you can with any other value, like `null` or `undefined`. Nope.
+因此如果你想测试你变量的值是不是这个特殊的失败数字`NaN`，你可能会认为你可以直接将它与`NaN`本身进行比较，就像你对其他值的做法一样，如`null`和`undefined`。Too young too simple！
 
 ```js
 var a = 2 / "foo";
@@ -598,9 +599,9 @@ a == NaN;	// false
 a === NaN;	// false
 ```
 
-`NaN` is a very special value in that it's never equal to another `NaN` value (i.e., it's never equal to itself). It's the only value, in fact, that is not reflexive (without the Identity characteristic `x === x`). So, `NaN !== NaN`. A bit strange, huh?
+`NaN`是一个非常特殊的值，因为它永远不会等于另外一个`NaN`值（即，它永远不会等于它自己）。事实上，它是唯一不遵守自反性（不带身份特征`x === x`）的值。因此`NaN !== NaN`，有点怪，对吧？（原句：`NaN` is a very special value in that it's never equal to another `NaN` value (i.e., it's never equal to itself). It's the only value, in fact, that is not reflexive (without the Identity characteristic `x === x`). So, `NaN !== NaN`. A bit strange, huh?）
 
-So how *do* we test for it, if we can't compare to `NaN` (since that comparison would always fail)?
+既然我们不能对`NaN`进行比较（因为比较总是失败），那我们如何检测它？
 
 ```js
 var a = 2 / "foo";
@@ -608,11 +609,11 @@ var a = 2 / "foo";
 isNaN( a ); // true
 ```
 
-Easy enough, right? We use the built-in global utility called `isNaN(..)` and it tells us if the value is `NaN` or not. Problem solved!
+很简单吧！我们使用内置的全局工具函数`isNaN(..)`来告诉我们一个值是不是`NaN`。问题解决了！
 
-Not so fast.
+事情并没有这么简单。
 
-The `isNaN(..)` utility has a fatal flaw. It appears it tried to take the meaning of `NaN` ("Not a Number") too literally -- that its job is basically: "test if the thing passed in is either not a `number` or is a `number`." But that's not quite accurate.
+`isNaN(..)`工具函数有个致命的缺陷。它仅仅只是取`NaN`的字面意思（“Not a Number”，不是一个数字），因此这个函数的工作就是简单的检测传递进来值是不是一个数字。但是这并不准确。（译者注：其实`isNaN(..)`函数通常用于检测`parseFloat()`和`parseInt()`的结果，以判断它们表示的是否是合法的数字。所以这个函数认为传递进来的值只有`NaN`和正常数字两种情况，并没有考虑到传递进来的还可能是字符串或其他非数字类型的值）
 
 ```js
 var a = 2 / "foo";
@@ -625,9 +626,9 @@ window.isNaN( a ); // true
 window.isNaN( b ); // true -- ouch!
 ```
 
-Clearly, `"foo"` is literally *not a `number`*, but it's definitely not the `NaN` value either! This bug has been in JS since the very beginning (over 19 years of *ouch*).
+显然，`"foo"`只是字面上**not a `number`**，但它根本不是`NaN`！这个bug在JS早期（超过19年）就一直存在。
 
-As of ES6, finally a replacement utility has been provided: `Number.isNaN(..)`. A simple polyfill for it so that you can safely check `NaN` values *now* even in pre-ES6 browsers is:
+在ES6中终于提供了一个替代工具：`Number.isNaN(..)`。你可以简单的polyfill它，这样你现在就可以安全的检测`NaN`了，即使在ES6版本之前的浏览器中：
 
 ```js
 if (!Number.isNaN) {
@@ -646,9 +647,9 @@ Number.isNaN( a ); // true
 Number.isNaN( b ); // false -- phew!
 ```
 
-Actually, we can implement a `Number.isNaN(..)` polyfill even easier, by taking advantage of that peculiar fact that `NaN` isn't equal to itself. `NaN` is the *only* value in the whole language where that's true; every other value is always **equal to itself**.
+实际上，我们可以用一种更简单的方法来pollfill实现`Number.isNaN(..)`，利用`NaN`不等于它自己这个特有事实。`NaN`是JS语言中**唯一**不等于它自己的值，所有其他值总是**等于自身**。
 
-So:
+因此：
 
 ```js
 if (!Number.isNaN) {
@@ -658,11 +659,11 @@ if (!Number.isNaN) {
 }
 ```
 
-Weird, huh? But it works!
+很奇怪，对吧？但它确实能工作！
 
-`NaN`s are probably a reality in a lot of real-world JS programs, either on purpose or by accident. It's a really good idea to use a reliable test, like `Number.isNaN(..)` as provided (or polyfilled), to recognize them properly.
+`NaN`在许多现实世界的JS程序中存在，无论是有意还是无意产生的。因此使用一个可靠的测试是必须的，就像ES6提供的`Number.isNaN(..)`（或polyfill的）能够准确识别`NaN`。
 
-If you're currently using just `isNaN(..)` in a program, the sad reality is your program *has a bug*, even if you haven't been bitten by it yet!
+如果你的程序正在使用`isNaN(..)`，可悲的现实是你的程序存在bug，即使现在你还没被它坑过！
 
 #### Infinities
 

@@ -12,7 +12,7 @@
 	* 数组
 	* 字符串
 	* 数字
-	* 特殊值
+	* 特殊数字
 	* Value vs Reference
 * 第三章：本地类型
 	* Internal `[[Class]]`
