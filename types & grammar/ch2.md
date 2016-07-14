@@ -585,7 +585,6 @@ var a = 2 / "foo";		// NaN
 typeof a === "number";	// true
 ```
 
-In other words: "the type of not-a-number is 'number'!" Hooray for confusing names and semantics.
 换句话说：“not-a-number的类型是数字！”。这名字和语义真会误导人！
 
 `NaN`是一种“标记值”（一个正常的值，但是它被赋予了特殊含义），它表示`number`集合中一种特殊的错误情况。这种错误情况，在本质上是说：“我试图执行一个数学运算，但失败了，所以我给你这个失败的数字结果。”
@@ -665,26 +664,26 @@ if (!Number.isNaN) {
 
 如果你的程序正在使用`isNaN(..)`，可悲的现实是你的程序存在bug，即使现在你还没被它坑过！
 
-#### Infinities
+#### 无穷大
 
-Developers from traditional compiled languages like C are probably used to seeing either a compiler error or runtime exception, like "Divide by zero," for an operation like:
+看如下这个例子，传统的编译型语言（如C语言）开发者可能已经习惯看到编译错误或运行时异常（如“Divide by zero”）：
 
 ```js
 var a = 1 / 0;
 ```
 
-However, in JS, this operation is well-defined and results in the value `Infinity` (aka `Number.POSITIVE_INFINITY`). Unsurprisingly:
+然后在JS中，这种操作是明确界定的，会返回结果`Infinity`（又名`Number.POSITIVE_INFINITY`）。不出所料：
 
 ```js
 var a = 1 / 0;	// Infinity
 var b = -1 / 0;	// -Infinity
 ```
 
-As you can see, `-Infinity` (aka `Number.NEGATIVE_INFINITY`) results from a divide-by-zero where either (but not both!) of the divide operands is negative.
+如你所见，进行除0运算，除法操作符两边有一边是负的（不能两边都是负的！）就会产生结果 `-Infinity`（又名`Number.NEGATIVE_INFINITY`）。
 
-JS uses finite numeric representations (IEEE 754 floating-point, which we covered earlier), so contrary to pure mathematics, it seems it *is* possible to overflow even with an operation like addition or subtraction, in which case you'd get `Infinity` or `-Infinity`.
+JS使用了有限的数字表示（IEEE 754浮点表示法，我们在前面介绍过），这违背了纯数学，在进行加法或减法运算的时候可能会溢出，在这种情况下你会得到`Infinity`或`-Infinity`。（原句：JS uses finite numeric representations (IEEE 754 floating-point, which we covered earlier), so contrary to pure mathematics, it seems it *is* possible to overflow even with an operation like addition or subtraction, in which case you'd get `Infinity` or `-Infinity`.）
 
-For example:
+举个例子：
 
 ```js
 var a = Number.MAX_VALUE;	// 1.7976931348623157e+308
@@ -693,15 +692,15 @@ a + Math.pow( 2, 970 );		// Infinity
 a + Math.pow( 2, 969 );		// 1.7976931348623157e+308
 ```
 
-According to the specification, if an operation like addition results in a value that's too big to represent, the IEEE 754 "round-to-nearest" mode specifies what the result should be. So, in a crude sense, `Number.MAX_VALUE + Math.pow( 2, 969 )` is closer to `Number.MAX_VALUE` than to `Infinity`, so it "rounds down," whereas `Number.MAX_VALUE + Math.pow( 2, 970 )` is closer to `Infinity` so it "rounds up".
+根据规范，如果数学运算操作（如加法）导致结果值太大而不能被显示，IEEE 754的“舍入到最近”（round-to-nearest）模式指定了结果应该是什么。简单来说，`Number.MAX_VALUE + Math.pow( 2, 969 )`比`Infinity`更加靠近`Number.MAX_VALUE`，所以进行“向下舍去”，而`Number.MAX_VALUE + Math.pow( 2, 970 )`更靠近`Infinity`，所以进行“向上舍入”。
 
-If you think too much about that, it's going to make your head hurt. So don't. Seriously, stop!
+如果你对这个想太多，你会更加蒙逼。所以，讲真，请适可而止！
 
-Once you overflow to either one of the *infinities*, however, there's no going back. In other words, in an almost poetic sense, you can go from finite to infinite but not from infinite back to finite.
+一旦你的运算结果溢出，产生了“无穷大”（两个无穷中的任意一个），你就不能回头了。用诗意的话来阐述，就是，你可以从有限到无限，但是不能从无限回退到有限。
 
-It's almost philosophical to ask: "What is infinity divided by infinity". Our naive brains would likely say "1" or maybe "infinity." Turns out neither is true. Both mathematically and in JavaScript, `Infinity / Infinity` is not a defined operation. In JS, this results in `NaN`.
+有个哲学性的问题：“无穷大除以无穷大的结果是什么”。我们天真的大脑可能会说“1”或“无穷大”。事实证明都是错的。无论是数学意义上还是在JavaScript中，`Infinity / Infinity`并不是一个已定义的操作。在JS中，你会得到`NaN`。
 
-But what about any positive finite `number` divided by `Infinity`? That's easy! `0`. And what about a negative finite `number` divided by `Infinity`? Keep reading!
+那正的有限值除以`无穷大`的结果是多少？这还是很简单的，当然是`0`。那负的有限值除以`无穷大`的结果是多少？请继续阅读！
 
 #### Zeros
 
