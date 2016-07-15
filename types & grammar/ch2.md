@@ -914,7 +914,7 @@ a; // [4,5,6,7]  not  [1,2,3,4]
 
 如你所见，`x.length = 0`和`x.push(4,5,6,7)`并没有创建新的数组，只是修改当前共享的数组。所以`a`理所当然的引用新的内容`[4,5,6,7]`。
 
-记住：你不能直接控制/覆盖值拷贝与引用——这些语义完全由基础值的类型控制。（原句：Remember: you cannot directly control/override value-copy vs. reference -- those semantics are controlled entirely by the type of the underlying value.）
+记住：你不能直接控制/覆盖值拷贝与引用——这些语义完全由底层值的类型控制。（原句：Remember: you cannot directly control/override value-copy vs. reference -- those semantics are controlled entirely by the type of the underlying value.）
 
 为了有效地将一个复合值（比如数组）按值拷贝，你需要手动创建一个它的副本，从而使这个引用不再指向原来的值。例如：
 
@@ -923,8 +923,6 @@ foo( a.slice() );
 ```
 
 `slice(..)`在默认情况下没有参数会创建一个全新的（浅）拷贝数组。所以，我们只传递拷贝的数组的引用，因此`foo(..)`并不能影响到`a`引用指向的内容。
-
-To do the reverse -- pass a scalar primitive value in a way where its value updates can be seen, kinda like a reference -- you have to wrap the value in another compound value (`object`, `array`, etc) that *can* be passed by reference-copy:
 
 相反，如果你想要传递一个原始类型的值进去，并且能够得到更新，就像引用一样。你必须把它包裹在另一个复合值（对象、数组等）中，而它可以通过引用拷贝进行传递：
 
@@ -973,14 +971,14 @@ console.log( b ); // 2, not 3
 
 引用是非常强大的，但有时它们会让你非常蛋疼，有时候你需要它们的地方它们却不存在。你必须明白唯一控制值拷贝与引用拷贝的行为是值本身的类型，所以你必须间接地影响值的类型来改变赋值或传递的行为。（原句：References are quite powerful, but sometimes they get in your way, and sometimes you need them where they don't exist. The only control you have over reference vs. value-copy behavior is the type of the value itself, so you must indirectly influence the assignment/passing behavior by which value types you choose to use.）
 
-## Review
+## 小结
 
-In JavaScript, `array`s are simply numerically indexed collections of any value-type. `string`s are somewhat "`array`-like", but they have distinct behaviors and care must be taken if you want to treat them as `array`s. Numbers in JavaScript include both "integers" and floating-point values.
+在JavaScript中，数组是数字索引的集合，能够存放任意类型的值。字符串有点类数组，但是它们之间有截然不同的行为，当你把它当作数组来对待的时候，你需要特别小心。JavaScript中的数字包括“整数”和浮点数值。
 
-Several special values are defined within the primitive types.
+基本类型中定义了几个特殊值。
 
-The `null` type has just one value: `null`, and likewise the `undefined` type has just the `undefined` value. `undefined` is basically the default value in any variable or property if no other value is present. The `void` operator lets you create the `undefined` value from any other value.
+`null`类型只有一个值：`null`，与`undefined`类型只有`undefined`一个值一样。`undefined`是任何没有被赋值的变量或属性的默认值。`void`操作符能够从任何其他值中创建`undefined`。
 
-`number`s include several special values, like `NaN` (supposedly "Not a Number", but really more appropriately "invalid number"); `+Infinity` and `-Infinity`; and `-0`.
+`number`包括几个特殊值，比如`NaN`（所谓的“Not a Number”，实际上更恰当的理解是“invalid number”）；`+Infinity`和`-Infinity`；以及`-0`.
 
-Simple scalar primitives (`string`s, `number`s, etc.) are assigned/passed by value-copy, but compound values (`object`s, etc.) are assigned/passed by reference-copy. References are not like references/pointers in other languages -- they're never pointed at other variables/references, only at the underlying values.
+简单原始类型（`string`、`number`等）通过值拷贝进行赋值或传递，但复合值（`object`等）是通过引用拷贝进行赋值或传递。JS中的引用并不像其他语言中的引用或指针——它们永远不指向其他变量或引用，仅指向底层的值。
