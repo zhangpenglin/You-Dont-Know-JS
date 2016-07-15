@@ -672,7 +672,7 @@ if (!Number.isNaN) {
 var a = 1 / 0;
 ```
 
-然后在JS中，这种操作是明确界定的，会返回结果`Infinity`（又名`Number.POSITIVE_INFINITY`）。不出所料：
+然后在JS中，这种操作是明确定义的，会返回结果`Infinity`（又名`Number.POSITIVE_INFINITY`）。不出所料：
 
 ```js
 var a = 1 / 0;	// Infinity
@@ -694,30 +694,30 @@ a + Math.pow( 2, 969 );		// 1.7976931348623157e+308
 
 根据规范，如果数学运算操作（如加法）导致结果值太大而不能被显示，IEEE 754的“舍入到最近”（round-to-nearest）模式指定了结果应该是什么。简单来说，`Number.MAX_VALUE + Math.pow( 2, 969 )`比`Infinity`更加靠近`Number.MAX_VALUE`，所以进行“向下舍去”，而`Number.MAX_VALUE + Math.pow( 2, 970 )`更靠近`Infinity`，所以进行“向上舍入”。
 
-如果你对这个想太多，你会更加蒙逼。所以，讲真，请适可而止！
+如果你对这个想太多，你会更加懵逼。所以，讲真，请适可而止！
 
 一旦你的运算结果溢出，产生了“无穷大”（两个无穷中的任意一个），你就不能回头了。用诗意的话来阐述，就是，你可以从有限到无限，但是不能从无限回退到有限。
 
 有个哲学性的问题：“无穷大除以无穷大的结果是什么”。我们天真的大脑可能会说“1”或“无穷大”。事实证明都是错的。无论是数学意义上还是在JavaScript中，`Infinity / Infinity`并不是一个已定义的操作。在JS中，你会得到`NaN`。
 
-那正的有限值除以`无穷大`的结果是多少？这还是很简单的，当然是`0`。那负的有限值除以`无穷大`的结果是多少？请继续阅读！
+那正的有限值除以无穷大的结果是多少？这还是很简单的，当然是`0`。那负的有限值除以无穷大的结果是多少？请继续阅读！
 
-#### Zeros
+#### 零
 
-While it may confuse the mathematics-minded reader, JavaScript has both a normal zero `0` (otherwise known as a positive zero `+0`) *and* a negative zero `-0`. Before we explain why the `-0` exists, we should examine how JS handles it, because it can be quite confusing.
+JavaScript有两个正常的零，`0`（也称为正零`+0`）和负零`-0`，有些数学头脑的读者可能会感到混淆。在我们解释为什么`-0`存在之前，我们应该研究JS如何处理它，因为它可能会相当混乱。
 
-Besides being specified literally as `-0`, negative zero also results from certain mathematic operations. For example:
+除了字面上指定为`-0`，特定的运算结果也会产生负零。例如：
 
 ```js
 var a = 0 / -3; // -0
 var b = 0 * -3; // -0
 ```
 
-Addition and subtraction cannot result in a negative zero.
+加减运算不会产生负零的结果。
 
-A negative zero when examined in the developer console will usually reveal `-0`, though that was not the common case until fairly recently, so some older browsers you encounter may still report it as `0`.
+负零在开发者控制台通常显示成`-0`，在以前可不是这样的，所以你如果你的浏览器很旧，它仍然会显示成`0`。
 
-However, if you try to stringify a negative zero value, it will always be reported as `"0"`, according to the spec.
+然而，根据规范，如果你尝试将一个零值转换成字符串，不管是正零还是负零，都会被转换成`"0"`。
 
 ```js
 var a = 0 / -3;
@@ -734,7 +734,7 @@ String( a );				// "0"
 JSON.stringify( a );		// "0"
 ```
 
-Interestingly, the reverse operations (going from `string` to `number`) don't lie:
+有趣的是，方向操作（从字符串转为数字）可以正常转换：
 
 ```js
 +"-0";				// -0
@@ -742,9 +742,9 @@ Number( "-0" );		// -0
 JSON.parse( "-0" );	// -0
 ```
 
-**Warning:** The `JSON.stringify( -0 )` behavior of `"0"` is particularly strange when you observe that it's inconsistent with the reverse: `JSON.parse( "-0" )` reports `-0` as you'd correctly expect.
+**警告：**当你发现`JSON.stringify( -0 )`的结果是`"0"`，而与它相反的操作，`JSON.parse( "-0" )`的结果返回`-0`（正如你说预期的那样），你会感觉特别奇怪。（原句：**Warning:** The `JSON.stringify( -0 )` behavior of `"0"` is particularly strange when you observe that it's inconsistent with the reverse: `JSON.parse( "-0" )` reports `-0` as you'd correctly expect.）
 
-In addition to stringification of negative zero being deceptive to hide its true value, the comparison operators are also (intentionally) configured to *lie*.
+除了字符串转换会隐藏负零的真实值（来欺骗你），比较运算符也会欺骗你。
 
 ```js
 var a = 0;
@@ -760,7 +760,7 @@ a === b;	// true
 a > b;		// false
 ```
 
-Clearly, if you want to distinguish a `-0` from a `0` in your code, you can't just rely on what the developer console outputs, so you're going to have to be a bit more clever:
+很显然，如果你想在你的代码中区分`-0`和`0`，你肯定不能相信那坑爹的开发者控制台的输出，你必须变得更机智点：
 
 ```js
 function isNegZero(n) {
@@ -773,11 +773,11 @@ isNegZero( 0 / -3 );	// true
 isNegZero( 0 );			// false
 ```
 
-Now, why do we need a negative zero, besides academic trivia?
+除了无聊的学术需要，我们为什么需要负零？
 
-There are certain applications where developers use the magnitude of a value to represent one piece of information (like speed of movement per animation frame) and the sign of that `number` to represent another piece of information (like the direction of that movement).
+这里有一些应用，开发者用一个值的幅度来代表一些信息（例如，每帧动画移动的速度），并且数字的符号代表另一条信息（例如，移动的方向）。
 
-In those applications, as one example, if a variable arrives at zero and it loses its sign, then you would lose the information of what direction it was moving in before it arrived at zero. Preserving the sign of the zero prevents potentially unwanted information loss.
+在这些应用中，举个例子，如果一个变量变为零并且失去了它的符号信息，那么你也将失去它是从哪个方向到达零这条信息。保留零的符号能够防止潜在的有用信息丢失。
 
 ### Special Equality
 
