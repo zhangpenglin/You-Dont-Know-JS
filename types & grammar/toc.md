@@ -13,7 +13,7 @@
 	* 字符串
 	* 数字
 	* 特殊数字
-	* Value vs Reference
+	* 值与引用
 * 第三章：本地类型
 	* Internal `[[Class]]`
 	* Boxing Wrappers

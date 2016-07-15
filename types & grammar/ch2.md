@@ -779,9 +779,9 @@ isNegZero( 0 );			// false
 
 在这些应用中，举个例子，如果一个变量变为零并且失去了它的符号信息，那么你也将失去它是从哪个方向到达零这条信息。保留零的符号能够防止潜在的有用信息丢失。
 
-### 特殊的相等比较
+### 特殊相等比较
 
-正如我们上面所看到的，`NaN`和`-0`在进行相等比较时会有特殊的行为。`NaN`永远不会等于它自身，因此你必须使用ES6提供的`Number.isNaN(..)`（或自己polyfill）。类似的，`-0`也会欺骗你，假装它与正常的零`0`是相等的（即使是严格相等`===`，参见第四章），所以你必须使用一些黑客技术（hackish），比如我们上面提到过的工具函数`isNegZero(..)`。
+正如我们上面所看到的，`NaN`和`-0`在进行相等比较时会有特殊的行为。`NaN`永远不会等于它自身，因此你必须使用ES6提供的`Number.isNaN(..)`（或自己polyfill）。类似的，`-0`也会欺骗你，假装它与正常的零`0`是相等的（即使是严格相等`===`，参见第四章），所以你必须使用一些hack技术（hackish），比如我们上面提到过的工具函数`isNegZero(..)`。
 
 在ES6中，有一个新的实用工具，可用于测试两个值是否绝对相等，不会发生任何异常。这就是`Object.is(..)`：
 
@@ -816,19 +816,19 @@ if (!Object.is) {
 
 `Object.is(..)`不应该被用于`==`或`===`中被认为是**安全**的比较（参见第四章“强制转换”），因为这些操作符会更加高效，并且更加常见。`Object.is(..)`主要用于这些特殊例子的相等比较。
 
-## Value vs. Reference
+## 值与引用
 
-In many other languages, values can either be assigned/passed by value-copy or by reference-copy depending on the syntax you use.
+在许多其他语言中，值可以按值拷贝或引用拷贝进行赋值/传递，取决于你使用的语法。
 
-For example, in C++ if you want to pass a `number` variable into a function and have that variable's value updated, you can declare the function parameter like `int& myNum`, and when you pass in a variable like `x`, `myNum` will be a **reference to `x`**; references are like a special form of pointers, where you obtain a pointer to another variable (like an *alias*). If you don't declare a reference parameter, the value passed in will *always* be copied, even if it's a complex object.
+例如，在C++中，如果你想将一个`number`变量传递给一个函数，并且让该变量的值得到更新，你可以这样声明函数变量`int& myNum`，当你传递一个变量如`x`，`myNum`就会变成**`x`的引用**；引用就像一种特殊形式的指针，指向另外一个变量（就像**alias**，别名）。如果你不声明引用参数，你传递进来的值**总是**会被拷贝，即使它是个复杂对象。
 
-In JavaScript, there are no pointers, and references work a bit differently. You cannot have a reference from one JS variable to another variable. That's just not possible.
+在JavaScript中没有指针，并且引用的工作机制也有点不同。你无法持有从一个JS变量到另一个变量的引用。这是不可能的。
 
-A reference in JS points at a (shared) **value**, so if you have 10 different references, they are all always distinct references to a single shared value; **none of them are references/pointers to each other.**
+JS中引用指向一个（共享的）**值**，所以如果你有10个不同的引用，它们始终是一个共享值的不同引用；**它们都不引用/指向对方**。
 
-Moreover, in JavaScript, there are no syntactic hints that control value vs. reference assignment/passing. Instead, the *type* of the value *solely* controls whether that value will be assigned by value-copy or by reference-copy.
+此外，在JavaScript中，并没有针对值或引用赋值/传递的语法提示。取而代之的是，值的**类型**单独控制该值是采用值拷贝还是引用拷贝。
 
-Let's illustrate:
+让我们举例来说明：
 
 ```js
 var a = 2;
@@ -844,15 +844,15 @@ c; // [1,2,3,4]
 d; // [1,2,3,4]
 ```
 
-Simple values (aka scalar primitives) are *always* assigned/passed by value-copy: `null`, `undefined`, `string`, `number`, `boolean`, and ES6's `symbol`.
+简单的值（又名原始类型）**总是**通过值拷贝进行赋值/传递：`null`、`undefined`、`string`、`number`、`boolean`和ES6的`symbol`。
 
-Compound values -- `object`s (including `array`s, and all boxed object wrappers -- see Chapter 3) and `function`s -- *always* create a copy of the reference on assignment or passing.
+复合值——`object`（包括`array`和所有基本类型对应的装箱类型——参见第三章）和`function`——**总是**创建引用的拷贝来进行赋值或传递。
 
-In the above snippet, because `2` is a scalar primitive, `a` holds one initial copy of that value, and `b` is assigned another *copy* of the value. When changing `b`, you are in no way changing the value in `a`.
+在上面的代码中，因为`2`是基本类型，`a`存储了这个值的初始拷贝，而`b`则被赋值为该值的另一份**拷贝**。所以，当你改变`b`的值，你根本就没法改变`a`的值。
 
-But **both `c` and `d`** are separate references to the same shared value `[1,2,3]`, which is a compound value. It's important to note that neither `c` nor `d` more "owns" the `[1,2,3]` value -- both are just equal peer references to the value. So, when using either reference to modify (`.push(4)`) the actual shared `array` value itself, it's affecting just the one shared value, and both references will reference the newly modified value `[1,2,3,4]`.
+但是`c`和`d`都是单独的引用，引用了相同的共享值`[1,2,3]`，它是一个复合值。你必须明白，`c`和`d`没有谁更多“拥有”值`[1,2,3]`——它们是相同的对该值的引用。因此，无论使用哪个引用修改（`.push(4)`）共享的数组值，它实际上影响的只是一个共享的值，并且这两个应用都会指向最新的修改值`[1,2,3,4]`。
 
-Since references point to the values themselves and not to the variables, you cannot use one reference to change where another reference is pointed:
+由于引用指向值本身，而不是变量，所以不能使用一个引用来更改另外一个引用的指向：
 
 ```js
 var a = [1,2,3];
@@ -866,9 +866,9 @@ a; // [1,2,3]
 b; // [4,5,6]
 ```
 
-When we make the assignment `b = [4,5,6]`, we are doing absolutely nothing to affect *where* `a` is still referencing (`[1,2,3]`). To do that, `b` would have to be a pointer to `a` rather than a reference to the `array` -- but no such capability exists in JS!
+但我们执行`b = [4,5,6]`这个赋值，我们并没有影响到`a`的指向，它仍然引用值`[1,2,3]`。要做到这一点，`b`必须是指向`a`的指针而不是数组的引用——但是JS中并不存在这样的能力！
 
-The most common way such confusion happens is with function parameters:
+这种困惑最常发生在函数参数中：
 
 ```js
 function foo(x) {
@@ -888,11 +888,11 @@ foo( a );
 a; // [1,2,3,4]  not  [4,5,6,7]
 ```
 
-When we pass in the argument `a`, it assigns a copy of the `a` reference to `x`. `x` and `a` are separate references pointing at the same `[1,2,3]` value. Now, inside the function, we can use that reference to mutate the value itself (`push(4)`). But when we make the assignment `x = [4,5,6]`, this is in no way affecting where the initial reference `a` is pointing -- still points at the (now modified) `[1,2,3,4]` value.
+当我们把参数`a`传递给函数，它会把`a`的引用拷贝一份赋值给`x`。`x`和`a`是指向相同值`[1,2,3]`的不同引用。在函数内部，我们可以用这个引用去修改值（`push(4)`）。但是当我们执行`x = [4,5,6]`赋值操作，它无法影响到`a`的初始引用指向——仍然指向值（现在被修改了）`[1,2,3,4]`。
 
-There is no way to use the `x` reference to change where `a` is pointing. We could only modify the contents of the shared value that both `a` and `x` are pointing to.
+这里没有办法通过`x`的引用来改变`a`的指向。我们只能修改`a`和`x`指向的共享值的内容。
 
-To accomplish changing `a` to have the `[4,5,6,7]` value contents, you can't create a new `array` and assign -- you must modify the existing `array` value:
+想要实现将`a`指向的值变为`[4,5,6,7]`，你不能创建一个新的数组然后赋值——你只能修改现有的数组的值：
 
 ```js
 function foo(x) {
@@ -912,19 +912,21 @@ foo( a );
 a; // [4,5,6,7]  not  [1,2,3,4]
 ```
 
-As you can see, `x.length = 0` and `x.push(4,5,6,7)` were not creating a new `array`, but modifying the existing shared `array`. So of course, `a` references the new `[4,5,6,7]` contents.
+如你所见，`x.length = 0`和`x.push(4,5,6,7)`并没有创建新的数组，只是修改当前共享的数组。所以`a`理所当然的引用新的内容`[4,5,6,7]`。
 
-Remember: you cannot directly control/override value-copy vs. reference -- those semantics are controlled entirely by the type of the underlying value.
+记住：你不能直接控制/覆盖值拷贝与引用——这些语义完全由基础值的类型控制。（原句：Remember: you cannot directly control/override value-copy vs. reference -- those semantics are controlled entirely by the type of the underlying value.）
 
-To effectively pass a compound value (like an `array`) by value-copy, you need to manually make a copy of it, so that the reference passed doesn't still point to the original. For example:
+为了有效地将一个复合值（比如数组）按值拷贝，你需要手动创建一个它的副本，从而使这个引用不再指向原来的值。例如：
 
 ```js
 foo( a.slice() );
 ```
 
-`slice(..)` with no parameters by default makes an entirely new (shallow) copy of the `array`. So, we pass in a reference only to the copied `array`, and thus `foo(..)` cannot affect the contents of `a`.
+`slice(..)`在默认情况下没有参数会创建一个全新的（浅）拷贝数组。所以，我们只传递拷贝的数组的引用，因此`foo(..)`并不能影响到`a`引用指向的内容。
 
 To do the reverse -- pass a scalar primitive value in a way where its value updates can be seen, kinda like a reference -- you have to wrap the value in another compound value (`object`, `array`, etc) that *can* be passed by reference-copy:
+
+相反，如果你想要传递一个原始类型的值进去，并且能够得到更新，就像引用一样。你必须把它包裹在另一个复合值（对象、数组等）中，而它可以通过引用拷贝进行传递：
 
 ```js
 function foo(wrapper) {
@@ -940,11 +942,11 @@ foo( obj );
 obj.a; // 42
 ```
 
-Here, `obj` acts as a wrapper for the scalar primitive property `a`. When passed to `foo(..)`, a copy of the `obj` reference is passed in and set to the `wrapper` parameter. We now can use the `wrapper` reference to access the shared object, and update its property. After the function finishes, `obj.a` will see the updated value `42`.
+在这里，`obj`把原始值包裹在它的属性`a`上。当把它传递给`foo(..)`，`obj`的引用拷贝会被赋值给`wrapper`参数。我们现在可以使用`wrapper`引用来访问这个共享的对象，并且更新它的属性。在函数执行完毕，我们看到`obj.a`被更新为`42`。
 
-It may occur to you that if you wanted to pass in a reference to a scalar primitive value like `2`, you could just box the value in its `Number` object wrapper (see Chapter 3).
+机智的你可能会想到，如果想要将像`2`这样的原始值当作引用来传递，只需要把这个值装箱成它的封装类`Number`（参见第三章）。
 
-It *is* true a copy of the reference to this `Number` object *will* be passed to the function, but unfortunately, having a reference to the shared object is not going to give you the ability to modify the shared primitive value, like you may expect:
+`Number`对象的引用副本确实会被传递给函数，但不幸的是，拥有对共享对象的引用并不会给你修改共享原始值的能力，你可能已经猜到了：
 
 ```js
 function foo(x) {
@@ -959,17 +961,17 @@ foo( b );
 console.log( b ); // 2, not 3
 ```
 
-The problem is that the underlying scalar primitive value is *not mutable* (same goes for `String` and `Boolean`). If a `Number` object holds the scalar primitive value `2`, that exact `Number` object can never be changed to hold another value; you can only create a whole new `Number` object with a different value.
+问题就出在底层原始值是**不可变**（同样适用于`String`和`Boolean`）。如果`Number`持有了原始值`2`，确切的说`Number`对象不能被改变（即不能持有其他值）；你只能创建一个全新的`Number`对象来持有不同的值。
 
-When `x` is used in the expression `x + 1`, the underlying scalar primitive value `2` is unboxed (extracted) from the `Number` object automatically, so the line `x = x + 1` very subtly changes `x` from being a shared reference to the `Number` object, to just holding the scalar primitive value `3` as a result of the addition operation `2 + 1`. Therefore, `b` on the outside still references the original unmodified/immutable `Number` object holding the value `2`.
+当`x`被用于表达式`x + 1`中，底层的原始值`2`会从`Number`对象中自动拆箱（提取）出来，`x = x + 1`这行代码非常微妙的将`x`从一个指向`Number`共享对象的引用，转变成指向基本值`3`（加法运算`2 + 1`的结果）。因此，在外面的`b`仍引用原始的未修改（不可变）的`Number`对象（持有的值为`2`）。
 
-You *can* add properties on top of the `Number` object (just not change its inner primitive value), so you could exchange information indirectly via those additional properties.
+你可以在`Number`对象的顶部（只是不改变其内在的原始值）添加属性，这样你可以通过这些附加的属性来间接地交换信息。
 
-This is not all that common, however; it probably would not be considered a good practice by most developers.
+然而，这种做法并不常见；许多的开发者可能会认为它并不是一个好主意。
 
-Instead of using the wrapper object `Number` in this way, it's probably much better to use the manual object wrapper (`obj`) approach in the earlier snippet. That's not to say that there's no clever uses for the boxed object wrappers like `Number` -- just that you should probably prefer the scalar primitive value form in most cases.
+与其用这种方法使用`Number`封装类，还不如使用之前代码片段中的手动对象包裹（`obj`）的方法。这并不是说原始类型的封装类（如`Number`）一无是处——只是在大多数情况下，你可能更喜欢原始值的形式。（原句：Instead of using the wrapper object `Number` in this way, it's probably much better to use the manual object wrapper (`obj`) approach in the earlier snippet. That's not to say that there's no clever uses for the boxed object wrappers like `Number` -- just that you should probably prefer the scalar primitive value form in most cases.）
 
-References are quite powerful, but sometimes they get in your way, and sometimes you need them where they don't exist. The only control you have over reference vs. value-copy behavior is the type of the value itself, so you must indirectly influence the assignment/passing behavior by which value types you choose to use.
+引用是非常强大的，但有时它们会让你非常蛋疼，有时候你需要它们的地方它们却不存在。你必须明白唯一控制值拷贝与引用拷贝的行为是值本身的类型，所以你必须间接地影响值的类型来改变赋值或传递的行为。（原句：References are quite powerful, but sometimes they get in your way, and sometimes you need them where they don't exist. The only control you have over reference vs. value-copy behavior is the type of the value itself, so you must indirectly influence the assignment/passing behavior by which value types you choose to use.）
 
 ## Review
 
