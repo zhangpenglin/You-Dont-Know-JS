@@ -704,7 +704,7 @@ a + Math.pow( 2, 969 );		// 1.7976931348623157e+308
 
 #### 零
 
-JavaScript有两个正常的零，`0`（也称为正零`+0`）和负零`-0`，有些数学头脑的读者可能会感到混淆。在我们解释为什么`-0`存在之前，我们应该研究JS如何处理它，因为它可能会相当混乱。
+JavaScript有两个正常的零，`0`（也称为正零`+0`）和负零`-0`，有数学头脑的读者可能会感到混淆。在我们解释为什么`-0`存在之前，我们应该研究JS如何处理它，因为它可能会相当混乱。
 
 除了字面上指定为`-0`，特定的运算结果也会产生负零。例如：
 
@@ -734,7 +734,7 @@ String( a );				// "0"
 JSON.stringify( a );		// "0"
 ```
 
-有趣的是，方向操作（从字符串转为数字）可以正常转换：
+有趣的是，反向操作（从字符串转为数字）可以正常转换：
 
 ```js
 +"-0";				// -0
@@ -779,11 +779,11 @@ isNegZero( 0 );			// false
 
 在这些应用中，举个例子，如果一个变量变为零并且失去了它的符号信息，那么你也将失去它是从哪个方向到达零这条信息。保留零的符号能够防止潜在的有用信息丢失。
 
-### Special Equality
+### 特殊的相等比较
 
-As we saw above, the `NaN` value and the `-0` value have special behavior when it comes to equality comparison. `NaN` is never equal to itself, so you have to use ES6's `Number.isNaN(..)` (or a polyfill). Simlarly, `-0` lies and pretends that it's equal (even `===` strict equal -- see Chapter 4) to regular positive `0`, so you have to use the somewhat hackish `isNegZero(..)` utility we suggested above.
+正如我们上面所看到的，`NaN`和`-0`在进行相等比较时会有特殊的行为。`NaN`永远不会等于它自身，因此你必须使用ES6提供的`Number.isNaN(..)`（或自己polyfill）。类似的，`-0`也会欺骗你，假装它与正常的零`0`是相等的（即使是严格相等`===`，参见第四章），所以你必须使用一些黑客技术（hackish），比如我们上面提到过的工具函数`isNegZero(..)`。
 
-As of ES6, there's a new utility that can be used to test two values for absolute equality, without any of these exceptions. It's called `Object.is(..)`:
+在ES6中，有一个新的实用工具，可用于测试两个值是否绝对相等，不会发生任何异常。这就是`Object.is(..)`：
 
 ```js
 var a = 2 / "foo";
@@ -795,7 +795,7 @@ Object.is( b, -0 );		// true
 Object.is( b, 0 );		// false
 ```
 
-There's a pretty simple polyfill for `Object.is(..)` for pre-ES6 environments:
+你可以很容易的pollfill`Object.is(..)`用于ES6之前的环境：
 
 ```js
 if (!Object.is) {
@@ -814,7 +814,7 @@ if (!Object.is) {
 }
 ```
 
-`Object.is(..)` probably shouldn't be used in cases where `==` or `===` are known to be *safe* (see Chapter 4 "Coercion"), as the operators are likely much more efficient and certainly are more idiomatic/common. `Object.is(..)` is mostly for these special cases of equality.
+`Object.is(..)`不应该被用于`==`或`===`中被认为是**安全**的比较（参见第四章“强制转换”），因为这些操作符会更加高效，并且更加常见。`Object.is(..)`主要用于这些特殊例子的相等比较。
 
 ## Value vs. Reference
 
