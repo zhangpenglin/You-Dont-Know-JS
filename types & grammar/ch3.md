@@ -91,7 +91,7 @@ Object.prototype.toString.call( true );		// "[object Boolean]"
 
 ## Boxing Wrappers
 
-These object wrappers serve a very important purpose. Primitive values don't have properties or methods, so to access `.length` or `.toString()` you need an object wrapper around the value. Thankfully, JS will automatically *box* (aka wrap) the primitive value to fulfill such accesses.
+这些封装对象有一个非常重要的目的。原始值是没有属性或方法，所以你需要在原始值的基础上封装一个对象，才能访问`.length`和`.toString()`。幸运的是，JS会自动**装箱**（又称包裹）原始值来实现这样的访问。
 
 ```js
 var a = "abc";
@@ -100,17 +100,21 @@ a.length; // 3
 a.toUpperCase(); // "ABC"
 ```
 
-So, if you're going to be accessing these properties/methods on your string values regularly, like a `i < a.length` condition in a `for` loop for instance, it might seem to make sense to just have the object form of the value from the start, so the JS engine doesn't need to implicitly create it for you.
+所以，如果你打算要经常访问你的字符串值的属性或方法，如在`for`循环中的判断条件`i < a.length`，看起来似乎很有理由一开始就把这个值转为对象的形式，这样JS引擎就不用隐式的为我们创建它了。
 
 But it turns out that's a bad idea. Browsers long ago performance-optimized the common cases like `.length`, which means your program will *actually go slower* if you try to "preoptimize" by directly using the object form (which isn't on the optimized path).
 
-In general, there's basically no reason to use the object form directly. It's better to just let the boxing happen implicitly where necessary. In other words, never do things like `new String("abc")`, `new Number(42)`, etc -- always prefer using the literal primitive values `"abc"` and `42`.
+事实证明这是一个坏主意。浏览器会对常见的情况（如`.length`）进行性能优化，这意味着如果你直接使用对象的形式反而会使得你的程序**跑得更慢**（因为这不是最优化路径）。
 
-### Object Wrapper Gotchas
+在一般情况下，基本上没有理由直接使用对象的形式。最好是让装箱操作在必要时隐式的发生。换句话说，千万不要做类似`new String("abc")`、`new Number(42)`等这样的事情——请总是使用它们的字面原始值`"abc"`和`42`。
+
+### 封装对象的陷阱
 
 There are some gotchas with using the object wrappers directly that you should be aware of if you *do* choose to ever use them.
 
-For example, consider `Boolean` wrapped values:
+如果你**确实**选择使用封装对象，你应该知道这里有一些陷阱与直接使用封装对象有关。
+
+例如，考虑`Boolean`封装值：
 
 ```js
 var a = new Boolean( false );
@@ -120,9 +124,9 @@ if (!a) {
 }
 ```
 
-The problem is that you've created an object wrapper around the `false` value, but objects themselves are "truthy" (see Chapter 4), so using the object behaves oppositely to using the underlying `false` value itself, which is quite contrary to normal expectation.
+问题就出在你在`false`值周围创建的封装对象上，因为对象是“truthy”（参见第四章），因此使用对象的行为与底层`false`值本身相对立，这与正常的预期相反。
 
-If you want to manually box a primitive value, you can use the `Object(..)` function (no `new` keyword):
+如果你想手动装箱一个原始值，你可以使用`Object(..)`函数（没有`new`关键字）：
 
 ```js
 var a = "abc";
@@ -140,11 +144,11 @@ Object.prototype.toString.call( b ); // "[object String]"
 Object.prototype.toString.call( c ); // "[object String]"
 ```
 
-Again, using the boxed object wrapper directly (like `b` and `c` above) is usually discouraged, but there may be some rare occasions you'll run into where they may be useful.
+再说一遍，通常不鼓励你直接使用封装类（如上面的`b`和`c`），但是可能在一些非常罕见的情况下你发现它们会很有用。
 
 ## Unboxing
 
-If you have an object wrapper and you want to get the underlying primitive value out, you can use the `valueOf()` method:
+如果你有一个封装对象并且想要获取它底层的原始值，你可以使用它的`valueOf()`方法：
 
 ```js
 var a = new String( "abc" );
@@ -156,7 +160,7 @@ b.valueOf(); // 42
 c.valueOf(); // true
 ```
 
-Unboxing can also happen implicitly, when using an object wrapper value in a way that requires the primitive value. This process (coercion) will be covered in more detail in Chapter 4, but briefly:
+当你使用一个封装对象，在某个地方你需要用到这个封装对象的底层原始值，这个时候会隐式的发生拆箱操作。这个过程（强制转换）会在第四章详细介绍，不介意先给你露一手：
 
 ```js
 var a = new String( "abc" );
