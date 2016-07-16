@@ -58,24 +58,26 @@ console.log( a );
 
 Values that are `typeof` `"object"` (such as an array) are additionally tagged with an internal `[[Class]]` property (think of this more as an internal *class*ification rather than related to classes from traditional class-oriented coding). This property cannot be accessed directly, but can generally be revealed indirectly by borrowing the default `Object.prototype.toString(..)` method called against the value. For example:
 
+`typeof` `"object"`（例如数组）的值会被附加上一个内部`[[Class]]`属性（这更像是面向对象编程中的内部类）。这个属性不能被直接访问到，你可以通过借用默认的`Object.prototype.toString(..)`方法间接的获取这个值。例如：
+
 ```js
 Object.prototype.toString.call( [1,2,3] );			// "[object Array]"
 
 Object.prototype.toString.call( /regex-literal/i );	// "[object RegExp]"
 ```
 
-So, for the array in this example, the internal `[[Class]]` value is `"Array"`, and for the regular expression, it's `"RegExp"`. In most cases, this internal `[[Class]]` value corresponds to the built-in native constructor (see below) that's related to the value, but that's not always the case.
+在这个例子中，数组的内部`[[Class]]`的值是`"Array"`，而正则表达式则是`"RegExp"`。在大多数情况下，内部`[[Class]]`的值和内置的native构造函数（见下文）是相对应的，但事实并非总是如此。
 
-What about primitive values? First, `null` and `undefined`:
+对于原始类型的值，情况是什么样子？首先来看`null`和`undefined`：
 
 ```js
 Object.prototype.toString.call( null );			// "[object Null]"
 Object.prototype.toString.call( undefined );	// "[object Undefined]"
 ```
 
-You'll note that there are no `Null()` or `Undefined()` native constructors, but nevertheless the `"Null"` and `"Undefined"` are the internal `[[Class]]` values exposed.
+你可能会发现这里并没有`Null()`或`Undefined()`的native构造函数，但`"Null"`和`"Undefined"`仍然出现在内部`[[Class]]`暴露的值中。
 
-But for the other simple primitives like `string`, `number`, and `boolean`, another behavior actually kicks in, which is usually called "boxing" (see "Boxing Wrappers" section next):
+但是对于其他简单的原始类型如`string`、`number`和`boolean`，这里需要提一个概念，就是我们通常所说的“装箱”（参见下一节的“Boxing Wrappers”）：
 
 ```js
 Object.prototype.toString.call( "abc" );	// "[object String]"
@@ -83,9 +85,9 @@ Object.prototype.toString.call( 42 );		// "[object Number]"
 Object.prototype.toString.call( true );		// "[object Boolean]"
 ```
 
-In this snippet, each of the simple primitives are automatically boxed by their respective object wrappers, which is why `"String"`, `"Number"`, and `"Boolean"` are revealed as the respective internal `[[Class]]` values.
+在这段代码中，每个简单的原始类型都被各自对应的封装类自动装箱了，这就是为什么`"String"`、`"Number"`和`"Boolean"`会出现在内部`[[Class]]`的当中的原因。
 
-**Note:** The behavior of `toString()` and `[[Class]]` as illustrated here has changed a bit from ES5 to ES6, but we cover those details in the *ES6 & Beyond* title of this series.
+**注意：**从ES5到ES6的过程中，`toString()`和`[[Class]]`的行为已经发生了一些变化，我们会在本系列标题为“超越ES6”中讲解这些细节。
 
 ## Boxing Wrappers
 
