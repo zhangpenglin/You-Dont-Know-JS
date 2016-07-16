@@ -1,9 +1,9 @@
 # 你不知道的JavaScript: 类型和语法
-# 第三章：本地类型
+# 第三章：Natives
 
-Several times in Chapters 1 and 2, we alluded to various built-ins, usually called "natives," like `String` and `Number`. Let's examine those in detail now.
+我们在第一章和第二章中提到过几次built-ins（内置插件），通常称为“natives”，比如`String`和`Number`。现在让我们仔细研究它们。
 
-Here's a list of the most commonly used natives:
+以下是最常用的natives列表：
 
 * `String()`
 * `Number()`
@@ -16,9 +16,9 @@ Here's a list of the most commonly used natives:
 * `Error()`
 * `Symbol()` -- added in ES6!
 
-As you can see, these natives are actually built-in functions.
+正如你所见，这些natives实际上是内置函数。
 
-If you're coming to JS from a language like Java, JavaScript's `String()` will look like the `String(..)` constructor you're used to for creating string values. So, you'll quickly observe that you can do things like:
+如果你是从像Java这样的语言转过来学习JS，那JavaScript的`String()`看起来像你用来创建字符串值的`String(..)`构造函数。因此，你很快就会看到，你可以做这样的事情：
 
 ```js
 var s = new String( "Hello World!" );
@@ -26,7 +26,7 @@ var s = new String( "Hello World!" );
 console.log( s.toString() ); // "Hello World!"
 ```
 
-It *is* true that each of these natives can be used as a native constructor. But what's being constructed may be different than you think.
+这些natives确实可以被用作native构造函数。但是，构造出什么可能跟你想象中的不同。
 
 ```js
 var a = new String( "abc" );
@@ -38,21 +38,21 @@ a instanceof String; // true
 Object.prototype.toString.call( a ); // "[object String]"
 ```
 
-The result of the constructor form of value creation (`new String("abc")`) is an object wrapper around the primitive (`"abc"`) value.
+通过构造函数的形式（`new String("abc")`）创建的值是一个原始类型（`"abc"`）值的对象包裹器。
 
-Importantly, `typeof` shows that these objects are not their own special *types*, but more appropriately they are subtypes of the `object` type.
+重要的是，`typeof`显示这些对象的类型并不是它们自己的特殊**类型**（更恰当地说是`object`的子类型）。
 
-This object wrapper can further be observed with:
+我们可以进一步观察这个对象包裹器：
 
 ```js
 console.log( a );
 ```
 
-The output of that statement varies depending on your browser, as developer consoles are free to choose however they feel it's appropriate to serialize the object for developer inspection.
+这条语句的输出取决于你的浏览器，开发者控制台选择他们认为合适的做法去序列化对象，然后呈现给开发者。（原句：The output of that statement varies depending on your browser, as developer consoles are free to choose however they feel it's appropriate to serialize the object for developer inspection.）
 
-**Note:** At the time of writing, the latest Chrome prints something like this: `String {0: "a", 1: "b", 2: "c", length: 3, [[PrimitiveValue]]: "abc"}`. But older versions of Chrome used to just print this: `String {0: "a", 1: "b", 2: "c"}`. The latest Firefox currently prints `String ["a","b","c"]`, but used to print `"abc"` in italics, which was clickable to open the object inspector. Of course, these results are subject to rapid change and your experience may vary.
+**注意：**在写这篇文章的时候，最新的Chrome打印是这样的：`String {0: "a", 1: "b", 2: "c", length: 3, [[PrimitiveValue]]: "abc"}`。但是，旧版本的Chrome以前只打印：`String {0: "a", 1: "b", 2: "c"}`。最新的Firefox目前打印`String ["a","b","c"]`，但是以前以斜体打印`"abc"`，它是可点击的，点击之后打开对象检查器。当然，这些结果都会受到迅速的变化，因此你看到的可能不一样。
 
-The point is, `new String("abc")` creates a string wrapper object around `"abc"`, not just the primitive `"abc"` value itself.
+问题的关键是，`new String("abc")`在字符串`"abc"`周围创建了一个字符串包装对象，而不仅仅是原始值`"abc"`本身。
 
 ## Internal `[[Class]]`
 

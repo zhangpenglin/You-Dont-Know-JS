@@ -14,7 +14,7 @@
 	* 数字
 	* 特殊数字
 	* 值与引用
-* 第三章：本地类型
+* 第三章：Natives
 	* Internal `[[Class]]`
 	* Boxing Wrappers
 	* Unboxing
