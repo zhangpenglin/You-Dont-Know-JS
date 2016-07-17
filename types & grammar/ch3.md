@@ -410,23 +410,25 @@ Object.getOwnPropertySymbols( a );
 
 ### Native Prototypes
 
-Each of the built-in native constructors has its own `.prototype` object -- `Array.prototype`, `String.prototype`, etc.
+每个内置的native构造器都有它们自己的`.prototype`对象——`Array.prototype`、`String.prototype`等。
 
 These objects contain behavior unique to their particular object subtype.
 
-For example, all string objects, and by extension (via boxing) `string` primitives, have access to default behavior as methods defined on the `String.prototype` object.
+这些对象包含的行为使得它们的子类型对象变得独特。
 
-**Note:** By documentation convention, `String.prototype.XYZ` is shortened to `String#XYZ`, and likewise for all the other `.prototype`s.
+例如，所有的字符串对象和通过扩展（即装箱）的字符串原始值，都可以访问这些定义在`String.prototype`对象上的方法。
 
-* `String#indexOf(..)`: find the position in the string of another substring
-* `String#charAt(..)`: access the character at a position in the string
-* `String#substr(..)`, `String#substring(..)`, and `String#slice(..)`: extract a portion of the string as a new string
-* `String#toUpperCase()` and `String#toLowerCase()`: create a new string that's converted to either uppercase or lowercase
-* `String#trim()`: create a new string that's stripped of any trailing or leading whitespace
+**注意：**根据文档约定，`String.prototype.XYZ`简写为`String#XYZ`，其他的`.prototype`也是一样的。
 
-None of the methods modify the string *in place*. Modifications (like case conversion or trimming) create a new value from the existing value.
+* `String#indexOf(..)`：在字符串中找到另一个子字符串的位置
+* `String#charAt(..)`：获取字符串指定位置对应的字符
+* `String#substr(..)`、`String#substring(..)`和`String#slice(..)`：提取字符串的一部分作为一个新的字符串
+* `String#toUpperCase()`和`String#toLowerCase()`：创建一个转换为大写或小写的新字符串
+* `String#trim()`：创建一个删除两端空白字符的新字符串
 
-By virtue of prototype delegation (see the *this & Object Prototypes* title in this series), any string value can access these methods:
+没有任何方法能够直接修改字符串**本身**。修改（如大小写转换或修剪(trimming)）会从现有的值当中创建一个新的值。
+
+通过原型代理（参见本系列标题为“this和对象原型”），任何字符串值都可以访问这些方法：
 
 ```js
 var a = " abc ";
@@ -436,9 +438,9 @@ a.toUpperCase(); // " ABC "
 a.trim(); // "abc"
 ```
 
-The other constructor prototypes contain behaviors appropriate to their types, such as `Number#toFixed(..)` (stringifying a number with a fixed number of decimal digits) and `Array#concat(..)` (merging arrays). All functions have access to `apply(..)`, `call(..)`, and `bind(..)` because `Function.prototype` defines them.
+其他的构造器原型包含适合它们类型的行为，比如`Number#toFixed(..)`（将一个数字转为固定位数的数字，并强制转换为字符串返回）和`Array#concat(..)`（合并数组）。所有的函数都可以访问`apply(..)`、`call(..)`和`bind(..)`，因为`Function.prototype`中定义了它们。
 
-But, some of the native prototypes aren't *just* plain objects:
+但是，一些native的原型不仅仅是纯对象：
 
 ```js
 typeof Function.prototype;			// "function"
@@ -448,7 +450,7 @@ RegExp.prototype.toString();		// "/(?:)/" -- empty regex
 "abc".match( RegExp.prototype );	// [""]
 ```
 
-A particularly bad idea, you can even modify these native prototypes (not just adding properties as you're probably familiar with):
+有个特别糟糕的注意，就是你可以修改这些native原型（不只是添加属性）：
 
 ```js
 Array.isArray( Array.prototype );	// true
@@ -460,13 +462,13 @@ Array.prototype;					// [1,2,3]
 Array.prototype.length = 0;
 ```
 
-As you can see, `Function.prototype` is a function, `RegExp.prototype` is a regular expression, and `Array.prototype` is an array. Interesting and cool, huh?
+如你所见，`Function.prototype`是一个函数，`RegExp.prototype`是一个正则表达式，而`Array.prototype`这是一个数组。是不是感觉很有趣，又很酷？
 
 #### Prototypes As Defaults
 
-`Function.prototype` being an empty function, `RegExp.prototype` being an "empty" (e.g., non-matching) regex, and `Array.prototype` being an empty array, make them all nice "default" values to assign to variables if those variables wouldn't already have had a value of the proper type.
+`Function.prototype`是一个空函数，`RegExp.prototype`是一个“空”（例如，不匹配）的正则表达式，而`Array.prototype`是一个空数组，这让它们很好的给变量赋予**默认值**，如果这些变量当前还没有赋予合适类型的值。
 
-For example:
+例如：
 
 ```js
 function isThisCool(vals,fn,rx) {
@@ -488,13 +490,13 @@ isThisCool(
 );					// false
 ```
 
-**Note:** As of ES6, we don't need to use the `vals = vals || ..` default value syntax trick (see Chapter 4) anymore, because default values can be set for parameters via native syntax in the function declaration (see Chapter 5).
+**注意：**在ES6中，我们没必要使用`vals = vals || ..`语法技巧来设置默认值（参见第四章），因为可以在函数声明中通过原生语法来给参数设置默认值（参见第五章）。
 
-One minor side-benefit of this approach is that the `.prototype`s are already created and built-in, thus created *only once*. By contrast, using `[]`, `function(){}`, and `/(?:)/` values themselves for those defaults would (likely, depending on engine implementations) be recreating those values (and probably garbage-collecting them later) for *each call* of `isThisCool(..)`. That could be memory/CPU wasteful.
+这种方法的一个微小好处在于`.prototype`是已经创建和内置的，因此它们只创建**一次**。与之对应，如果使用`[]`、`function(){}`和`/(?:)/`值作为默认值将会在**每次调用**函数`isThisCool(..)`（可能，取决于引擎的实现）重新创建这些值（可能之后会被垃圾回收）。这会浪费内存和CPU的。
 
-Also, be very careful not to use `Array.prototype` as a default value **that will subsequently be modified**. In this example, `vals` is used read-only, but if you were to instead make in-place changes to `vals`, you would actually be modifying `Array.prototype` itself, which would lead to the gotchas mentioned earlier!
+此外，要非常小心不要使用`Array.prototype`作为**随后将修改**的默认值。在这个例子中，`vals`用于只读的，但是如果你反过来修改`vals`本身，你实际上是修改`Array.prototype`本身，这将导致前面提到的陷阱！
 
-**Note:** While we're pointing out these native prototypes and some usefulness, be cautious of relying on them and even more wary of modifying them in anyway. See Appendix A "Native Prototypes" for more discussion.
+**注意：**虽然我们指出了这些native原型和它们的一些用途，但依赖它们需谨慎，特别是你无论如何都要修改它们的时候，你需要更加警惕。更多的讨论请参见附录A“Native Prototypes”。
 
 ## Review
 
