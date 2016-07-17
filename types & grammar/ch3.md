@@ -305,7 +305,7 @@ Inside of `apply(..)`, we can envision there's another `for` loop (kinda like `j
 
 ### `Object(..)`, `Function(..)`, and `RegExp(..)`
 
-The `Object(..)`/`Function(..)`/`RegExp(..)` constructors are also generally optional (and thus should usually be avoided unless specifically called for):
+`Object(..)`/`Function(..)`/`RegExp(..)`构造函数一般也是可选的（因此通常应该避免使用，除非特别要求）：
 
 ```js
 var c = new Object();
@@ -323,11 +323,11 @@ var h = new RegExp( "^a*b+", "g" );
 var i = /^a*b+/g;
 ```
 
-There's practically no reason to ever use the `new Object()` constructor form, especially since it forces you to add properties one-by-one instead of many at once in the object literal form.
+这里几乎没有理由去使用`new Object()`的构造形式，特别是它强迫你必须一个接一个的添加属性，不像对象字面量形式，一次性可以添加多个属性。
 
-The `Function` constructor is helpful only in the rarest of cases, where you need to dynamically define a function's parameters and/or its function body. **Do not just treat `Function(..)` as an alternate form of `eval(..)`.** You will almost never need to dynamically define a function in this way.
+`Function`构造函数只有在极少数情况下才会用到，比如，你需要动态的定义函数参数或函数体。**千万不要把`Function(..)`当作`eval(..)`的另一种形式。**你几乎从不需要以这种方式动态定义函数。
 
-Regular expressions defined in the literal form (`/^a*b+/g`) are strongly preferred, not just for ease of syntax but for performance reasons -- the JS engine precompiles and caches them before code execution. Unlike the other constructor forms we've seen so far, `RegExp(..)` has some reasonable utility: to dynamically define the pattern for a regular expression.
+强烈推荐你用字面量形式（`/^a*b+/g`）定义正则表达式，不仅仅是为了语法上便捷，更是基于性能原因——JS引擎会在代码执行前预编译并且缓存它们。不同于我们迄今见过的其他构造形式，`RegExp(..)`具有一定的合理实用性：动态定义正则表达式模式。
 
 ```js
 var name = "Kyle";
@@ -336,7 +336,7 @@ var namePattern = new RegExp( "\\b(?:" + name + ")+\\b", "ig" );
 var matches = someText.match( namePattern );
 ```
 
-This kind of scenario legitimately occurs in JS programs from time to time, so you'd need to use the `new RegExp("pattern","flags")` form.
+在JS程序中经常会出现这种形式的脚本（这是合法的脚本），因此你需要使用`new RegExp("pattern","flags")`这种形式。
 
 ### `Date(..)` and `Error(..)`
 
