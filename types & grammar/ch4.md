@@ -1,13 +1,13 @@
 # 你不知道的JavaScript: 类型和语法
-# 第四章：强制转换
+# 第四章：coercion
 
-Now that we much more fully understand JavaScript's types and values, we turn our attention to a very controversial topic: coercion.
+现在，我们已经更加全面了解JavaScript的类型和值，我们把注意力放到一个非常有争议性的话题：coercion。（译者注：coercion，强迫，意译为强制转换，未避免读者误解，不做翻译）
 
-As we mentioned in Chapter 1, the debates over whether coercion is a useful feature or a flaw in the design of the language (or somewhere in between!) have raged since day one. If you've read other popular books on JS, you know that the overwhelmingly prevalent *message* out there is that coercion is magical, evil, confusing, and just downright a bad idea.
+正如我们在第一章提到的，关于coercion是一个非常有用的功能，还是语言的设计缺陷（或介于两者之间！）的争论，从语言设计之初就开始了。如果你已经阅读过一些JS的畅销书，你就知道绝大多数流行的观点是coercion是很神奇的、邪恶的、令人混乱的，是个彻头彻尾的坏主意。
 
-In the same overall spirit of this book series, rather than running away from coercion because everyone else does, or because you get bitten by some quirk, I think you should run toward that which you don't understand and seek to *get it* more fully.
+基于本系列书籍的相同精神，不要因为别人这么做，或者你曾经被它的奇怪特性坑过，你就逃离coercion，我认为你应该勇敢面对你不明白的地方，尽全力充分掌握它。
 
-Our goal is to fully explore the pros and cons (yes, there *are* pros!) of coercion, so that you can make an informed decision on its appropriateness in your program.
+我们的目标是充分发掘coercion的利弊（对，它**的确有**好的一面！），这样你就可以在你的程序中做适当的决定。
 
 ## Converting Values
 
