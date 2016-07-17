@@ -379,17 +379,17 @@ function foo(x) {
 
 ### `Symbol(..)`
 
-New as of ES6, an additional primitive value type has been added, called "Symbol". Symbols are special "unique" (not strictly guaranteed!) values that can be used as properties on objects with little fear of any collision. They're primarily designed for special built-in behaviors of ES6 constructs, but you can also define your own symbols.
+在ES6中新增了一种原始类型，叫“Symbol”。Symbols是“unique”（不严格保证！）的值，它可以用作对象的属性而不用担心冲突。它们主要是为ES6构造特殊的内置行为，但你也可以定义自己的Symbols。
 
-Symbols can be used as property names, but you cannot see or access the actual value of a symbol from your program, nor from the developer console. If you evaluate a symbol in the developer console, what's shown looks like `Symbol(Symbol.create)`, for example.
+Symbols可以作为属性名称，但是你不能看到或从程序访问一个symbol的实际值，即使在开发者控制台也不行。如果你在开发者控制台输出一个symbol，你可能会看到类似`Symbol(Symbol.create)`的东西。
 
-There are several predefined symbols in ES6, accessed as static properties of the `Symbol` function object, like `Symbol.create`, `Symbol.iterator`, etc. To use them, do something like:
+在ES6中预定义了几个symbols，你可以通过`Symbol`函数的静态属性进行访问，比如`Symbol.create`、`Symbol.iterator`等，要使用它们，可以这么做：
 
 ```js
 obj[Symbol.iterator] = function(){ /*..*/ };
 ```
 
-To define your own custom symbols, use the `Symbol(..)` native. The `Symbol(..)` native "constructor" is unique in that you're not allowed to use `new` with it, as doing so will throw an error.
+要自定义symbol，请使用`Symbol(..)`native。`Symbol(..)`native构造器比较特殊，你不允许使用`new`关键字进行构造，因为这么做会引发错误。
 
 ```js
 var mysym = Symbol( "my own symbol" );
@@ -404,9 +404,9 @@ Object.getOwnPropertySymbols( a );
 // [ Symbol(my own symbol) ]
 ```
 
-While symbols are not actually private (`Object.getOwnPropertySymbols(..)` reflects on the object and reveals the symbols quite publicly), using them for private or special properties is likely their primary use-case. For most developers, they may take the place of property names with `_` underscore prefixes, which are almost always by convention signals to say, "hey, this is a private/special/internal property, so leave it alone!"
+虽然symbol实际上不是私有（`Object.getOwnPropertySymbols(..)`可以公开的获取对象的symbol）的，但把它们当作私有或特殊属性来使用可能是它们主要的用途。对大多数开发者来说，他们可能会在属性前面加上下划线`_`，这是一个惯例，似乎在告诉别人：“这是私有/专用/内部的属性，请不要动它！”
 
-**Note:** `Symbol`s are *not* `object`s, they are simple scalar primitives.
+**注意：**`Symbol`**不是**`object`，它们就是简单的原始类型。
 
 ### Native Prototypes
 
