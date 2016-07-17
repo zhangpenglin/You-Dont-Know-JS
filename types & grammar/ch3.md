@@ -498,8 +498,10 @@ isThisCool(
 
 **注意：**虽然我们指出了这些native原型和它们的一些用途，但依赖它们需谨慎，特别是你无论如何都要修改它们的时候，你需要更加警惕。更多的讨论请参见附录A“Native Prototypes”。
 
-## Review
+## 小结
 
 JavaScript provides object wrappers around primitive values, known as natives (`String`, `Number`, `Boolean`, etc). These object wrappers give the values access to behaviors appropriate for each object subtype (`String#trim()` and `Array#concat(..)`).
 
-If you have a simple scalar primitive value like `"abc"` and you access its `length` property or some `String.prototype` method, JS automatically "boxes" the value (wraps it in its respective object wrapper) so that the property/method accesses can be fulfilled.
+JavaScript为原始值提供对象包装类，被称为natives（`String`、`Number`、`Boolean`等）。这些对象包装器能够让原始值访问每个对象的子类型对应的行为（`String#trim()`和`Array#concat(..)`）。
+
+如果你有一个像`"abc"`这样的简单原始类型值，当你访问它的`length`属性或一些`String.prototype`的方法，JS会自动**装箱**这个值（把它封装在对应的封装类中），这样你才能访问这些属性和方法。
