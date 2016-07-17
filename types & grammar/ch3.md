@@ -340,13 +340,13 @@ var matches = someText.match( namePattern );
 
 ### `Date(..)` and `Error(..)`
 
-The `Date(..)` and `Error(..)` native constructors are much more useful than the other natives, because there is no literal form for either.
+`Date(..)`和`Error(..)`原生构造函数比其他natives有用得多，因为这里没有任何字面量形式能创建它们。
 
-To create a date object value, you must use `new Date()`. The `Date(..)` constructor accepts optional arguments to specify the date/time to use, but if omitted, the current date/time is assumed.
+要创建一个日期对象，你必须使用`new Date()`。`Date(..)`构造器接受可选的参数指定日期或时间，如果省略，就假定是当前时间。
 
-By far the most common reason you construct a date object is to get the current timestamp value (a signed integer number of milliseconds since Jan 1, 1970). You can do this by calling `getTime()` on a date object instance.
+你构造一个日期对象最常见的原因就是为了获取当前的时间戳（自1970年1月1日的毫秒数）。你可以通过调用日期对象实例的`getTime()`来做到这一点。
 
-But an even easier way is to just call the static helper function defined as of ES5: `Date.now()`. And to polyfill that for pre-ES5 is pretty easy:
+当更简单的方法是只需调用ES5定义的静态辅助函数：`Date.now()`。对ES5之前的代码进行polyfill也很简单：
 
 ```js
 if (!Date.now) {
@@ -356,13 +356,13 @@ if (!Date.now) {
 }
 ```
 
-**Note:** If you call `Date()` without `new`, you'll get back a string representation of the date/time at that moment. The exact form of this representation is not specified in the language spec, though browsers tend to agree on something close to: `"Fri Jul 18 2014 00:31:02 GMT-0500 (CDT)"`.
+**注意：**如果你调用`Date()`没有带上`new`，你会得到那一刻时间的字符串表示。具体的格式并没有在语言规范里面指定，但浏览器在此基本达成一致：`"Fri Jul 18 2014 00:31:02 GMT-0500 (CDT)"`。
 
-The `Error(..)` constructor (much like `Array()` above) behaves the same with the `new` keyword present or omitted.
+`Error(..)`构造器在有没有`new`关键字表现都是一致的（这与上面的`Array()`很相似）。
 
-The main reason you'd want to create an error object is that it captures the current execution stack context into the object (in most JS engines, revealed as a read-only `.stack` property once constructed). This stack context includes the function call-stack and the line-number where the error object was created, which makes debugging that error much easier.
+你想创建一个错误对象的主要原因是，它捕获了当前执行堆栈的上下文，存入对象（在大多数JS引擎中，一旦创建成功，就暴露一个只读属性`.stack`）。这个堆栈上下文包括了函数调用栈和这个错误对象创建的行数（在代码中哪个位置创建的），这使得调试错误变得更加容易。
 
-You would typically use such an error object with the `throw` operator:
+你通常会结合`throw`操作符一块使用错误对象：
 
 ```js
 function foo(x) {
@@ -373,9 +373,9 @@ function foo(x) {
 }
 ```
 
-Error object instances generally have at least a `message` property, and sometimes other properties (which you should treat as read-only), like `type`. However, other than inspecting the above-mentioned `stack` property, it's usually best to just call `toString()` on the error object (either explicitly, or implicitly through coercion -- see Chapter 4) to get a friendly-formatted error message.
+错误对象实例一般至少有一个`message`属性，有时会有其他属性（你应该把它们当作只读属性），如`type`。然而，除了检查上述提到的`stack`属性，通常最好的方法是调用错误对象的`toString()`方法（显式调用或通过强制转换隐式调用——参见第四章），以获得一个友好格式的错误信息。
 
-**Tip:** Technically, in addition to the general `Error(..)` native, there are several other specific-error-type natives: `EvalError(..)`, `RangeError(..)`, `ReferenceError(..)`, `SyntaxError(..)`, `TypeError(..)`, and `URIError(..)`. But it's very rare to manually use these specific error natives. They are automatically used if your program actually suffers from a real exception (such as referencing an undeclared variable and getting a `ReferenceError` error).
+**提示：**技术上讲，除了一般的`Error(..)`native，还有其他一些特定的错误类型natives：`EvalError(..)`、`RangeError(..)`、`ReferenceError(..)`、`SyntaxError(..)`、`TypeError(..)`和`URIError(..)`。但是手动调用这些特定错误的natives非常罕见。当你的程序确实含有真实的异常（如引用未声明的变量会抛出一个`ReferenceError`错误），它们会被自动使用。
 
 ### `Symbol(..)`
 
