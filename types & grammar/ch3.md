@@ -174,7 +174,9 @@ typeof b; // "string"
 
 For `array`, `object`, `function`, and regular-expression values, it's almost universally preferred that you use the literal form for creating the values, but the literal form creates the same sort of object as the constructor form does (that is, there is no nonwrapped value).
 
-Just as we've seen above with the other natives, these constructor forms should generally be avoided, unless you really know you need them, mostly because they introduce exceptions and gotchas that you probably don't really *want* to deal with.
+对于`array`、`object`、`function`和正则表达式，创建它们的值的普遍首选是字面量形式，但是字面量形式创建的和构造函数形式创建的对象是一样的（也就是说，不存在未封装过的值）。
+
+正如我们上面看到的natives，一般应该避免这些构造函数的形式，除非你真的知道你需要它们，大部分情况下，它们会引入异常和陷阱，你可能真的不希望处理这些。
 
 ### `Array(..)`
 
@@ -186,21 +188,25 @@ var b = [1, 2, 3];
 b; // [1, 2, 3]
 ```
 
-**Note:** The `Array(..)` constructor does not require the `new` keyword in front of it. If you omit it, it will behave as if you have used it anyway. So `Array(1,2,3)` is the same outcome as `new Array(1,2,3)`.
+**注意：**`Array(..)`构造函数前面不需要添加`new`关键字。如果你忽略它，它会表现得就像你用了它一样。因此，`Array(1,2,3)`和`new Array(1,2,3)`的结果是相同的。
 
-The `Array` constructor has a special form where if only one `number` argument is passed, instead of providing that value as *contents* of the array, it's taken as a length to "presize the array" (well, sorta).
+`Array`构造函数有个特殊的形式，就是如果你只传递一个数字参数，那它不会生成一个含有此数字的数组，而是把这个数字当作数组的初始化长度。
 
-This is a terrible idea. Firstly, you can trip over that form accidentally, as it's easy to forget.
+这真是一个可怕的主意。首先，这种形式很容易就把你绊倒，因为它容易忘记。
 
-But more importantly, there's no such thing as actually presizing the array. Instead, what you're creating is an otherwise empty array, but setting the `length` property of the array to the numeric value specified.
+但更重要的是，你实际上根本就不是初始化数组。相反，你创建的就是一个空数组，并且设置数组的`length`属性为指定的数字。
 
 An array that has no explicit values in its slots, but has a `length` property that *implies* the slots exist, is a weird exotic type of data structure in JS with some very strange and confusing behavior. The capability to create such a value comes purely from old, deprecated, historical functionalities ("array-like objects" like the `arguments` object).
 
-**Note:** An array with at least one "empty slot" in it is often called a "sparse array."
+这个数组插槽中没有明确的值，仅仅是属性`length`**暗示**了插槽的存在，在JS中，这是一个怪异奇特的数据结构，带着奇怪和混乱的行为。创建这么奇怪的数组的能力，来自旧的、弃用的历史功能（类数组对象，如`arguments`对象）。
 
-It doesn't help matters that this is yet another example where browser developer consoles vary on how they represent such an object, which breeds more confusion.
+**注意：**数组中至少含有一个“空槽”（empty slot）的数组通常称为“稀疏数组”（sparse array）。
 
-For example:
+让懵逼来得更猛烈些吧！
+
+我们来看另外一个例子，浏览器的开发者控制台是打印这些对象的结果也不同，这孕育了更多的混乱。
+
+例如：
 
 ```js
 var a = new Array( 3 );
@@ -209,9 +215,9 @@ a.length; // 3
 a;
 ```
 
-The serialization of `a` in Chrome is (at the time of writing): `[ undefined x 3 ]`. **This is really unfortunate.** It implies that there are three `undefined` values in the slots of this array, when in fact the slots do not exist (so-called "empty slots" -- also a bad name!).
+在Chrome中（在写作本书的时候）`a`序列化的结果是：`[ undefined x 3 ]`。**这真是不幸。**这暗示有3个`undefined`值在这个数组的插槽中，而实际上根本就不存在插槽（所谓的“空插槽！(empty slots)”——这名字真误导人！）。（译者注：下文中的空插槽，均是指此意。重要的事情再说一遍，空插槽并不是真的是空的插槽，它实际上是不存在的，只是JS传统叫法上叫空插槽，这个叫法十分的误导人，千万别误入歧途！！！）
 
-To visualize the difference, try this:
+为了显现差异，试试这个：
 
 ```js
 var a = new Array( 3 );
@@ -224,17 +230,19 @@ b;
 c;
 ```
 
-**Note:** As you can see with `c` in this example, empty slots in an array can happen after creation of the array. Changing the `length` of an array to go beyond its number of actually-defined slot values, you implicitly introduce empty slots. In fact, you could even call `delete b[1]` in the above snippet, and it would introduce an empty slot into the middle of `b`.
+**注意：**正如你在这个例子中看到的`c`，空插槽可以在数组创建后产生。通过更改数组的`length`让它超过实际上定义的长度，你就隐式的引入了空插槽。事实上，你可以在上面代码中调用`delete b[1]`，它会在`b`的中间引入一个空插槽。
 
-For `b` (in Chrome, currently), you'll find `[ undefined, undefined, undefined ]` as the serialization, as opposed to `[ undefined x 3 ]` for `a` and `c`. Confused? Yeah, so is everyone else.
+在当前版本的Chrome中，`b`的输出是`[ undefined, undefined, undefined ]`，而`a`和`c`的输出结果是`[ undefined x 3 ]`。一脸懵逼，是吧！没事，其他人跟你一样：）
 
-Worse than that, at the time of writing, Firefox reports `[ , , , ]` for `a` and `c`. Did you catch why that's so confusing? Look closely. Three commas implies four slots, not three slots like we'd expect.
+更糟糕的是，在写作本书的时候，Firefox中`a`和`c`的输出结果是`[ , , , ]`。你看出为什么这么混乱吗？看仔细点。三个逗号意味着四个插槽，而不是我们期望的三个插槽。
 
 **What!?** Firefox puts an extra `,` on the end of their serialization here because as of ES5, trailing commas in lists (array values, property lists, etc.) are allowed (and thus dropped and ignored). So if you were to type in a `[ , , , ]` value into your program or the console, you'd actually get the underlying value that's like `[ , , ]` (that is, an array with three empty slots). This choice, while confusing if reading the developer console, is defended as instead making copy-n-paste behavior accurate.
 
-If you're shaking your head or rolling your eyes about now, you're not alone! Shrugs.
+**我靠！？**Firefox在它的序列化的末尾加上一个额外的`,`，因为在ES5中，在列表（数组值、属性列表等）后面尾随逗号是允许的（会被丢弃或忽略掉）。因此，如果你在你的程序或控制台中输入`[ , , , ]`，实际上得到的值是`[ , , ]`（即，三个空插槽的数组）。这种做法让你在读开发者控制台的输出结果感到困惑，当却被美其名曰这么做能让复制粘贴的行为更准确。
 
-Unfortunately, it gets worse. More than just confusing console output, `a` and `b` from the above code snippet actually behave the same in some cases **but differently in others**:
+如果你现在一脸懵逼，没啥事，you're not alone！
+
+不幸的是，事情变得更糟糕。不仅仅是开发者控制台的输出让你困惑不解，上面代码中的`a`和`b`在某个情况下表现一致，但在另外一些情况下，表现的**完全不一样**。
 
 ```js
 a.join( "-" ); // "--"
@@ -244,9 +252,9 @@ a.map(function(v,i){ return i; }); // [ undefined x 3 ]
 b.map(function(v,i){ return i; }); // [ 0, 1, 2 ]
 ```
 
-**Ugh.**
+**什么鬼！？？？**
 
-The `a.map(..)` call *fails* because the slots don't actually exist, so `map(..)` has nothing to iterate over. `join(..)` works differently. Basically, we can think of it implemented sort of like this:
+`a.map(..)`调用**失败**因为插槽根本就不存在，因此`map(..)`没有任何迭代。`join(..)`的工作方式不同与它。基本上我们想想就知道，可以这么实现它：
 
 ```js
 function fakeJoin(arr,connector) {
@@ -266,32 +274,34 @@ var a = new Array( 3 );
 fakeJoin( a, "-" ); // "--"
 ```
 
-As you can see, `join(..)` works by just *assuming* the slots exist and looping up to the `length` value. Whatever `map(..)` does internally, it (apparently) doesn't make such an assumption, so the result from the strange "empty slots" array is unexpected and likely to cause failure.
+如你所见，`join(..)`执行的时候**假定**槽是存在的，然后根据`length`的值来执行循环。而`map(..)`内部的工作原理显然不是这样的，因此那些特殊的“空插槽”数组的结果出乎意料，导致执行失败。
 
-So, if you wanted to *actually* create an array of actual `undefined` values (not just "empty slots"), how could you do it (besides manually)?
+所以，如果你想要**真正**创建一个包含`undefined`值（而不是所谓的“空插槽”）的数组，你会怎么做？
 
 ```js
 var a = Array.apply( null, { length: 3 } );
 a; // [ undefined, undefined, undefined ]
 ```
 
-Confused? Yeah. Here's roughly how it works.
+懵逼了？没事，简单给你解释下它的工作原理。
 
-`apply(..)` is a utility available to all functions, which calls the function it's used with but in a special way.
+`apply(..)`是所有函数都可以使用的工具函数，它通过一种特殊的方式调用函数。
 
-The first argument is a `this` object binding (covered in the *this & Object Prototypes* title of this series), which we don't care about here, so we set it to `null`. The second argument is supposed to be an array (or something *like* an array -- aka an "array-like object"). The contents of this "array" are "spread" out as arguments to the function in question.
+第一个参数是一个`this`对象绑定（在本系列标题为“this和对象原型”中讲过），我们在这不关心它，所以把它设置为`null`。第二个参数要求是个数组（或者像数组的东西——又叫“类数组”对象）。这个“数组”的内容会作为参数传递给题中的函数。
 
-So, `Array.apply(..)` is calling the `Array(..)` function and spreading out the values (of the `{ length: 3 }` object value) as its arguments.
+因此`Array.apply(..)`是调用`Array(..)`函数，并把传递进来的值（`{ length: 3 }`对象）作为它的参数。
 
 Inside of `apply(..)`, we can envision there's another `for` loop (kinda like `join(..)` from above) that goes from `0` up to, but not including, `length` (`3` in our case).
 
-For each index, it retrieves that key from the object. So if the array-object parameter was named `arr` internally inside of the `apply(..)` function, the property access would effectively be `arr[0]`, `arr[1]`, and `arr[2]`. Of course, none of those properties exist on the `{ length: 3 }` object value, so all three of those property accesses would return the value `undefined`.
+在`apply(..)`的内部，我们可以设想有另外一个`for`循环（有点像上面的`join(..)`），从`0`开始循环，但是不包括属性`length`（在我们的例子中是`3`）。
 
-In other words, it ends up calling `Array(..)` basically like this: `Array(undefined,undefined,undefined)`, which is how we end up with an array filled with `undefined` values, and not just those (crazy) empty slots.
+对于每个索引，它会把该索引作为键从对象中取它的值。假设在`apply(..)`函数内部这个数组对象参数被命名为`arr`，属性访问大概是这样的`arr[0]`、`arr[1]`和`arr[2]`。然而，`{ length: 3 }`对象中并没有这些属性，所以这三个属性访问的结果都是`undefined`。
 
-While `Array.apply( null, { length: 3 } )` is a strange and verbose way to create an array filled with `undefined` values, it's **vastly** better and more reliable than what you get with the footgun'ish `Array(3)` empty slots.
+换句话说，调用`Array(..)`的最终效果基本上是这样的`Array(undefined,undefined,undefined)`，这就是我们最终得到一个充满`undefined`值的数组的方式，而不是那些该死的空插槽。
 
-Bottom line: **never ever, under any circumstances**, should you intentionally create and use these exotic empty-slot arrays. Just don't do it. They're nuts.
+虽然`Array.apply( null, { length: 3 } )`用一种奇怪的方式创建了一个充满`undefined`值的数组，但是它比愚蠢的`Array(3)`空插槽**好得多**，并且**更靠谱**。
+
+底线：**在任何情况下都不要**创建那些奇怪的空插槽数组。千万不要去做。它们是疯子（指不定就上来咬你一口）。
 
 ### `Object(..)`, `Function(..)`, and `RegExp(..)`
 
