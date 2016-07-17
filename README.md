@@ -12,7 +12,7 @@
 
 我会按照如下的顺序进行翻译，因为"Scope & Closures"和"this & Object Prototypes"中文版已经出版了，所以现在不打算把这两个主题纳入翻译范围，后期可能会和原翻译者沟通，将他们的翻译版本放在这里。
 
-- "Up & Going"     翻译完成
+- ~~"Up & Going"翻译完成~~
 - "Types & Grammar"   正在翻译
 - "Async & Performance" 即将翻译
 - "ES6 & Beyond"        即将翻译
@@ -21,11 +21,11 @@
 
 ### Up & Going
 
-* foreword.md翻译完成
-* ch1.md翻译完成
-* ch2.md翻译完成
-* ch3.md正在翻译
-* ch4.md将要翻译
+* ~~foreword.md翻译完成~~
+* ~~ch1.md翻译完成~~
+* ~~ch2.md翻译完成~~
+* ~~ch3.md翻译完成~~
+* ch4.md正在翻译
 * ch5.md将要翻译
 * apA.md将要翻译
 * apB.md翻译完成
