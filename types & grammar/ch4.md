@@ -59,11 +59,13 @@ But we're having this discussion of "explicit" vs. "implicit" based on the likel
 
 Before we can explore *explicit* vs *implicit* coercion, we need to learn the basic rules that govern how values *become* either a `string`, `number`, or `boolean`. The ES5 spec in section 9 defines several "abstract operations" (fancy spec-speak for "internal-only operation") with the rules of value conversion. We will specifically pay attention to: `ToString`, `ToNumber`, and `ToBoolean`, and to a lesser extent, `ToPrimitive`.
 
+在我们开始探索**explicit**与**implicit** coercion之前，我们需要学习支配值是如何转换成`string`、`number`或 `boolean`的规则。ES5规范的第九节定义了几种关于值转换的“抽象操作”（规范而言，是“仅供内部使用的操作”）的规则。我们会特别注意：`ToString`、`ToNumber`和`ToBoolean`，从某种程度上说，是`ToPrimitive`。
+
 ### `ToString`
 
-When any non-`string` value is coerced to a `string` representation, the conversion is handled by the `ToString` abstract operation in section 9.8 of the specification.
+当非字符串的值被强制转换为字符串，该转换由抽象操作`ToString`（ES5规范第9.8节）处理。
 
-Built-in primitive values have natural stringification: `null` becomes `"null"`, `undefined` becomes `"undefined"` and `true` becomes `"true"`. `number`s are generally expressed in the natural way you'd expect, but as we discussed in Chapter 2, very small or very large `numbers` are represented in exponent form:
+内置的原始值有自然的字符串化规则：`null`变成`"null"`, `undefined`变成`"undefined"`以及`true`变成`"true"`。`number`以你期望的自然方式转换，但正如我们在第二章中讨论的，非常小或非常大的数字会以指数形式表示：
 
 ```js
 // multiplying `1.07` by `1000`, seven times over
@@ -73,13 +75,13 @@ var a = 1.07 * 1000 * 1000 * 1000 * 1000 * 1000 * 1000 * 1000;
 a.toString(); // "1.07e21"
 ```
 
-For regular objects, unless you specify your own, the default `toString()` (located in `Object.prototype.toString()`) will return the *internal `[[Class]]`* (see Chapter 3), like for instance `"[object Object]"`.
+对于常规的对象，除非你指定你自己的，默认的`toString()`（位于`Object.prototype.toString()`）会返回**internal `[[Class]]`**（参见第三章），比如：`"[object Object]"`。
 
-But as shown earlier, if an object has its own `toString()` method on it, and you use that object in a `string`-like way, its `toString()` will automatically be called, and the `string` result of that call will be used instead.
+但如之前展示的，如果一个对象有自己的`toString()`方法，并且你把该对象以字符串的方式来使用，它的`toString()`方法会被自动调用，并且将这个函数的字符串结果作为替代值。
 
-**Note:** The way an object is coerced to a `string` technically goes through the `ToPrimitive` abstract operation (ES5 spec, section 9.1), but those nuanced details are covered in more detail in the `ToNumber` section later in this chapter, so we will skip over them here.
+**注意：**将对象转换为字符串的方法，技术上来说，是通过抽象操作`ToPrimitive`来完成的（ES5规范，第9.1节），但这些细致入微的细节在本章的后面的`ToNumber`一节中会详细介绍，所以我们在这先跳过。
 
-Arrays have an overridden default `toString()` that stringifies as the (string) concatenation of all its values (each stringified themselves), with `","` in between each value:
+数组覆盖了默认的`toString()`方法，它会将每个值都转为字符串，然后用`","`将它们连接起来：
 
 ```js
 var a = [1,2,3];
@@ -87,7 +89,7 @@ var a = [1,2,3];
 a.toString(); // "1,2,3"
 ```
 
-Again, `toString()` can either be called explicitly, or it will automatically be called if a non-`string` is used in a `string` context.
+再次说明，`toString()`既可以被明确地调用，也可以在一个非字符串被用于字符串上下文中，被自动调用。
 
 #### JSON Stringification
 
