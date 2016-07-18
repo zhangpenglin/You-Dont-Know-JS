@@ -13,15 +13,19 @@
 
 Converting a value from one type to another is often called "type casting," when done explicitly, and "coercion" when done implicitly (forced by the rules of how a value is used).
 
-**Note:** It may not be obvious, but JavaScript coercions always result in one of the scalar primitive (see Chapter 2) values, like `string`, `number`, or `boolean`. There is no coercion that results in a complex value like `object` or `function`. Chapter 3 covers "boxing," which wraps scalar primitive values in their `object` counterparts, but this is not really coercion in an accurate sense.
+显式地将一个值从一种类型转换为另外一种类型，通常称为“type casting”。而“coercion”代表隐式的完成这一动作（根据值是如何使用的规则进行强制转换）。
 
-Another way these terms are often distinguished is as follows: "type casting" (or "type conversion") occur in statically typed languages at compile time, while "type coercion" is a runtime conversion for dynamically typed languages.
+**注意：**它可能不是很明显，但JavaScript的coercions结果总是原始值之一，比如`string`、`number`或`boolean`。这里不存在coercions的结果是复合值，如`object`或`function`。第三章讲解的“装箱”，能够把原始值包装成它们对应的封装类，准确意义上讲它并不算coercion。
 
-However, in JavaScript, most people refer to all these types of conversions as *coercion*, so the way I prefer to distinguish is to say "implicit coercion" vs. "explicit coercion."
+另一种区分这两个概念的方式是：“type casting”（或“type conversion”）发生在静态类型语言的编译阶段，而“type coercion”发生在动态类型语言的运行阶段。
+
+然而，在JavaScript中，大多数人把所有的类型转换都称为**coercion**，而我更喜欢把它们用“implicit coercion”（隐式强制转换）和“explicit coercion”（显式强制转换）区分开。
 
 The difference should be obvious: "explicit coercion" is when it is obvious from looking at the code that a type conversion is intentionally occurring, whereas "implicit coercion" is when the type conversion will occur as a less obvious side effect of some other intentional operation.
 
-For example, consider these two approaches to coercion:
+这两者的区别显而易见：“explicit coercion”是指当你看代码的时候你就可以发现很明显要进行类型强制转换，而“implicit coercion”是指一些其他的操作引起不太明显的副作用而导致类型强制转换。
+
+例如，考虑如下两种coercion：
 
 ```js
 var a = 42;
@@ -31,21 +35,25 @@ var b = a + "";			// implicit coercion
 var c = String( a );	// explicit coercion
 ```
 
-For `b`, the coercion that occurs happens implicitly, because the `+` operator combined with one of the operands being a `string` value (`""`) will insist on the operation being a `string` concatenation (adding two strings together), which *as a (hidden) side effect* will force the `42` value in `a` to be coerced to its `string` equivalent: `"42"`.
+对于`b`，发生的coercion是隐式的，因为`+`运算符的一个操作符是字符串（`""`），所以它认为这是一个字符串拼接（将两个字符串合并在一起）操作，这个**隐藏的副作用**会强迫数字`42`转换成与之等价的字符串值：`"42"`。
 
-By contrast, the `String(..)` function makes it pretty obvious that it's explicitly taking the value in `a` and coercing it to a `string` representation.
+相比之下，`String(..)`函数的意图很明显，它明确的把`a`的值转换成字符串。
 
-Both approaches accomplish the same effect: `"42"` comes from `42`. But it's the *how* that is at the heart of the heated debates over JavaScript coercion.
+两种方法都达到同样的效果：`42`转换成`"42"`。但是，**如何转换**，才是JavaScript coercion激烈辩论的核心。
 
-**Note:** Technically, there's some nuanced behavioral difference here beyond the stylistic difference. We cover that in more detail later in the chapter, in the "Implicitly: Strings <--> Numbers" section.
+**注意：**从技术上讲，在这里有一些细致入微的行为差异超出了形式上的不同（beyond the stylistic difference）。我们会在这章的“Implicitly: Strings <--> Numbers”一节中详细讲解。
 
 The terms "explicit" and "implicit," or "obvious" and "hidden side effect," are *relative*.
 
-If you know exactly what `a + ""` is doing and you're intentionally doing that to coerce to a `string`, you might feel the operation is sufficiently "explicit." Conversely, if you've never seen the `String(..)` function used for `string` coercion, its behavior might seem hidden enough as to feel "implicit" to you.
+术语“显式”和“隐式”，或者“明显的”和“隐藏副作用”是**相对的**。
+
+如果你确切地知道`a + ""`在做什么，你有意这样做，强制将数字转为字符串，你可能会觉得这个操作很“explicit”（“明确的”）。相反，如果你从来没见过`String(..)`函数被用来进行字符串强制转换，它的行为对你来说就很隐蔽，感觉是“implicit”（“隐式的”）。
 
 But we're having this discussion of "explicit" vs. "implicit" based on the likely opinions of an *average, reasonably informed, but not expert or JS specification devotee* developer. To whatever extent you do or do not find yourself fitting neatly in that bucket, you will need to adjust your perspective on our observations here accordingly.
 
-Just remember: it's often rare that we write our code and are the only ones who ever read it. Even if you're an expert on all the ins and outs of JS, consider how a less experienced teammate of yours will feel when they read your code. Will it be "explicit" or "implicit" to them in the same way it is for you?
+但是，我们关于“explicit”与“implicit”的讨论，是基于**平均水平、合理的通知，但不是专家或JS规范制定者**的开发者的意见。不管你是处于哪种程度的开发者，你都要根据我们的观察来调整你的视角。
+
+请记住：你写的代码只有你一个人阅读，这种情况是非常少见的。即使你是一个对JS来龙去脉都非常精通的专家，请考虑一下你那经验不足的队友阅读你代码时的感受。对你来说是“explicit”或“implicit”的代码，对他们来说还是一样的吗？
 
 ## Abstract Value Operations
 
