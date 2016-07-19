@@ -93,11 +93,11 @@ a.toString(); // "1,2,3"
 
 #### JSON Stringification
 
-Another task that seems awfully related to `ToString` is when you use the `JSON.stringify(..)` utility to serialize a value to a JSON-compatible `string` value.
+另外一个与`ToString`非常相关的任务是，当你使用`JSON.stringify(..)`工具序列化一个值为JSON字符串。
 
-It's important to note that this stringification is not exactly the same thing as coercion. But since it's related to the `ToString` rules above, we'll take a slight diversion to cover JSON stringification behaviors here.
+需要注意的是，这里的JSON字符串化和coercion并不是完全一样的东西。但因为它和上面的`ToString`规则有关联，我们在这里稍微叉开话题，介绍一下JSON字符串化的行为。
 
-For most simple values, JSON stringification behaves basically the same as `toString()` conversions, except that the serialization result is *always a `string`*:
+对于大多数简单的值，JSON字符串化的行为基本与`toString()`的转换是相同的，除了`toString()`的序列化结果总是字符串这一点（下面你会看到JSON字符串化的结果不一定为字符串）：
 
 ```js
 JSON.stringify( 42 );	// "42"
@@ -106,13 +106,13 @@ JSON.stringify( null );	// "null"
 JSON.stringify( true );	// "true"
 ```
 
-Any *JSON-safe* value can be stringified by `JSON.stringify(..)`. But what is *JSON-safe*? Any value that can be represented validly in a JSON representation.
+任何**JSON安全**的值都可以通过`JSON.stringify(..)`转换为字符串。但是，什么是**JSON安全**？能够有效用JSON形式表示的任何值。
 
-It may be easier to consider values that are **not** JSON-safe. Some examples: `undefined`s, `function`s, (ES6+) `symbol`s, and `object`s with circular references (where property references in an object structure create a never-ending cycle through each other). These are all illegal values for a standard JSON structure, mostly because they aren't portable to other languages that consume JSON values.
+很容易就想到那些**非**JSON安全的值。例如：`undefined`、`function`、(ES6+) `symbol`以及循环引用的`object`（对象结构的属性引用通过创建彼此，构成一个永无止境的循环）。对一个标准的JSON结构来说，这些值都是非法的，主要是因为它们无法移植都其他支持JSON的语言中。
 
-The `JSON.stringify(..)` utility will automatically omit `undefined`, `function`, and `symbol` values when it comes across them. If such a value is found in an `array`, that value is replaced by `null` (so that the array position information isn't altered). If found as a property of an `object`, that property will simply be excluded.
+当`JSON.stringify(..)`遇到`undefined`、`function`和`symbol`的时候，会自动忽略它们的值。如果这样的值在数组中，这个值会被替换成`null`（这样数组的位置信息就不被改变）。如果这样的值出现在对象的属性中，那这个属性会被排除掉。
 
-Consider:
+考虑如下：
 
 ```js
 JSON.stringify( undefined );					// undefined
@@ -122,13 +122,13 @@ JSON.stringify( [1,undefined,function(){},4] );	// "[1,null,null,4]"
 JSON.stringify( { a:2, b:function(){} } );		// "{"a":2}"
 ```
 
-But if you try to `JSON.stringify(..)` an `object` with circular reference(s) in it, an error will be thrown.
+但是，如果你尝试`JSON.stringify(..)`一个带有循环引用的对象，它就会抛出异常。
 
-JSON stringification has the special behavior that if an `object` value has a `toJSON()` method defined, this method will be called first to get a value to use for serialization.
+JSON字符串化有个特殊的行为，如果一个对象定义了`toJSON()`方法，那这个方法首先被调用，并且将它的返回值进行序列化。
 
-If you intend to JSON stringify an object that may contain illegal JSON value(s), or if you just have values in the `object` that aren't appropriate for the serialization, you should define a `toJSON()` method for it that returns a *JSON-safe* version of the `object`.
+如果你打算将一个含有非法JSON值的对象转换成JSON字符串，或只是你的对象中含有不适合序列化的值，你就应该定义一个`toJSON()`方法，用于返回该对象的**JSON安全**版本
 
-For example:
+例如：
 
 ```js
 var o = { };
@@ -154,11 +154,11 @@ a.toJSON = function() {
 JSON.stringify( a ); // "{"b":42}"
 ```
 
-It's a very common misconception that `toJSON()` should return a JSON stringification representation. That's probably incorrect, unless you're wanting to actually stringify the `string` itself (usually not!). `toJSON()` should return the actual regular value (of whatever type) that's appropriate, and `JSON.stringify(..)` itself will handle the stringification.
+一个非常参见的误解是`toJSON()`应该返回一个对象的字符串表示。这是不对滴，除非你确实想将一个字符串再进行字符串化（这很少见！）。`toJSON()`应该返回一个合适的（任何类型的）正常值，而`JSON.stringify(..)`本身会处理字符串化的工作。
 
-In other words, `toJSON()` should be interpreted as "to a JSON-safe value suitable for stringification," not "to a JSON string" as many developers mistakenly assume.
+换句话说，`toJSON()`应该被解释为“返回一个适合进行字符串化的JSON安全值”，而不是“返回一个JSON字符串”（很多的开发者错误地认为就是这样）。
 
-Consider:
+考虑：
 
 ```js
 var a = {
@@ -186,15 +186,17 @@ JSON.stringify( a ); // "[2,3]"
 JSON.stringify( b ); // ""[2,3]""
 ```
 
-In the second call, we stringified the returned `string` rather than the `array` itself, which was probably not what we wanted to do.
+在第二次调用中，我们将返回的字符串（而不是数组本身）进行字符串化，这可能不是我们想做的事。
 
-While we're talking about `JSON.stringify(..)`, let's discuss some lesser-known functionalities that can still be very useful.
+既然我们在谈论`JSON.stringify(..)`，让我们讨论一些鲜为人知但却非常有用的功能，一般人我不告诉他：）
 
 An optional second argument can be passed to `JSON.stringify(..)` that is called *replacer*. This argument can either be an `array` or a `function`. It's used to customize the recursive serialization of an `object` by providing a filtering mechanism for which properties should and should not be included, in a similar way to how `toJSON()` can prepare a value for serialization.
 
-If *replacer* is an `array`, it should be an `array` of `string`s, each of which will specify a property name that is allowed to be included in the serialization of the `object`. If a property exists that isn't in this list, it will be skipped.
+`JSON.stringify(..)`第二个参数是个可选参数，被称为**replacer**。这个参数可以是**数组**或**函数**。它提供了一个过滤机制指定了应该或不应该包含哪些属性，从而实现了对象的可定制的递归序列化，这种做法和`toJSON()`如何为序列化准备一个值很相似。
 
-If *replacer* is a `function`, it will be called once for the `object` itself, and then once for each property in the `object`, and each time is passed two arguments, *key* and *value*. To skip a *key* in the serialization, return `undefined`. Otherwise, return the *value* provided.
+如果**replacer**是一个数组，它应该是一个字符串数组，每个值都指定了一个对象的属性名称，代表该属性应该被加入到序列化中。如果一个属性不在这个列表中，它会被跳过。
+
+如果**replacer**是一个函数，它首先会被该对象本身调用一次，然后该对象的每个属性会调用一次，每次都会给这个函数传递两个值，**key**和**value**。想在序列化过程中跳过某个**key**，只需返回`undefined`。否则，返回提供的**value**。
 
 ```js
 var a = {
@@ -211,9 +213,9 @@ JSON.stringify( a, function(k,v){
 // "{"b":42,"d":[1,2,3]}"
 ```
 
-**Note:** In the `function` *replacer* case, the key argument `k` is `undefined` for the first call (where the `a` object itself is being passed in). The `if` statement **filters out** the property named `"c"`. Stringification is recursive, so the `[1,2,3]` array has each of its values (`1`, `2`, and `3`) passed as `v` to *replacer*, with indexes (`0`, `1`, and `2`) as `k`.
+**注意：**在**replacer**为函数的例子中，参数`k`第一次调用的时候值是`undefined`（第一次是`a`对象本身被传递进去）。`if`语句**过滤掉**名称为`"c"`的属性。字符串化是递归进行的，所以数组`[1,2,3]`中的每个值（`1`、`2`和`3`）都被传递给**replacer**的参数`v`，对应的下标（`0`、`1`和`2`）作为参数`k`。
 
-A third optional argument can also be passed to `JSON.stringify(..)`, called *space*, which is used as indentation for prettier human-friendly output. *space* can be a positive integer to indicate how many space characters should be used at each indentation level. Or, *space* can be a `string`, in which case up to the first ten characters of its value will be used for each indentation level.
+第三个可选的参数也可以传递给`JSON.stringify(..)`，被称为**space**，被用作缩进，是为了使得输出更加漂亮和人性化。**space**可以是一个正整数，指定每层缩进应该缩进多少个空格。或者，**space**也可以是个字符串，其值的前十个字符被用于每个缩进层次。
 
 ```js
 var a = {
@@ -245,10 +247,10 @@ JSON.stringify( a, null, "-----" );
 // }"
 ```
 
-Remember, `JSON.stringify(..)` is not directly a form of coercion. We covered it here, however, for two reasons that relate its behavior to `ToString` coercion:
+请记住，`JSON.stringify(..)`并不是coercion的一种形式。我们就讲解到这，然而，有两个原因把它的行为和`ToString`的coercion相关联：
 
-1. `string`, `number`, `boolean`, and `null` values all stringify for JSON basically the same as how they coerce to `string` values via the rules of the `ToString` abstract operation.
-2. If you pass an `object` value to `JSON.stringify(..)`, and that `object` has a `toJSON()` method on it, `toJSON()` is automatically called to (sort of) "coerce" the value to be *JSON-safe* before stringification.
+1. `string`、`number`、`boolean`和`null`值的JSON字符串化和通过`ToString`抽象操作规则强制转换为字符串值是基本一样的。
+2. 如果你传递一个对象给`JSON.stringify(..)`，并且该对象有一个`toJSON()`方法，`toJSON()`会在序列化之前自动调用，将该值（在某种程度上）“coerce”（翻译：强制转换）成一个**JSON安全**的值
 
 ### `ToNumber`
 
