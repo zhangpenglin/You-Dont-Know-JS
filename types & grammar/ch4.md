@@ -97,7 +97,7 @@ a.toString(); // "1,2,3"
 
 需要注意的是，这里的JSON字符串化和coercion并不是完全一样的东西。但因为它和上面的`ToString`规则有关联，我们在这里稍微叉开话题，介绍一下JSON字符串化的行为。
 
-对于大多数简单的值，JSON字符串化的行为基本与`toString()`的转换是相同的，除了`toString()`的序列化结果总是字符串这一点（下面你会看到JSON字符串化的结果不一定为字符串）：
+对于大多数简单的值，JSON字符串化的行为与`toString()`的转换是基本相同的，除了`toString()`的序列化结果总是字符串这一点（下面你会看到JSON字符串化的结果不一定为字符串）：
 
 ```js
 JSON.stringify( 42 );	// "42"
@@ -106,7 +106,7 @@ JSON.stringify( null );	// "null"
 JSON.stringify( true );	// "true"
 ```
 
-任何**JSON安全**的值都可以通过`JSON.stringify(..)`转换为字符串。但是，什么是**JSON安全**？能够有效用JSON形式表示的任何值。
+任何**JSON安全**的值都可以通过`JSON.stringify(..)`转换为字符串。但是，什么是**JSON安全**的值？能够有效用JSON形式表示的任何值。
 
 很容易就想到那些**非**JSON安全的值。例如：`undefined`、`function`、(ES6+) `symbol`以及循环引用的`object`（对象结构的属性引用通过创建彼此，构成一个永无止境的循环）。对一个标准的JSON结构来说，这些值都是非法的，主要是因为它们无法移植都其他支持JSON的语言中。
 
@@ -154,7 +154,7 @@ a.toJSON = function() {
 JSON.stringify( a ); // "{"b":42}"
 ```
 
-一个非常参见的误解是`toJSON()`应该返回一个对象的字符串表示。这是不对滴，除非你确实想将一个字符串再进行字符串化（这很少见！）。`toJSON()`应该返回一个合适的（任何类型的）正常值，而`JSON.stringify(..)`本身会处理字符串化的工作。
+一个非常常见的误解是`toJSON()`应该返回一个对象的字符串表示。这是不对的，除非你确实想将一个字符串再进行字符串化（这很少见！）。`toJSON()`应该返回一个合适的（任何类型的）正常值，而`JSON.stringify(..)`本身会处理字符串化的工作。
 
 换句话说，`toJSON()`应该被解释为“返回一个适合进行字符串化的JSON安全值”，而不是“返回一个JSON字符串”（很多的开发者错误地认为就是这样）。
 
@@ -254,25 +254,27 @@ JSON.stringify( a, null, "-----" );
 
 ### `ToNumber`
 
-If any non-`number` value is used in a way that requires it to be a `number`, such as a mathematical operation, the ES5 spec defines the `ToNumber` abstract operation in section 9.3.
+如果任何非数字的值被用于要求是数字的操作，如数学运算，在ES5规范的9.3节中定义了`ToNumber`抽象操作。
 
-For example, `true` becomes `1` and `false` becomes `0`. `undefined` becomes `NaN`, but (curiously) `null` becomes `0`.
+例如，`true`变成`1`以及`false`变成`0`。`undefined`变成`NaN`，但是（很奇怪地）`null`变成了`0`。
 
 `ToNumber` for a `string` value essentially works for the most part like the rules/syntax for numeric literals (see Chapter 3). If it fails, the result is `NaN` (instead of a syntax error as with `number` literals). One example difference is that `0`-prefixed octal numbers are not handled as octals (just as normal base-10 decimals) in this operation, though such octals are valid as `number` literals (see Chapter 2).
 
-**Note:** The differences between `number` literal grammar and `ToNumber` on a `string` value are subtle and highly nuanced, and thus will not be covered further here. Consult section 9.3.1 of the ES5 spec for more information.
+对大部分符合数字字面量规则/语法（参见第三章）的字符串值，都可以与`ToNumber`工作的很好。如果失败，其结果是`NaN`（而不是报数字字面量相关的语法错误）。一个不同的例子是，前缀是`0`的八进制数字在此操作中不会被当作八进制处理（而是当作正常的十进制），尽管这种格式在数字字面量中是合法的（参见第二章）。
 
-Objects (and arrays) will first be converted to their primitive value equivalent, and the resulting value (if a primitive but not already a `number`) is coerced to a `number` according to the `ToNumber` rules just mentioned.
+**注意：**数字字面量语法和字符串值经过`ToNumber`之后的结果，二者之间的差异是极其微妙的，因而不会在这里进一步讲解。有关更多信息，请参考ES5规范的第9.3.1节。
 
-To convert to this primitive value equivalent, the `ToPrimitive` abstract operation (ES5 spec, section 9.1) will consult the value (using the internal `DefaultValue` operation -- ES5 spec, section 8.12.8) in question to see if it has a `valueOf()` method. If `valueOf()` is available and it returns a primitive value, *that* value is used for the coercion. If not, but `toString()` is available, it will provide the value for the coercion.
+对象和数组首先被转化为与它们等价的原始值，得到的结果值（如果还不是一个数字）会根据刚才提到的`ToNumber`规则强制转换为数字。
 
-If neither operation can provide a primitive value, a `TypeError` is thrown.
+要等价的转换这个原始值，`ToPrimitive`抽象操作（ES5规范，第9.1节）会查询这个值（使用内部的`DefaultValue`操作——ES5规范，第8.12.8节）是否有`valueOf()`方法。如果`valueOf()`方法存在并且返回一个原始值，这个值会被用于coercion。如果不是，并且`toString()`方法存在，那它提供的值会被用于coercion。
 
-As of ES5, you can create such a noncoercible object -- one without `valueOf()` and `toString()` -- if it has a `null` value for its `[[Prototype]]`, typically created with `Object.create(null)`. See the *this & Object Prototypes* title of this series for more information on `[[Prototype]]`s.
+如果没有操作可以提供原始值，就会抛出`TypeError`异常。
 
-**Note:** We cover how to coerce to `number`s later in this chapter in detail, but for this next code snippet, just assume the `Number(..)` function does so.
+在ES5中，你可以创建一个不可转换的对象——一个没有`valueOf()`和`toString()`方法的对象——并且它的原型为`null`，通常可以通过`Object.create(null)`来创建这么一个对象。参见本系列标题为**this和对象原型**以获取更多有关原型的信息。
 
-Consider:
+**注意：**我们会在本章后面详细讲解如何强制转为数字，下面这段代码只是认为函数`Number(..)`做了此项工作。
+
+考虑如下：
 
 ```js
 var a = {
