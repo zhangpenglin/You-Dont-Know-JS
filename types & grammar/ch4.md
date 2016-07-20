@@ -304,24 +304,26 @@ Number( [ "abc" ] );	// NaN
 
 ### `ToBoolean`
 
-Next, let's have a little chat about how `boolean`s behave in JS. There's **lots of confusion and misconception** floating out there around this topic, so pay close attention!
+接下来，让我们聊一聊在JS中`boolean`的行为。关于这个话题，会有**许多的混乱和误解**飘出来，所以请密切关注！
 
-First and foremost, JS has actual keywords `true` and `false`, and they behave exactly as you'd expect of `boolean` values. It's a common misconception that the values `1` and `0` are identical to `true`/`false`. While that may be true in other languages, in JS the `number`s are `number`s and the `boolean`s are `boolean`s. You can coerce `1` to `true` (and vice versa) or `0` to `false` (and vice versa). But they're not the same.
+首先，JS确实有关键字`true`和`false`，并且它们表现得完全如你所期望的`boolean`值。一个最普遍的误解是，`1`和`0`与`true`和`false`是等价的。虽然这在其他的语言中可能是对的，但在JS中，数字就是数字，布尔就是布尔。你可以强制`1`转换成`true`（反之亦然）或`0`转换成`false`（反之亦然）。但是，它们绝对不是一样的。
 
 #### Falsy Values
 
 But that's not the end of the story. We need to discuss how values other than the two `boolean`s behave whenever you coerce *to* their `boolean` equivalent.
 
-All of JavaScript's values can be divided into two categories:
+但是，这并不是故事的结束。我们不是要讨论两个`boolean`值的行为，而是讨论其他值如何强制转换为与它们等价的`boolean`值。
 
-1. values that will become `false` if coerced to `boolean`
-2. everything else (which will obviously become `true`)
+所有的JavaScript值可以分为两类：
 
-I'm not just being facetious. The JS spec defines a specific, narrow list of values that will coerce to `false` when coerced to a `boolean` value.
+1. 被强制转换成`boolean`，结果为`false`的值
+2. 剩余其他值（强制转换结果为`true`）
 
-How do we know what the list of values is? In the ES5 spec, section 9.2 defines a `ToBoolean` abstract operation, which says exactly what happens for all the possible values when you try to coerce them "to boolean."
+我不是在开玩笑。JS规范中定义了一个具体的小范围的值，当它们被强制转为`boolean`类型，会被转换成`false`。
 
-From that table, we get the following as the so-called "falsy" values list:
+我们怎么知道这个值列表？在ES5规范中，第9.2节定义了`ToBoolean`抽象操作，它说明了所有可能的值在强制转为`boolean`时会发生什么。
+
+从那个表中，我们得到了一下所谓的“假值”列表：
 
 * `undefined`
 * `null`
@@ -329,9 +331,11 @@ From that table, we get the following as the so-called "falsy" values list:
 * `+0`, `-0`, and `NaN`
 * `""`
 
-That's it. If a value is on that list, it's a "falsy" value, and it will coerce to `false` if you force a `boolean` coercion on it.
+就这些了。如果一个值在这个列表中，它就是一个“falsy”值，如果你强制将它转换成`boolean`，你会得到`false`。
 
 By logical conclusion, if a value is *not* on that list, it must be on *another list*, which we call the "truthy" values list. But JS doesn't really define a "truthy" list per se. It gives some examples, such as saying explicitly that all objects are truthy, but mostly the spec just implies: **anything not explicitly on the falsy list is therefore truthy.**
+
+显而易见，如果一个值**不在**那个列表中，那它肯定在**另一个列表中**，我们称之为“truthy”值列表。但是JS并没有真正定义“truthy”列表。它提供了一些例子，例如明确规定所有的对象都是“truthy”，其实这个规范的意思就是：**所有不在falsy列表中的值都是truthy。**
 
 #### Falsy Objects
 
