@@ -63,7 +63,7 @@ JS引擎在执行之前会立即编译你的代码（有些引擎会在执行时
 
 为了解决这两个重大缺陷，ES6引入了两个新的机制（事实上，是模式）：promises and generators（专业术语，你懂的）。
 
-Promises是一个与时间无关的“未来值”包裹器，它可以让你在不管值是否准备就绪的情况下使用和组合它们。此外，它们将路由回调通过一个可信和可组合的promise（承若）机制，高效地解决了IoC信任问题。（原句：Promises are a time-independent wrapper around a "future value," which lets you reason about and compose them regardless of if the value is ready or not yet. Moreover, they effectively solve the IoC trust issues by routing callbacks through a trustable and composable promise mechanism.）
+Promises是一个与时间无关的“未来值”包裹器，它可以让你在不管值是否准备就绪的情况下使用和组合它们。此外，它们将路由回调通过一个可信和可组合的promise（承诺）机制，高效地解决了IoC信任问题。（原句：Promises are a time-independent wrapper around a "future value," which lets you reason about and compose them regardless of if the value is ready or not yet. Moreover, they effectively solve the IoC trust issues by routing callbacks through a trustable and composable promise mechanism.）
 
 Generators为JS函数引入一种新的执行模式，它在`yield`点可以被暂停然后可以异步的恢复状态。Generator这种暂定-恢复的能力使得代码看起来是同步顺序的，但幕后却是以异步的方式处理。通过这样做，我们解决了回调带来的非线性和跳跃式的混乱，从而使我们的异步代码看起来像同步调用，这是多么美好的事情。（原句：Generators introduce a new mode of execution for JS functions, whereby the generator can be paused at `yield` points and be resumed asynchronously later. The pause-and-resume capability enables synchronous, sequential looking code in the generator to be processed asynchronously behind the scenes. By doing so, we address the non-linear, non-local-jump confusions of callbacks and thereby make our asynchronous code sync-looking so as to be more reason-able.）
 
